@@ -1,0 +1,24 @@
+.menu-search-bar {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	height: 6.5vh;
+	width: 94%;
+	font-size: 3vh;
+	font-weight: 200;
+	padding-top: 4.5vh;
+	text-align: right;
+	border: none;
+	border-radius: 2%;
+	padding-right: 5%;
+}
+
+.menu-search-bar:active,
+.menu-search-bar:focus {
+	outline: none;
+}
+
+@media only screen and (min-width: 700px) {
+	.menu-search-bar {
+		height: 5.5vh;
+	}
+}

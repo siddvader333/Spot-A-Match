@@ -1,0 +1,52 @@
+/*Mobile First*/
+.side-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100vh;
+	transform: translateX(-100%);
+	transition: 1s;
+	color: white;
+	text-align: right;
+}
+
+.close-menu-button {
+	font-size: 3vh;
+	font-weight: 200;
+	cursor: pointer;
+	margin-right: 10%;
+}
+.close-menu-button:hover {
+	font-weight: 400;
+}
+.side-menu-container {
+	height: 93vh;
+	padding-top: 2vh;
+	padding-bottom: 5vh;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	position: relative;
+	transition: 10s;
+}
+
+.menu-links-container {
+	position: absolute;
+	bottom: 5vh;
+	width: 100%;
+	transition: 0.3s;
+}
+
+/*Tablet Adjustment*/
+@media only screen and (min-width: 700px) and (max-width: 899px) {
+	.side-menu-container {
+		width: 25%;
+	}
+}
+/*Desktop Adjustment*/
+@media only screen and (min-width: 800px) {
+	.side-menu-container {
+		width: 20%;
+	}
+}

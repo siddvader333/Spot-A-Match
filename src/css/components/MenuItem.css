@@ -1,0 +1,19 @@
+/*Menu Items are styled the same for mobile and desktop views*/
+
+.menu-item {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	height: 6.5vh;
+	text-align: center;
+	font-size: 3vh;
+	font-weight: 200;
+	padding-top: 3.5vh;
+	cursor: pointer;
+	border-radius: 2%;
+	border: 1px solid rgba(25, 20, 20, 0.8);
+}
+
+.menu-item:hover {
+	color: rgba(25, 20, 20, 0.8);
+	background-color: rgba(30, 215, 96, 0.8);
+}
