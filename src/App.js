@@ -7,7 +7,10 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route exact path="/dashboard" component={DashboardContainer} />
+					<Route path="/dashboard" component={DashboardContainer} />
+					<Route>
+						<h1>A 404 page would be here</h1>
+					</Route>
 				</Switch>
 			</BrowserRouter>
 		);
