@@ -1,0 +1,53 @@
+.session-page{
+    width: 100%;
+    background-color: #121212;
+    height: 100vh;
+    text-align: center;
+    color:white;
+    
+}
+
+.song-queue{
+    /*border: 1px solid red;*/
+    margin: -10px 50px 0px 50px;
+    height: 520px;
+}
+
+.up-next-session{
+    font-size:22px;
+    text-align: left;
+}
+
+.song-list-inner{
+    margin-right: 10px;
+}
+
+.song-list{
+   /* border: 1px solid green;*/
+   margin-top: 10px;
+    height:420px;
+    overflow: auto;
+    
+}
+.song-list::-webkit-scrollbar{
+    width:6px;
+    background-color:transparent;
+    
+}
+
+.song-list::-webkit-scrollbar-thumb{
+    background-color:#b3b3b3;
+}
+
+
+
+
+
+
+.queue-user-text{
+    margin-bottom:15px;
+}
+
+.song-list{
+    overflow: auto;
+}

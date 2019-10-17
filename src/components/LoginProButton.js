@@ -10,7 +10,7 @@ class LoginProButton extends React.Component {
         
         return (
 
-            <a href="https://www.spotify.com/ca-en/">
+            <a href="/session">
               <button className="log-in-pro">
                 {this.props.displayText}
               </button>
