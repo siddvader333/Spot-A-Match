@@ -1,0 +1,57 @@
+/**CSS RESET**/
+h1,h2,h3,h4,h5,h6{margin:0;padding:0}
+
+.main {
+  text-align: center;
+  background-color: #121212;
+  width: 100%;
+}
+
+.left{
+  height: 100vh;                  /**change height on mobile**/
+}
+
+.right{
+  height: 100vh;                /**change height on mobile**/
+}
+
+.title{
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top:45vh;
+  
+  
+  color: #1DB954;   
+}
+
+.slogan{
+  font-size: 25px;
+  font-weight: 300;
+  color: #b3b3b3;
+
+}
+
+.slogan em{
+  color: #1DB954;
+}
+
+/** when md col collapses**/
+@media screen and (max-width: 768px){
+
+  .left{
+    height: 60vh;
+   
+  }
+
+  .title{
+    margin-top: 40vh;
+  }
+
+  .right{
+    height: 40vh;
+  }
+
+  
+
+}

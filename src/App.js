@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import LoginPage from './containers/LoginPage';
 import DashboardContainer from './containers/DashboardContainer';
 
 class App extends React.Component {
@@ -8,9 +9,7 @@ class App extends React.Component {
 			<BrowserRouter>
 				<Switch>
 					<Route path="/dashboard" component={DashboardContainer} />
-					<Route>
-						<h1>A 404 page would be here</h1>
-					</Route>
+					<Route path="" component={LoginPage}/>
 				</Switch>
 			</BrowserRouter>
 		);
