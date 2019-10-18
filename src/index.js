@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import LoginPage from './containers/LoginPage';
 import * as serviceWorker from './serviceWorker';
-import App from './App.js'
+import App from './App.js';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

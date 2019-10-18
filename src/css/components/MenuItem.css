@@ -3,11 +3,11 @@
 .menu-item {
 	background-color: rgba(0, 0, 0, 0.8);
 	color: white;
-	height: 6.5vh;
+	height: 10vh;
 	text-align: center;
 	font-size: 3vh;
 	font-weight: 200;
-	padding-top: 3.5vh;
+	padding-top: 3vh;
 	cursor: pointer;
 	border-radius: 2%;
 	border: 1px solid rgba(25, 20, 20, 0.8);

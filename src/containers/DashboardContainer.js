@@ -1,6 +1,7 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
 import { Route, Switch } from 'react-router-dom';
+import SessionPage from './SessionPage';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
@@ -26,14 +27,15 @@ class DashboardContainer extends React.Component {
 		return (
 			<div>
 				<SideMenu closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
+				<button onClick={this.openMenu}>Open Menu</button>
 				<Switch>
-					<Route exact path="/dashboard/room">
-						<h1>This might be the in a room view </h1>
-						<button onClick={this.openMenu}>Open Menu</button>
+					<Route exact path="/dashboard/session">
+						<h1>This is the session View </h1>
+						<SessionPage />
 					</Route>
 					<Route>
 						<h1>This is the default dashboard view </h1>
-						<button onClick={this.openMenu}>Open Menu</button>
+						<a href="/dashboard/session">Click here to join a session</a>
 					</Route>
 				</Switch>
 			</div>

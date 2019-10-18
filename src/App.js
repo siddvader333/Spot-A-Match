@@ -5,14 +5,24 @@ import DashboardContainer from './containers/DashboardContainer';
 import SessionPage from './containers/SessionPage';
 
 class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentTrack: ''
+		};
+		this.setCurrentTrack = this.setCurrentTrack.bind(this);
+	}
+
+	setCurrentTrack(event) {
+		console.log(event.target.classList[0]);
+		this.setState({ currentTrack: event.target.classList[0] });
+	}
 	render() {
 		return (
 			<BrowserRouter>
 				<Switch>
 					<Route path="/dashboard" component={DashboardContainer} />
-					<Route path ="/session" component={SessionPage}/>
-					<Route path="" component={LoginPage}/>
-					
+					<Route path="" component={LoginPage} />
 				</Switch>
 			</BrowserRouter>
 		);

@@ -1,8 +1,8 @@
 .menu-search-bar {
 	background-color: rgba(0, 0, 0, 0.8);
 	color: white;
-	height: 6.5vh;
-	width: 94%;
+	height: 11vh;
+	width: 100%;
 	font-size: 3vh;
 	font-weight: 200;
 	padding-top: 4.5vh;
@@ -10,6 +10,7 @@
 	border: none;
 	border-radius: 2%;
 	padding-right: 5%;
+	border: 1px solid rgba(25, 20, 20, 0.8);
 }
 
 .menu-search-bar:active,
@@ -19,6 +20,6 @@
 
 @media only screen and (min-width: 700px) {
 	.menu-search-bar {
-		height: 5.5vh;
+		height: 10vh;
 	}
 }

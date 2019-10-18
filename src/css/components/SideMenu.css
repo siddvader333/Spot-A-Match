@@ -7,7 +7,7 @@
 	width: 100%;
 	height: 100vh;
 	transform: translateX(-100%);
-	transition: 1s;
+	transition: 0.1s;
 	color: white;
 	text-align: right;
 }
@@ -22,13 +22,13 @@
 	font-weight: 400;
 }
 .side-menu-container {
-	height: 93vh;
+	height: 100vh;
 	padding-top: 2vh;
 	padding-bottom: 5vh;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.9);
 	position: relative;
-	transition: 10s;
+	transition: 1s;
 }
 
 .menu-links-container {
