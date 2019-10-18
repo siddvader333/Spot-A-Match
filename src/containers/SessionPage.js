@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/containers/SessionPage.css';
 import SongBlock from '../components/SongBlock';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
+import UpNextSongList from '../components/UpNextSongList';
 
 class SessionPage extends React.Component {
 	render() {
@@ -12,21 +13,7 @@ class SessionPage extends React.Component {
 				<div className="row">
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
-						<div className="song-list">
-							<div className="song-list-inner">
-								{' '}
-								{/**idk how to make the scroll margin chage so making a extra div */}
-								<SongBlock
-									songName="Gang Up"
-									songArtist="Young Thug, 2 Chainz, Wiz Khalifa, Pnb Rock"
-								/>
-								<SongBlock songName="Loaded Gun" songArtist="6lack" />
-								<SongBlock songName="3005" songArtist="Childish Gambino" />
-								<SongBlock songName="Wesley's Theory" songArtist="Kendrick Lamar" />
-								<SongBlock songName="POWER" songArtist="Kanye West" />
-							</div>
-						</div>
-
+						<UpNextSongList/>
 						<AddSongsBtnSession />
 					</div>
 

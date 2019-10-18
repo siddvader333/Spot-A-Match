@@ -7,34 +7,40 @@
 
 .song-description{
     /**border: 1px solid yellow;**/
-    width: 90%;
+    width: 80%;
 
 }
 
 .row{               /**reset row margins**/
-    margin: 0px;    
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 .song-title{
     font-size:22px;
     margin-top: 15px;
     margin-bottom: 5px;
     margin-left: 15px;
+    margin-right: 5%;
 }
 
 .song-artist{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 300;
+    color: #b3b3b3;
     margin-top: 5px;
     margin-bottom: 15px;
     margin-left: 15px;
+    margin-right:5%;
 
 }
 
 .song-info-btn{
     /**border: 1px solid green; **/
-    width:10%;
-    margin-top: 4vh;
+    width:20%;    
     text-align: center;
+    
 }
 
 .song-info-btn button{
@@ -46,6 +52,8 @@
     width: 30px;
     border-radius: 50%;
     line-height: 0px;
+
+    margin-right: 10%;
 
     
 }
