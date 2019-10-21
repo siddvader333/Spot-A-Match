@@ -3,6 +3,7 @@ import SideMenu from '../components/SideMenu';
 import { Route, Switch } from 'react-router-dom';
 import SessionPage from './SessionPage';
 import DashboardContentHeader from '../components/DashboardContentHeader';
+import DashboardFlashMessage from '../components/DashboardFlashMessage';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
@@ -37,6 +38,7 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/session"
 							leaveButtonText="Exit session"
 						/>
+						<DashboardFlashMessage displayText="In a session with User1234" duration="3500" />
 						<SessionPage />
 					</Route>
 					<Route exact path="/dashboard/room-host">
@@ -46,6 +48,7 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
 						/>
+						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
 						{/*Session page used below for placeholder content */}
 						<SessionPage />
 					</Route>
@@ -56,6 +59,7 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Exit Room"
 							path="/dashboard/room-listener"
 						/>
+						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
 						{/*Session page used below for placeholder content */}
 						<SessionPage />
 					</Route>

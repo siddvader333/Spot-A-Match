@@ -1,0 +1,28 @@
+.menu-search-result {
+	width: 100%;
+	height: 6vh;
+	border-radius: 2%;
+	border: 1px solid rgba(25, 20, 20, 0.8);
+	display: inline-block;
+	text-align: left;
+	cursor: pointer;
+	padding-top: 1vh;
+	color: white;
+}
+
+.search-item-song {
+	display: inline-block;
+	font-weight: lighter;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.menu-search-result:hover {
+	color: #1db954;
+}
+
+.search-item-title {
+	display: inline-block;
+	color: gray;
+	margin-right: 5%;
+}

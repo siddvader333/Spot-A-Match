@@ -38,15 +38,14 @@
 	transition: 0.3s;
 }
 
-/*Tablet Adjustment*/
-@media only screen and (min-width: 700px) and (max-width: 899px) {
-	.side-menu-container {
-		width: 25%;
-	}
+.search-results-container {
+	width: 100%;
+	height: 30vh;
+	overflow: scroll;
 }
-/*Desktop Adjustment*/
-@media only screen and (min-width: 800px) {
+/*Tablet Adjustment*/
+@media only screen and (min-width: 700px) {
 	.side-menu-container {
-		width: 20%;
+		width: 30%;
 	}
 }

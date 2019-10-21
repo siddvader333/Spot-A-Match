@@ -6,10 +6,11 @@
 	font-size: 3vh;
 	font-weight: 200;
 	padding-top: 4.5vh;
-	text-align: right;
+	text-align: left;
 	border: none;
 	border-radius: 2%;
 	padding-right: 5%;
+	padding-left: 5%;
 	border: 1px solid rgba(25, 20, 20, 0.8);
 }
 

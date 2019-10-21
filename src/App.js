@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './containers/LoginPage';
 import DashboardContainer from './containers/DashboardContainer';
 import SessionPage from './containers/SessionPage';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 class App extends React.Component {
 	constructor(props) {
@@ -11,6 +13,7 @@ class App extends React.Component {
 			currentTrack: ''
 		};
 		this.setCurrentTrack = this.setCurrentTrack.bind(this);
+		AOS.init();
 	}
 
 	setCurrentTrack(event) {

@@ -1,0 +1,17 @@
+.flash-message-container {
+	height: 10vh;
+	width: 70%;
+	margin-top: 4vh;
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 15%;
+
+	background-color: rgba(25, 25, 25, 0.9);
+	color: #1db954;
+	opacity: 0.8;
+	border-radius: 20px;
+	text-align: center;
+	border: 1px solid gray;
+	padding-top: 3vh;
+}
