@@ -1,18 +1,25 @@
-.add-songs-session{
-    margin-top: 10px;
-  
-    width: 150px;
-    height:45px;
-  
-    border: 2px solid #1DB954;
-    border-radius: 500px;
-  
-    font-size:20px;
-    font-weight: 500;
-    color:white;
-    background-color: #1DB954;
-    
-    
-    
-    
+.add-songs-session {
+	margin-top: 10px;
+
+	width: 150px;
+	height: 45px;
+
+	border: 2px solid #1db954;
+	border-radius: 500px;
+
+	font-size: 20px;
+	font-weight: 500;
+	color: white;
+	background-color: #1db954;
+
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+}
+
+.add-songs-session:hover {
+	transform: scale(1.1);
+}
+.add-songs-session:focus,
+.add-songs-session:active {
+	outline: none;
 }

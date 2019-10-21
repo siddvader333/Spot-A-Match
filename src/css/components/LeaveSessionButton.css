@@ -1,0 +1,37 @@
+.leave-session-button {
+	width: 30%;
+	height: 7.5vh;
+
+	margin-top: 1.25vh;
+	margin-bottom: 1.25vh;
+	margin-right: 5%;
+
+	border: 2px solid #ff5733;
+	border-radius: 500px;
+
+	text-align: center;
+	font-weight: 500;
+	color: white;
+	background-color: #ff5733;
+
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+	float: right;
+}
+
+.leave-session-button:hover {
+	transform: scale(1.1);
+}
+.leave-session-button:focus,
+.leave-session-button:active {
+	outline: none;
+}
+
+@media only screen and (min-width: 800px) {
+	.leave-session-button {
+		height: 8vh;
+		width: 15%;
+		margin-right: 5%;
+		float: right;
+	}
+}

@@ -9,7 +9,7 @@ class SessionPage extends React.Component {
 		return (
 			<div className="session-page">
 				<br />
-				<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>
+				{/*<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>*/}
 				<div className="row">
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>

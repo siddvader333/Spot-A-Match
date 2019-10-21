@@ -1,22 +1,30 @@
-.log-in-pro{
-    margin-top: 10px;
-  
-    width: 250px;
-    height:50px;
-  
-    border: 2px solid #1DB954;
-    border-radius: 500px;
-  
-    font-size:20px;
-    font-weight: 500;
-    color:white;
-    background-color: #1DB954;
-    
+.log-in-pro {
+	margin-top: 10px;
+
+	width: 250px;
+	height: 50px;
+
+	border: 2px solid #1db954;
+	border-radius: 500px;
+
+	font-size: 20px;
+	font-weight: 500;
+	color: white;
+	background-color: #1db954;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
 }
 
+.log-in-pro:hover {
+	transform: scale(1.1);
+}
+.log-in-pro:focus,
+.log-in-pro:active {
+	outline: none;
+}
 
-@media screen and (max-width: 768px){
-    .log-in-pro{
-        margin-top: 10px;
-    }
+@media screen and (max-width: 768px) {
+	.log-in-pro {
+		margin-top: 10px;
+	}
 }

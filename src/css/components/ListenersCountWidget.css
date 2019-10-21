@@ -1,0 +1,32 @@
+.listener-count-widget {
+	width: 40%;
+	height: 7.5vh;
+
+	margin-top: 1.25vh;
+	margin-bottom: 1.25vh;
+	margin-left: 5%;
+
+	border: 2px solid #1db954;
+	border-radius: 500px;
+
+	text-align: center;
+	font-weight: 500;
+	color: white;
+	background-color: transparent;
+	float: left;
+}
+
+.listener-count-widget:focus,
+.listener-count-widget:active {
+	outline: none;
+}
+
+@media only screen and (min-width: 800px) {
+	.listener-count-widget {
+		height: 8vh;
+		width: 20%;
+		margin-right: 5%;
+		float: right;
+		margin-left: 0%;
+	}
+}

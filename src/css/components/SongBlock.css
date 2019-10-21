@@ -1,59 +1,66 @@
-.song-box{
-    border: 1px solid #535353;
-    text-align: left;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.song-box {
+	border: 1px solid #535353;
+	text-align: left;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-.song-description{
-    /**border: 1px solid yellow;**/
-    width: 80%;
-
+.song-description {
+	/**border: 1px solid yellow;**/
+	width: 80%;
 }
 
-.row{               /**reset row margins**/
-    margin: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+.row {
+	/**reset row margins**/
+	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.song-title{
-    font-size:22px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    margin-left: 15px;
-    margin-right: 5%;
-}
-
-.song-artist{
-    font-size: 15px;
-    font-weight: 300;
-    color: #b3b3b3;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 15px;
-    margin-right:5%;
-
+.song-title {
+	font-size: 22px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	margin-left: 15px;
+	margin-right: 5%;
 }
 
-.song-info-btn{
-    /**border: 1px solid green; **/
-    width:20%;    
-    text-align: center;
-    
+.song-artist {
+	font-size: 15px;
+	font-weight: 300;
+	color: #b3b3b3;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-right: 5%;
 }
 
-.song-info-btn button{
-    color: white;
-    font-weight: 400;
-    background-color: transparent;
-    border: 2px solid #b3b3b3;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    line-height: 0px;
+.song-info-btn {
+	/**border: 1px solid green; **/
+	width: 20%;
+	text-align: center;
+}
 
-    margin-right: 10%;
+.song-info-btn button {
+	color: white;
+	font-weight: 400;
+	background-color: transparent;
+	border: 2px solid #b3b3b3;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	line-height: 0px;
 
-    
+	margin-right: 10%;
+
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+}
+
+.song-info-btn:hover {
+	transform: scale(1.1);
+}
+.song-info-btn:focus,
+.song-info-btn:active {
+	outline: none;
 }
