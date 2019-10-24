@@ -3,6 +3,7 @@ import '../css/containers/SessionPage.css';
 import SongBlock from '../components/SongBlock';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
+import Chat from '../components/Chat';
 
 class SessionPage extends React.Component {
 	render() {
@@ -18,7 +19,7 @@ class SessionPage extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<h4>CHAT</h4>
+						<Chat />
 					</div>
 				</div>
 			</div>
