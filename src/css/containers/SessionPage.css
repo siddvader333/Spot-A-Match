@@ -1,3 +1,9 @@
+.chat {
+	margin: 0px 50px 0px 50px; 
+	height: 520px;
+	width: 80%; 
+}
+
 .session-page {
 	width: 100%;
 	background-color: rgba(20, 25, 25);
