@@ -34,11 +34,9 @@ class Chat extends React.Component{
 
                 <React.Fragment>
                 <form className = "message-input-field">
-                    <label>
-                        <input type="text" placeholder="Enter your message here" class = "typng-fiield"/>
-                    </label>
-                    <input type="submit" />
-                    </form>
+                    <input type="text" placeholder="Enter your message here"/>
+                    <input type="submit" value = "Send"/>
+                </form>
                 </React.Fragment>
 
             </div>
