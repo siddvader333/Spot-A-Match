@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/components/Chat.css';
 import ReceivedMessage from './ReceivedMessage'; 
 import SentMessage from './SentMessage'; 
+  
 
 class Chat extends React.Component{
     render(){
@@ -38,6 +39,11 @@ class Chat extends React.Component{
                     <input type="submit" value = "Send"/>
                 </form>
                 </React.Fragment>
+
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
+ 
 
             </div>
             
