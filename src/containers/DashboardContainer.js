@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import SessionPage from './SessionPage';
 import DashboardContentHeader from '../components/DashboardContentHeader';
 import DashboardFlashMessage from '../components/DashboardFlashMessage';
+import DashboardOptions from '../components/DashboardOptions';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
@@ -64,12 +65,13 @@ class DashboardContainer extends React.Component {
 						<SessionPage />
 					</Route>
 					<Route>
-						<h1>This is the default dashboard view </h1>
+						{/* <h1>This is the default dashboard view </h1>
 						<a href="/dashboard/session">Click here to join a session </a>
 						<br />
 						<a href="/dashboard/room-host">Click here to host a room</a>
 						<br />
-						<a href="/dashboard/room-listener">Click here to join a room</a>
+						<a href="/dashboard/room-listener">Click here to join a room</a> */}
+						<DashboardOptions/>
 					</Route>
 				</Switch>
 			</div>
