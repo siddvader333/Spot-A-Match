@@ -1,73 +1,84 @@
-.chat{
-    background-color: #0e1111; 
-    border-color: goldenrod; 
-    border-style: solid; 
-    border-width: 1px; 
-    border-radius: 5%; 
+.chat {
+	background-color: #0e1111;
+	border-color: goldenrod;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5%;
 }
 
-.chat-box{
-    display: block;
-    overflow: auto; 
-    height: 350px;
+.chat-box {
+	display: block;
+	overflow: auto;
+	height: 350px;
 }
 
-.chat-box::-webkit-scrollbar{
-    width:6px;
-    background-color:transparent;
+.chat-box::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
 }
 
-.chat-header{
-    text-align: left; 
-    margin: 20px 20px 30px;
+.chat-header {
+	text-align: left;
+	margin: 20px 20px 30px;
 }
 
-.message-input-field{
-    width: 100%; 
-    margin: 20px 20px 20px 20px; 
-    float: left; 
+.message-input-field {
+	width: 100%;
+	margin: 20px 20px 20px 20px;
+	float: left;
 }
 
-.received-message{
-    display: block; 
-    max-width: 70%; 
-    margin: 10px 10px 10px 10px; 
-    float: left; 
-    clear: both; 
-    background-color: green; 
-    border-radius: 10px; 
+.received-message {
+	display: block;
+	max-width: 70%;
+	margin: 10px 10px 10px 10px;
+	float: left;
+	clear: both;
+	background-color: green;
+	border-radius: 10px;
 }
 
-.sent-message{
-    display: block; 
-    max-width: 70%; 
-    margin: 10px 10px 10px 10px; 
-    float: right; 
-    clear: both; 
-    background-color: lightseagreen; 
-    border-radius: 10px; 
+.sent-message {
+	display: block;
+	max-width: 70%;
+	margin: 10px 10px 10px 10px;
+	float: right;
+	clear: both;
+	background-color: lightseagreen;
+	border-radius: 10px;
 }
 
-input[type=text]{
-    border-radius: 10px; 
-    background-color: #3CBC8D;
-    border-style: solid; 
-    border-width: 1px; 
-    border-color: #3CBC8D; 
-    color: white;
-    float: left; 
-    width: 80%; 
-    padding: 10px 10px 10px;
+/*input[type=text] {
+	border-radius: 10px;
+	background-color: #3cbc8d;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #3cbc8d;
+	color: white;
+	float: left;
+	width: 80%;
+	padding: 10px 10px 10px;
+}*/
+
+.chat-entry {
+	border-radius: 10px;
+	background-color: #3cbc8d;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #3cbc8d;
+	color: white;
+	float: left;
+	width: 80%;
+	padding: 10px 10px 10px;
 }
 
-
-input[type=submit]{
-    width: 15%; 
-    margin: 5px 5px 5px 5px; 
-    border-radius: 10px; 
-    border-color: #3CBC8D;
-    border-style: solid; 
-    border-width: 1px; 
-    background-color: #3CBC8D;
-    color: white; 
+input[type=submit] {
+	width: 15%;
+	margin: 5px 5px 5px 5px;
+	border-radius: 10px;
+	border-color: #3cbc8d;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #3cbc8d;
+	color: white;
 }
