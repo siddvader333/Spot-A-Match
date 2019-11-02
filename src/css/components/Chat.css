@@ -34,8 +34,6 @@
 	margin: 10px 10px 10px 10px;
 	float: left;
 	clear: both;
-	background-color: green;
-	border-radius: 10px;
 }
 
 .sent-message {
@@ -44,8 +42,6 @@
 	margin: 10px 10px 10px 10px;
 	float: right;
 	clear: both;
-	background-color: lightseagreen;
-	border-radius: 10px;
 }
 
 /*input[type=text] {
