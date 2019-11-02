@@ -4,9 +4,11 @@ import SongBlock from '../components/SongBlock';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
 import Chat from '../components/Chat';
+import GroupChat from '../components/GroupChat';
 
 class SessionPage extends React.Component {
 	render() {
+		console.log(window.location.pathname); 
 		return (
 			<div className="session-page">
 				<br />
@@ -19,7 +21,7 @@ class SessionPage extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<Chat />
+						{window.location.pathname == '/dashboard/session' ? <Chat /> : <GroupChat /> }
 					</div>
 				</div>
 			</div>
