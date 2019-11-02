@@ -10,7 +10,21 @@ class Chat extends React.Component {
 		messages: []
 	}
 
+	componentDidMount() {
+		this.scrollToBottom();
+	  }
+	
+	componentDidUpdate() {
+		this.scrollToBottom();
+	}
+
+	scrollToBottom() {
+		this.bottomMessage.scrollIntoView({ behavior: 'smooth' });
+	}
+	
+
 	handleNewMessage = (event) =>{
+		event.preventDefault(); 
 		const target = event.target; 
 		const value = target.value; 
 
@@ -19,7 +33,8 @@ class Chat extends React.Component {
 		})
 	}
 
-	addMessage = () => {
+	addMessage = (e) => {
+		e.preventDefault(); 
 		const messageList = this.state.messages; 
 		const message = {
 			content: this.state.message,
@@ -33,9 +48,9 @@ class Chat extends React.Component {
 			sender: "UserXYZ"
 		}
 		messageList.push(message2); 
-		console.log(messageList); 
 		this.setState({
 			messages: messageList,
+			message: ""
 		})
 	}
 
@@ -43,25 +58,30 @@ class Chat extends React.Component {
 		return (
 			<div>
 				<h3 className="chat-header"> Chat with UserXYZ </h3>
-				<div dangerouslySetInnerHTML={{__html: this.element}}></div>
 				<div className="chat-box">
 					{ this.state.messages.map((message) => {
 						if (message.type == "received-message"){
 							return(
 								<div className="received-message">
-									<ReceivedMessage message={message.content} />
+									<ReceivedMessage message={message.content} sender = {message.sender}/>
 								</div>
 							)
 						}
 						else if (message.type == "sent-message"){
 							return(
 								<div className="sent-message">
-									<SentMessage message={message.content} />
+									<SentMessage message={message.content} sender = {message.sender}/>
 								</div>
 							)
 						}
 					})
 					}
+					<div
+						style={{ float: 'left', clear: 'both' }}
+						ref={(bottomMessage) => {
+							this.bottomMessage = bottomMessage;
+						}}
+					/>
 				</div>
 
 				<React.Fragment>
@@ -71,16 +91,10 @@ class Chat extends React.Component {
 								placeholder="Enter your message here" 
 								value = {this.state.message}
 								onChange = {this.handleNewMessage}/>
-						<input type="submit" value="Send" onClick = {this.addMessage}/>
+						<input type="submit" value="Send" onClick = {(e)=>{this.addMessage(e)}} />
 					</form>
 				</React.Fragment>
 
-				<div
-					style={{ float: 'left', clear: 'both' }}
-					ref={(el) => {
-						this.messagesEnd = el;
-					}}
-				/>
 			</div>
 		);
 	}
