@@ -73,3 +73,32 @@
 .container .box .details .content button{
 	margin-top: 10px;
 }
+
+/* styling for the buttons */
+
+.action-button{
+	margin-top: 47vh;
+
+	width: 200px;
+	height: 40px;
+
+	border: 2px solid #1db954;
+	border-radius: 500px;
+
+	font-size: 15px;
+	font-weight: 500;
+	color: white;
+	background-color: #1db954;
+
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+}
+
+.action-button:hover{
+	transform: scale(1.1);
+}
+
+.action-button:focus, 
+.action-button:active{
+	outline: none;
+}

@@ -13,7 +13,9 @@ class DashboardOptions extends React.Component{
                     <div className="details">
                         <div className="content">
                             <h2>Join a session with another listener.</h2>
-                            <button onclick="window.location.href = 'https://google.com';">Click Here</button>
+                            <a href="/dashboard/session">
+                            <button className="action-button">Start Session</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +26,9 @@ class DashboardOptions extends React.Component{
                     <div className="details">
                         <div className="content">
                             <h2>Join a hosted room and enjoy the ride.</h2>
-                            <button onclick="window.location.href = 'https://google.com';">Click Here</button>
+                            <a href="/dashboard/room-listener">
+                            <button className="action-button">Join Room</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +39,9 @@ class DashboardOptions extends React.Component{
                     <div className="details">
                         <div className="content">
                             <h2>Host your own room (Premium Feature).</h2>
-                            <button onclick="window.location.href = 'https://google.com';">Click Here</button>
+                            <a href="/dashboard/room-host">
+                            <button className="action-button">Host Room</button>
+                            </a>
                         </div>
                     </div>
                 </div>
