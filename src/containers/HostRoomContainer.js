@@ -1,14 +1,13 @@
 import React from 'react';
 import '../css/containers/SessionPage.css';
-import SongBlock from '../components/SongBlock';
+//import SongBlock from '../components/SongBlock';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
-import Chat from '../components/Chat';
+//import Chat from '../components/Chat';
 import GroupChat from '../components/GroupChat';
 
-class SessionPage extends React.Component {
+class HostRoomContainer extends React.Component {
 	render() {
-		console.log(window.location.pathname);
 		return (
 			<div className="session-page">
 				<br />
@@ -21,7 +20,7 @@ class SessionPage extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						{window.location.pathname == '/dashboard/session' ? <Chat /> : <GroupChat />}
+						<GroupChat />
 					</div>
 				</div>
 			</div>
@@ -29,4 +28,4 @@ class SessionPage extends React.Component {
 	}
 }
 
-export default SessionPage;
+export default HostRoomContainer;
