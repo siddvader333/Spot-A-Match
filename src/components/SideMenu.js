@@ -5,6 +5,8 @@ import '../css/components/SideMenu.css';
 
 import { fakeSearchResults } from '../util/Data.js';
 import MenuSearchResult from './MenuSearchResult';
+import cookieFunctions from '../util/Cookie';
+import history from '../util/History';
 
 class SideMenu extends React.Component {
 	constructor(props) {
@@ -63,9 +65,15 @@ class SideMenu extends React.Component {
 						<div className="search-results-container">{searchResults}</div>
 					)}
 					<div className="menu-links-container">
-						<MenuItem displayText="My Profile"/>
-						<MenuItem displayText="Upgrade to Pro" link="https://www.spotify.com/ca-en/premium/?utm_source=ca-en_brand_contextual_text&utm_medium=paidsearch&utm_campaign=alwayson_ucanz_ca_premiumbusiness_premium_brand+contextual+text+exact+ca-en+google&gclid=CjwKCAjw0vTtBRBREiwA3URt7uYzUVqqSCCy28LFAK4qN-uD_v3BoHZ7MByDgrZpoXR92Qwo954IahoCXwUQAvD_BwE&gclsrc=aw.ds"/>
-						<MenuItem displayText="Logout" link="/session"/>
+						<MenuItem displayText="My Profile" />
+						<MenuItem displayText="Upgrade to Pro" />
+						<MenuItem
+							onClick={() => {
+								cookieFunctions.setCookie('auth-status', 'false');
+								history.push('/');
+							}}
+							displayText="Logout"
+						/>
 					</div>
 				</div>
 			</div>

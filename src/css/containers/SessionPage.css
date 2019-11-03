@@ -16,7 +16,6 @@
 .session-page {
 	width: 100%;
 	background-color: rgba(20, 25, 25);
-
 	text-align: center;
 	color: white;
 }
@@ -37,27 +36,22 @@
 	text-align: left;
 }
 
-.suggested-queue{
+.suggested-queue {
 	/*border: 1px solid red;*/
 	margin: -10px 50px 0px 50px;
 	height: 520px;
 }
 
-
 .queue-user-text {
 	margin-bottom: 15px;
 }
 
-
-
-@media only screen and (max-width: 768px){
-
-	.song-queue{
-		margin: -10px 10px 0 10px;
+@media only screen and (max-width: 768px) {
+	.song-queue {
+		margin-bottom: 10vh;
 	}
 
-	.suggested-queue{
+	.suggested-queue {
 		margin: 10px 10px 0 10px;
 	}
-
 }

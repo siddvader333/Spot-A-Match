@@ -2,11 +2,11 @@ import React from 'react';
 import '../css/components/MenuItem.css';
 
 const MenuItem = (props) => {
-	const { displayText, link } = props;
+	const { displayText, link, onClick } = props;
 	return (
-		<div>
+		<div onClick={onClick}>
 			<a href={link}>
-			<div className="menu-item">{displayText}</div>
+				<div className="menu-item">{displayText}</div>
 			</a>
 		</div>
 	);

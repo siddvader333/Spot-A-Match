@@ -18,6 +18,7 @@ function LoginPage() {
 				<LoginSpotifyButton
 					onClick={() => {
 						cookieFunctions.setCookie('premium-status', 'false');
+						cookieFunctions.setCookie('auth-status', 'true');
 					}}
 					displayText="Log in with Spotify"
 				/>
@@ -25,6 +26,7 @@ function LoginPage() {
 				<LoginProButton
 					onClick={() => {
 						cookieFunctions.setCookie('premium-status', 'true');
+						cookieFunctions.setCookie('auth-status', 'true');
 					}}
 					displayText="Log in as PRO"
 				/>
