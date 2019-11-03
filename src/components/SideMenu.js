@@ -66,7 +66,12 @@ class SideMenu extends React.Component {
 					)}
 					<div className="menu-links-container">
 						<MenuItem displayText="My Profile" />
-						<MenuItem displayText="Upgrade to Pro" />
+						<MenuItem
+							displayText="Upgrade to Pro"
+							onClick={() => {
+								cookieFunctions.setCookie('premium-status', 'true');
+							}}
+						/>
 						<MenuItem
 							onClick={() => {
 								cookieFunctions.setCookie('auth-status', 'false');

@@ -5,7 +5,9 @@ class LoginProButton extends React.Component {
 	render() {
 		return (
 			<a href="/dashboard">
-				<button className="log-in-pro">{this.props.displayText}</button>
+				<button onClick={this.props.onClick} className="log-in-pro">
+					{this.props.displayText}
+				</button>
 			</a>
 		);
 	}
