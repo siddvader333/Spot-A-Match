@@ -1,6 +1,5 @@
 import React from 'react'
-import '../css/components/UpNextSongList.css';
-import SongBlock from '../components/SongBlock';
+import '../css/components/SongSuggestionList.css';
 import SongBlockSuggestion from '../components/SongBlockSuggestion';
 
 class UpNextSongList extends React.Component{
@@ -10,14 +9,14 @@ class UpNextSongList extends React.Component{
             <div className="song-list">
                 <div className="song-list-inner">                   
                     {/**idk how to make the scroll margin chage so making a extra div */}
-                    <SongBlock
+                    <SongBlockSuggestion
                         songName="Gang Up"
                         songArtist="Young Thug, 2 Chainz, Wiz Khalifa, Pnb Rock"
                     />
-                    <SongBlock songName="Loaded Gun" songArtist="6lack" />
-                    <SongBlock songName="3005" songArtist="Childish Gambino" />
-                    <SongBlock songName="Wesley's Theory" songArtist="Kendrick Lamar" />
-                    <SongBlock songName="POWER" songArtist="Kanye West" />
+                    <SongBlockSuggestion songName="Loaded Gun" songArtist="6lack" />
+                    <SongBlockSuggestion songName="3005" songArtist="Childish Gambino" />
+                    <SongBlockSuggestion songName="Wesley's Theory" songArtist="Kendrick Lamar" />
+                    <SongBlockSuggestion songName="POWER" songArtist="Kanye West" />
                 </div>
             </div>
         );

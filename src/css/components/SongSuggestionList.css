@@ -13,22 +13,10 @@
 	
 }
 
-.up-next {
+.up-next-session {
 	font-size: 22px;
 	text-align: left;
 }
-
-.suggested-songs {
-	font-size: 22px;
-	text-align: left;
-}
-
-.suggested-queue{
-	/*border: 1px solid red;*/
-	margin: -10px 50px 0px 50px;
-	height: 520px;
-}
-
 
 .queue-user-text {
 	margin-bottom: 15px;
@@ -42,8 +30,5 @@
 		margin: -10px 10px 0 10px;
 	}
 
-	.suggested-queue{
-		margin: 10px 10px 0 10px;
-	}
 
 }
