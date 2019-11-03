@@ -45,8 +45,8 @@ class SessionPage extends React.Component {
 			<div className="session-page">
 				<br />
 				{/*<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>*/}
-				<div className="shit row">
-					<div className="song-queue col-md">
+				<div className="row">
+					<div className="song-queue xxx col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
 						<AddSongsBtnSession displayText="+ Add Song" />

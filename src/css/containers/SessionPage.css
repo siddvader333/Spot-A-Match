@@ -21,9 +21,9 @@
 }
 
 .song-queue {
-	/*border: 1px solid red;*/
+	/**border: 1px solid red;**/
 	margin: -10px 50px 0px 50px;
-	height: 55vh;
+	overflow: auto;
 }
 
 .up-next {
