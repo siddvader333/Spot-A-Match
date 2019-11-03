@@ -20,5 +20,40 @@ module.exports = {
 			songName: 'Senorita',
 			artist: 'Shawn Mendes, Camilla Cabello'
 		}
+	],
+
+
+	suggestedSongs: [
+		{
+			songName: 'Under Ground Kings',
+			artist: 'Drake'
+		},
+		{
+			songName: 'Goodbyes (Feat. Young Thug',
+			artist: 'Post Malone'
+		},
+		{
+			songName: 'Demons',
+			artist: 'Imagine Dragons'
+		},
+		{
+			songName: 'Parkstone Drive',
+			artist: 'Russ'
+		},
+		{
+			songName: 'Lost in Japan',
+			artist: 'Shawn Mendes'
+		},
+		{
+			songName: 'Sanguine Paradise',
+			artist: 'Lil Uzi Vert'
+		}
 	]
+
+
+
+
+
+
+
 };

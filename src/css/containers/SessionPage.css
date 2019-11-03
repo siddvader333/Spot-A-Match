@@ -26,9 +26,20 @@
 	height: 55vh;
 }
 
-.up-next-session {
+.up-next {
 	font-size: 22px;
 	text-align: left;
+}
+
+.suggested-songs {
+	font-size: 22px;
+	text-align: left;
+}
+
+.suggested-queue {
+	/*border: 1px solid red;*/
+	margin: -10px 50px 0px 50px;
+	height: 520px;
 }
 
 .queue-user-text {
@@ -38,5 +49,9 @@
 @media only screen and (max-width: 768px) {
 	.song-queue {
 		margin-bottom: 10vh;
+	}
+
+	.suggested-queue {
+		margin: 10px 10px 0 10px;
 	}
 }

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "aos": "^2.3.4",
+    "history": "^4.10.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-flash-message": "^1.0.2",

@@ -2,9 +2,11 @@ import React from 'react';
 import '../css/containers/SessionPage.css';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
+import SongSuggestionList from '../components/SongSuggestionList';
 import Chat from '../components/Chat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
 import { fakeSearchResults } from '../util/Data.js';
+
 
 class SessionPage extends React.Component {
 	constructor(props) {
@@ -49,8 +51,9 @@ class SessionPage extends React.Component {
 						<AddSongsBtnSession displayText="+ Add Song" />
 					</div>
 
-					<div className="chat col-md">
-						<Chat />
+					<div className="suggested-queue col-md">
+						<h3 className="suggested-songs">Suggested Songs</h3>
+						<SongSuggestionList suggestedList ={this.state.suggestedSongList}/>						
 					</div>
 				</div>
 				<div className="current-playing">
