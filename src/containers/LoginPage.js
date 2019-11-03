@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/containers/LoginPage.css';
 import LoginSpotifyButton from '../components/LoginSpotifyButton';
 import LoginProButton from '../components/LoginProButton';
+import cookieFunctions from '../util/Cookie';
 
 function LoginPage() {
 	return (
@@ -14,9 +15,19 @@ function LoginPage() {
 			</div>
 
 			<div className="right col-md">
-				<LoginSpotifyButton displayText="Log in with Spotify" />
+				<LoginSpotifyButton
+					onClick={() => {
+						cookieFunctions.setCookie('premium-status', 'false');
+					}}
+					displayText="Log in with Spotify"
+				/>
 				<br />
-				<LoginProButton displayText="Log in as PRO" />
+				<LoginProButton
+					onClick={() => {
+						cookieFunctions.setCookie('premium-status', 'true');
+					}}
+					displayText="Log in as PRO"
+				/>
 			</div>
 		</div>
 	);

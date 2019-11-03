@@ -13,7 +13,7 @@ class HostRoomContainer extends React.Component {
 
 		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		let songList = fakeSearchResults; 
+		const songList = Array.from(fakeSearchResults)
 		const currentSong = songList.shift(); 
 		this.state = {
 			currentPlaying: currentSong, 

@@ -15,7 +15,7 @@ class SongBlockSuggestion extends React.Component {
 							<button>+</button>
 						</a>
 					</div>
-                    <div className="song-reject-btn">
+					<div className="song-reject-btn">
 						<a href="#">
 							<button>x</button>
 						</a>
