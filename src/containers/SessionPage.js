@@ -20,6 +20,9 @@ class SessionPage extends React.Component {
 			currentPlaying: currentSong,
 			currentSongList: songList
 		};
+		this.nextSong = this.nextSong.bind(this);
+		//this.acceptSong = this.acceptSong.bind(this);
+		this.newSong = this.newSong.bind(this);
 	}
 
 	state = {
@@ -40,6 +43,16 @@ class SessionPage extends React.Component {
 
 
 
+	newSong = (e) => {
+		e.preventDefault();
+		let currentList = this.state.currentSongList;
+		const newSong = {title: "Song Title", artist: "Song Artist"};
+		currentList.push(newSong);
+		this.setState({
+			currentSongList: currentList
+		});
+	}
+	
 	render() {
 		return (
 			<div className="session-page">
@@ -48,8 +61,8 @@ class SessionPage extends React.Component {
 				<div className="shit row">
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
-						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Add Song" />
+						<UpNextSongList songList = {this.state.currentSongList}/>
+						<AddSongsBtnSession displayText = "+ Add Song" addSong = {this.newSong}/>
 					</div>
 
 					<div className="suggested-queue col-md">
