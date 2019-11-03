@@ -19,6 +19,10 @@ module.exports = {
 		{
 			songName: 'Senorita',
 			artist: 'Shawn Mendes, Camilla Cabello'
+		},
+		{
+			songName: 'Wolves',
+			artist: 'Kanye West'
 		}
 	],
 

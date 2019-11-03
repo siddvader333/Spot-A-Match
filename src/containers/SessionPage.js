@@ -5,7 +5,7 @@ import UpNextSongList from '../components/UpNextSongList';
 import SongSuggestionList from '../components/SongSuggestionList';
 import Chat from '../components/Chat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
-import { fakeSearchResults } from '../util/Data.js';
+import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
 
 
 class SessionPage extends React.Component {
@@ -16,11 +16,16 @@ class SessionPage extends React.Component {
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
 		const songList = Array.from(fakeSearchResults);
 		const currentSong = songList.shift();
+
+		const suggestedList = Array.from(suggestedSongs);
+
 		this.state = {
 			currentPlaying: currentSong,
-			currentSongList: songList
+			currentSongList: songList,
+			suggestedList: suggestedList
 		};
 		this.nextSong = this.nextSong.bind(this);
+		this.acceptSong = this.acceptSong.bind(this);
 	}
 
 	state = {
@@ -39,6 +44,25 @@ class SessionPage extends React.Component {
 		});
 	};
 
+	acceptSong(song){
+		//remove from suggestedList
+		const newSuggestedList =  this.state.suggestedList.filter(			//returns a new list with everything except the song			
+			(item) =>{
+				return( item.songName !== song.songName);
+			}		
+		);
+		this.setState({suggestedList: newSuggestedList});
+	}
+
+	rejectSong = (song)=> {
+		const newSuggestedList = this.state.suggestedList.filter(
+			(item) => {return (item.songName !== song.songName);}
+		);
+		this.setState({suggestedList: newSuggestedList});
+	}
+
+
+
 	render() {
 		return (
 			<div className="session-page">
@@ -53,7 +77,11 @@ class SessionPage extends React.Component {
 
 					<div className="suggested-queue col-md">
 						<h3 className="suggested-songs">Suggested Songs</h3>
-						<SongSuggestionList suggestedList ={this.state.suggestedSongList}/>						
+						<SongSuggestionList 
+							suggestedList={this.state.suggestedList} 
+							acceptSong={this.acceptSong} 
+							rejectSong = {this.rejectSong}
+						/>						
 					</div>
 				</div>
 				<div className="row">

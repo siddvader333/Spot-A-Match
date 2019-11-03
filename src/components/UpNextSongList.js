@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/components/UpNextSongList.css';
 import SongBlock from '../components/SongBlock';
-import SongBlockSuggestion from '../components/SongBlockSuggestion';
+
 
 class UpNextSongList extends React.Component{
 
