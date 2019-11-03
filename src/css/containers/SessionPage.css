@@ -4,6 +4,15 @@
 	width: 80%; 
 }
 
+.currently-playing{
+	margin-top: 30px; 
+	width: 100%; 
+	height: 100px; 
+	color:black;
+	border-top-style: solid; 
+	border-top-color: white;
+}
+
 .session-page {
 	width: 100%;
 	background-color: rgba(20, 25, 25);

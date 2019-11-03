@@ -1,0 +1,41 @@
+.song-info{
+    display: inline-block; 
+    width: 50%; 
+    border: none;
+    color: white; 
+}
+
+.currently-playing{
+	margin-top: 30px; 
+	width: 100%; 
+	height: 10vh; 
+	color:black;
+	border-top-style: solid; 
+	border-top-color: #b3b3b3;
+}
+
+.controlButton {
+    color: #b3b3b3; 
+    background-color: black; 
+    border-radius: 50%; 
+    border-style: solid; 
+    border-color: #b3b3b3; 
+    margin-top: 20px;
+    margin-left: 30px; 
+    width: 30px; 
+    height: 30px; 
+    float: left; 
+}
+
+.controlButton:hover{
+    color: white; 
+    border-color: #b3b3b3; 
+}
+
+.controlButton:active{
+    color: #1db954; 
+}
+
+.controlButton:focus{
+    outline: 0; 
+}

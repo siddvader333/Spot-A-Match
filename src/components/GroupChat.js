@@ -3,7 +3,7 @@ import '../css/components/Chat.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
 
-class Chat extends React.Component { 
+class GroupChat extends React.Component { 
 
 	state = {
 		message: "",
@@ -42,15 +42,21 @@ class Chat extends React.Component {
 			sender: "You"
 		}
 		messageList.push(message); 
-
+		
 		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
 		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
 		const message2 = {
 			content: "Generic Response", 
 			type: "received-message", 
 			sender: "UserXYZ"
-		}
-		messageList.push(message2); 
+        }
+        messageList.push(message2); 
+        const message3 = {
+			content: "Generic Response2 to show group chat", 
+			type: "received-message", 
+			sender: "UserABC"
+        }
+        messageList.push(message3); 
 		this.setState({
 			messages: messageList,
 			message: ""
@@ -60,7 +66,7 @@ class Chat extends React.Component {
 	render() {
 		return (
 			<div>
-				<h3 className="chat-header"> Chat with UserXYZ </h3>
+				<h3 className="chat-header"> Group Chat </h3>
 				<div className="chat-box">
 					{ this.state.messages.map((message) => {
 						if (message.type == "received-message"){
@@ -103,4 +109,4 @@ class Chat extends React.Component {
 	}
 }
 
-export default Chat;
+export default GroupChat;
