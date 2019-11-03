@@ -10,6 +10,8 @@ import Navbar from '../components/Navbar';
 import HostRoomContainer from './HostRoomContainer';
 import JoinRoomContainer from './JoinRoomContainer';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
+import cookieFunctions from '../util/Cookie';
+import history from '../util/History';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
@@ -41,7 +43,7 @@ class DashboardContainer extends React.Component {
 			<div>
 				<SideMenu closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
 				{/* <button onClick={this.openMenu}>Open Menu</button> */}
-				<Navbar openMenu={this.openMenu}/>
+				<Navbar openMenu={this.openMenu} />
 				<Switch>
 					<Route exact path="/dashboard/session">
 						<DashboardContentHeader
@@ -70,7 +72,7 @@ class DashboardContainer extends React.Component {
 						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
 						<JoinRoomContainer />
 					</Route>
-					<Route>
+					<Route exact path="/dashboard">
 						{/* <h1>This is the default dashboard view </h1>
 						<a href="/dashboard/session">Click here to join a session </a>
 						<br />

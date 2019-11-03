@@ -16,7 +16,6 @@
 .session-page {
 	width: 100%;
 	background-color: rgba(20, 25, 25);
-
 	text-align: center;
 	color: white;
 }
@@ -34,4 +33,10 @@
 
 .queue-user-text {
 	margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+	.song-queue {
+		margin-bottom: 10vh;
+	}
 }

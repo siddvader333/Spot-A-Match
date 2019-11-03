@@ -5,6 +5,8 @@ import DashboardContainer from './containers/DashboardContainer';
 import SessionPage from './containers/SessionPage';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+import history from '../src/util/History';
+import { Router } from 'react-router-dom';
 
 class App extends React.Component {
 	constructor(props) {
@@ -22,12 +24,12 @@ class App extends React.Component {
 	}
 	render() {
 		return (
-			<BrowserRouter>
+			<Router history={history}>
 				<Switch>
 					<Route path="/dashboard" component={DashboardContainer} />
-					<Route path="" component={LoginPage} />
+					<Route exact path="/" component={LoginPage} />
 				</Switch>
-			</BrowserRouter>
+			</Router>
 		);
 	}
 }

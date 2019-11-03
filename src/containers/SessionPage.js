@@ -42,7 +42,7 @@ class SessionPage extends React.Component {
 			<div className="session-page">
 				<br />
 				{/*<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>*/}
-				<div className="row">
+				<div className="shit row">
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
@@ -53,7 +53,7 @@ class SessionPage extends React.Component {
 						<Chat />
 					</div>
 				</div>
-				<div className="row">
+				<div className="current-playing">
 					<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="true" />
 				</div>
 			</div>
