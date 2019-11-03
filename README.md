@@ -1,68 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+For a copy of our proposal, visit the following document: https://docs.google.com/document/d/1m3dWc-WHRjjtKWWPv9tSuvQWSDL-dqsjEB5UyhhWCuE/edit?usp=sharing
 
-In the project directory, you can run:
+## Milestone 1 Notes
 
-### `npm start`
+* The project description specified that we needed to have a user and an admin login, with specific credentials. However, in our application, we instead have a different hierarchy: normal and premium users. Furthermore, the login for our future application will eventually be done directly through Spotify. Through discussion with our TA, we agreed that implementing a login function that will eventually be completely removed anyway would not be conductive to our learning in this course, nor a wise use of our time. Thus, our authentication between the two types of users is done through a simple button click, and a cookie is used within the application to differentiate between the two user types. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Milestone 1 Instructions
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. Our homepage has 2 buttons: "Log in with Spotify" will take you to our normal user mode, and "Log in as PRO" will take you to our premium user mode. 
 
-### `npm test`
+2. Once entering the application, three images will show up. The first will take you to a private session, where you will be paired with one other user. The second will allow you to join a room, where a "host" will control the music and you can listen along. The third will allow you to host a room, where you control the music for those who join your room. Note that this third feature is only available for premium users; if a normal user tries to access this, they will be greeted with a message barring them from entering without premium credentials. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. On every page in our application after loging in, the user can open the menu from the button in the top-left corner. Within the menu, they will be able to search for a song, view their profile, upgrade to premium, and log out. 
 
-### `npm run build`
+4. When joining a private session, you will be paired with one another user. At the left of the screen, you will have the option of adding songs to your shared queue, and any songs added to the queue (that aren't currently playing) will be displayed in the "up next" list. Clicking the information button will reveal more information about the song. At the right of the screen is a chat box, where you can talk with the other user. Simply typing a message and pressing "Enter" allows you to send a message. For now, the "other user" will immediately reply with a generic message. Above each message will be the name of the sender, which will be important when implementing group chats (see below). At the bottom of the screen is the current playing song, along with options to pause and skip songs. Skipping songs will update the currently playing song, and remove it from the "up next" queue. Finally, the button in the top right corner allows you to leave the private session. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Joining a room works almost identically, with three notable differences: first, the private chat is replaced by a group chat, allowing everyone in the room to talk with each other. Second, users can now only request songs (from the host), rather than adding songs themselves. Finally, the option to pause and skip to the next song are removed. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+6. Hosting a room is very similar to joining a private session, with some differences being a group chat (rather than a private chat), and the ability to approve user requests for songs. The host can also see how many users are listening, which users are listening, and can remove/ban users from the room. 
