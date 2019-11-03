@@ -1,8 +1,23 @@
 import React from 'react';
 import '../css/components/DashboardOptions.css';
+import authFunctions from '../util/Auth';
 
 class DashboardOptions extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            path: '/dashboard/room-host' //ignore this, ended up not needing it
+        };
+    }
+
     render(){
+        let roomPath;
+        if (authFunctions.isPremium() === false){
+            roomPath = '/dashboard';
+        }
+        else{
+            roomPath = '/dashboard/room-host';
+        }
         return(
             <div className="container">
 
@@ -39,7 +54,7 @@ class DashboardOptions extends React.Component{
                     <div className="details">
                         <div className="content">
                             <h2>Host your own room (Premium Feature).</h2>
-                            <a href="/dashboard/room-host">
+                            <a href={roomPath}>
                             <button className="action-button">Host Room</button>
                             </a>
                         </div>
