@@ -1,0 +1,15 @@
+.other-user-message{
+    color: white; 
+    font-size: 14px; 
+    padding: 10px 25px 10px 25px; 
+    text-align: left; 
+    background-color: rgba(25,25,25,0.9);
+	border-radius: 10px;
+}
+
+.speaker{
+    text-align: left;
+    margin-bottom: 2px;  
+    font-size: 11px; 
+    color: grey; 
+}

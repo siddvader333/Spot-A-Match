@@ -5,7 +5,7 @@ class AddSongsBtnSession extends React.Component {
 	render() {
 		return (
 			<a href="/session">
-				<button className="add-songs-session">+ Add Songs</button>
+				<button className="add-songs-session">{this.props.displayText}</button>
 			</a>
 		);
 	}
