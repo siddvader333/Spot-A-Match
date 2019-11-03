@@ -42,6 +42,9 @@ class Chat extends React.Component {
 			sender: "You"
 		}
 		messageList.push(message); 
+
+		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
+		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
 		const message2 = {
 			content: "Generic Response", 
 			type: "received-message", 

@@ -9,6 +9,9 @@ class SessionPage extends React.Component {
 	
 	constructor(props){
 		super(props);
+
+		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
+		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
 		const song1 = {
 			title: "Gang Up", 
 			artist: "Young Thug, 2 Chainz, Wiz Khalifa, Pnb Rock"
