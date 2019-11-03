@@ -9,12 +9,14 @@ import Navbar from '../components/Navbar';
 // import '../css/components/Navbar.css'
 import HostRoomContainer from './HostRoomContainer';
 import JoinRoomContainer from './JoinRoomContainer';
+import CurrentlyPlaying from '../components/CurrentlyPlaying';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOpen: false
+			isOpen: false,
+			currentPlaying: {}
 		};
 
 		this.openMenu = this.openMenu.bind(this);
@@ -28,6 +30,10 @@ class DashboardContainer extends React.Component {
 
 	closeMenu() {
 		this.setState({ isOpen: false });
+	}
+
+	playSong(song) {
+		this.setState({ currentSongPlaying: [ song ] });
 	}
 
 	render() {

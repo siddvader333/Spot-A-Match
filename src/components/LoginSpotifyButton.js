@@ -5,7 +5,9 @@ class LoginSpotifyButton extends React.Component {
 	render() {
 		return (
 			<a href="/dashboard">
-				<button className="log-in-spotify">{this.props.displayText}</button>
+				<button onClick={this.props.onClick} className="log-in-spotify">
+					{this.props.displayText}
+				</button>
 			</a>
 		);
 	}
