@@ -12,7 +12,7 @@ class UpNextSongList extends React.Component{
                     {this.props.songList.map((song) => {	
                         return(
                             <div>
-                                <SongBlock songName={song.title} songArtist = {song.artist}/>
+                                <SongBlock songName={song.songName} songArtist = {song.artist}/>
                             </div>
                         )
 					})}

@@ -5,7 +5,7 @@ import SongBlock from '../components/SongBlock';
 class CurrentlyPlaying extends React.Component { 
 
 	render() {
-		const songName = this.props.songList.currentPlaying.title; 
+		const songName = this.props.songList.currentPlaying.songName; 
 		const songArtist = this.props.songList.currentPlaying.artist; 
 		const premium = (this.props.premium != "false");
 		let button1 = null; 

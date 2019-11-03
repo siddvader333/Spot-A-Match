@@ -1,11 +1,10 @@
 import React from 'react';
 import '../css/containers/SessionPage.css';
-//import SongBlock from '../components/SongBlock';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
-//import Chat from '../components/Chat';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
+import { fakeSearchResults } from '../util/Data.js';
 
 class HostRoomContainer extends React.Component {
 
@@ -14,36 +13,13 @@ class HostRoomContainer extends React.Component {
 
 		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		const song1 = {
-			title: "Gang Up", 
-			artist: "Young Thug, 2 Chainz, Wiz Khalifa, Pnb Rock"
-		}
-		const song2 = {
-			title: "Loaded Gun", 
-			artist: "6lack"
-		}
-		const song3 = {
-			title: "3005", 
-			artist: "Childish Gambino"
-		}
-		const song4 = {
-			title: "Wesley's Theory", 
-			artist: "Kendrick Lamar"
-		}
-		const song5 = {
-			title: "POWER", 
-			artist: "Kanye West"
-		} 
-		const songList = []; 
-		songList.push(song2);
-		songList.push(song3); 
-		songList.push(song4); 
-		songList.push(song5);
+		let songList = fakeSearchResults; 
+		const currentSong = songList.shift(); 
 		this.state = {
-			currentPlaying: song1, 
+			currentPlaying: currentSong, 
 			currentSongList: songList
 		}
-		this.nextSong = this.nextSong.bind(this); 
+		this.nextSong = this.nextSong.bind(this);
 	}
 
 	state = {
