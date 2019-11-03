@@ -9,8 +9,7 @@ import Navbar from '../components/Navbar';
 // import '../css/components/Navbar.css'
 import HostRoomContainer from './HostRoomContainer';
 import JoinRoomContainer from './JoinRoomContainer';
-import CurrentlyPlaying from '../components/CurrentlyPlaying';
-import cookieFunctions from '../util/Cookie';
+import authFunctions from '../util/Auth';
 import history from '../util/History';
 
 class DashboardContainer extends React.Component {
@@ -39,6 +38,10 @@ class DashboardContainer extends React.Component {
 	}
 
 	render() {
+		if (!authFunctions.isAuthed()) {
+			console.log('user not logged in');
+			history.push('/');
+		}
 		return (
 			<div>
 				<SideMenu closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
