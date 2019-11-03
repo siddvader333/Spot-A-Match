@@ -35,6 +35,10 @@ class Chat extends React.Component {
 
 	addMessage = (e) => {
 		e.preventDefault(); 
+
+		if (this.state.message == "") 
+			return; 
+			
 		const messageList = this.state.messages; 
 		const message = {
 			content: this.state.message,

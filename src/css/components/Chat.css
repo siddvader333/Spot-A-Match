@@ -3,13 +3,12 @@
 	border-color: b3b3b3;
 	border-style: solid;
 	border-width: 1px;
-	border-radius: 5%;
 }
 
 .chat-box {
 	display: block;
 	overflow: auto;
-	height: 350px;
+	height: 32vh;
 }
 
 .chat-box::-webkit-scrollbar {

@@ -6,7 +6,7 @@
 .song-list{
    /* border: 1px solid green;*/
    margin-top: 10px;
-    height:420px;
+    height:45vh;
     overflow: auto;
     
 }

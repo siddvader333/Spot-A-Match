@@ -1,6 +1,6 @@
 .chat {
 	margin: 0px 50px 0px 50px; 
-	height: 520px;
+	height: 55vh;
 	width: 80%; 
 }
 
@@ -24,7 +24,7 @@
 .song-queue {
 	/*border: 1px solid red;*/
 	margin: -10px 50px 0px 50px;
-	height: 520px;
+	height: 55vh;
 }
 
 .up-next-session {
