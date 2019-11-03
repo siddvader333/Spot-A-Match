@@ -11,14 +11,14 @@ class CurrentlyPlaying extends React.Component {
 		let button2 = null;
 		if (premium) {
 			button1 = (
-				<button class="controlButton" id="pause">
+				<button className="controlButton" id="pause">
 					{' '}
 					l l{' '}
 				</button>
 			);
 			button2 = (
 				<button
-					class="controlButton"
+					className="controlButton"
 					id="next"
 					onClick={(e) => {
 						this.props.getnextsong(e);
