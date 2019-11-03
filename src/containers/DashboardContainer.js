@@ -52,7 +52,9 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
 						/>
-						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
+						<DashboardFlashMessage displayText="REQUEST: UserABCDEFG is requesting you play 'Winners Circle' by Anderson .Paak" duration="10000" />
+						<DashboardFlashMessage displayText="REQUEST: UserX is requesting you play 'Senorita' by Shawn Mendes, Camilla Cabello" duration="6500" />
+						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="2500" />
 						<HostRoomContainer />
 					</Route>
 					<Route exact path="/dashboard/room-listener">
