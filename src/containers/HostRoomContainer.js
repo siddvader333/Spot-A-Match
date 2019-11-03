@@ -2,9 +2,10 @@ import React from 'react';
 import '../css/containers/SessionPage.css';
 import AddSongsBtnSession from '../components/AddSongsBtnSession';
 import UpNextSongList from '../components/UpNextSongList';
+import SongSuggestionList from '../components/SongSuggestionList';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
-import { fakeSearchResults } from '../util/Data.js';
+import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
 
 class HostRoomContainer extends React.Component {
 	
@@ -15,11 +16,17 @@ class HostRoomContainer extends React.Component {
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
 		const songList = Array.from(fakeSearchResults)
 		const currentSong = songList.shift(); 
+
+		const suggestedList = Array.from(suggestedSongs);
+
 		this.state = {
 			currentPlaying: currentSong, 
-			currentSongList: songList
+			currentSongList: songList,
+			suggestedList: suggestedList
 		}
 		this.nextSong = this.nextSong.bind(this);
+		this.acceptSong = this.acceptSong.bind(this);
+		this.rejectSong = this.rejectSong.bind(this);
 	}
 
 	state = {
@@ -38,6 +45,23 @@ class HostRoomContainer extends React.Component {
 			currentSongList: currentList
 		})
 	}
+
+	acceptSong(song){
+		//remove from suggestedList
+		const newSuggestedList =  this.state.suggestedList.filter(			//returns a new list with everything except the song			
+			(item) =>{
+				return( item.songName !== song.songName);
+			}		
+		);
+		this.setState({suggestedList: newSuggestedList});
+	}
+
+	rejectSong = (song)=> {
+		const newSuggestedList = this.state.suggestedList.filter(
+			(item) => {return (item.songName !== song.songName);}
+		);
+		this.setState({suggestedList: newSuggestedList});
+	}
 	
 	render() {
 		return (
@@ -55,9 +79,32 @@ class HostRoomContainer extends React.Component {
 						<GroupChat />
 					</div>
 				</div>
+				<br/>
+				<br/>
+				<br/>
+
 				<div className="row">
-					<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
+					<div className="suggested-queue col-md">
+						<h3 className="suggested-songs">Suggested Songs</h3>
+						<SongSuggestionList 
+							suggestedList={this.state.suggestedList} 
+							acceptSong={this.acceptSong} 
+							rejectSong = {this.rejectSong}
+						/>						
+					</div>
+
+					{/*placeholder*/}
+					<div className="col-md">
+						<h3 className>USER LIST TBA</h3>
+											
+					</div>
+
+
 				</div>
+
+				{/*<div className="row">
+					<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
+		</div>*/}
 			</div>
 		);
 	}
