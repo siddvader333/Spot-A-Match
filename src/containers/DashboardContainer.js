@@ -5,6 +5,8 @@ import SessionPage from './SessionPage';
 import DashboardContentHeader from '../components/DashboardContentHeader';
 import DashboardFlashMessage from '../components/DashboardFlashMessage';
 import DashboardOptions from '../components/DashboardOptions';
+import Navbar from '../components/Navbar';
+// import '../css/components/Navbar.css'
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
@@ -30,7 +32,8 @@ class DashboardContainer extends React.Component {
 		return (
 			<div>
 				<SideMenu closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
-				<button onClick={this.openMenu}>Open Menu</button>
+				{/* <button onClick={this.openMenu}>Open Menu</button> */}
+				<Navbar openMenu={this.openMenu}/>
 				<Switch>
 					<Route exact path="/dashboard/session">
 						<h1>This is the session View </h1>
