@@ -54,6 +54,8 @@ class HostRoomContainer extends React.Component {
 			}		
 		);
 		this.setState({suggestedList: newSuggestedList});
+		//add
+		const newSongList = this.state.currentSongList.push({songName: song.songName,artist: song.songArtist});
 	}
 
 	rejectSong = (song)=> {
@@ -61,6 +63,7 @@ class HostRoomContainer extends React.Component {
 			(item) => {return (item.songName !== song.songName);}
 		);
 		this.setState({suggestedList: newSuggestedList});
+		
 	}
 	
 	render() {
@@ -84,6 +87,12 @@ class HostRoomContainer extends React.Component {
 				<br/>
 
 				<div className="row">
+					
+					{/*placeholder*/}
+					<div className="col-md">
+						<h3 className>USER LIST TBA</h3>											
+					</div>
+
 					<div className="suggested-queue col-md">
 						<h3 className="suggested-songs">Suggested Songs</h3>
 						<SongSuggestionList 
@@ -92,13 +101,6 @@ class HostRoomContainer extends React.Component {
 							rejectSong = {this.rejectSong}
 						/>						
 					</div>
-
-					{/*placeholder*/}
-					<div className="col-md">
-						<h3 className>USER LIST TBA</h3>
-											
-					</div>
-
 
 				</div>
 
