@@ -1,31 +1,31 @@
 .nav {
 	/* text-align: center; */
-	height: 10vh;
+	height: 7vh;
 	/* line-height: 100px; */
-	background-color: rgb(122, 76, 236);
+	background-color: rgb(235, 81, 20);
 }
 
 .nav button {
-	margin-top: 1.7vh;
+	margin-top: 1.1vh;
 	margin-left: 10px;
 	margin-right: 10px;
 
-	width: 120px;
-	height: 40px;
+	width: 100px;
+	height: 30px;
 
-	border: 2px solid #1db954;
+	border: 2px solid rgb(10, 6, 73);
 	border-radius: 500px;
 
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: 500;
-	color: white;
-	background-color: #1db954;
+	color: rgb(235, 81, 20);
+	background-color: rgb(10, 6, 73);
 
 	transition: all .2s ease-in-out;
 	cursor: pointer;
 	text-align: center;
 
-	line-height: 20px;
+	line-height: 0px;
 }
 
 .nav a {
@@ -34,13 +34,13 @@
 	clear: right;
 	text-decoration: none;
 	color: gray;
-	line-height: 60px;
+	line-height: 40px;
 	transition: all .3s ease-in-out;
 }
 
 span {
-	color: #54d17a;
-	font-size: 40px;
+	color: rgb(10, 6, 73);
+	font-size: 30px;
 	font-weight: 500;
 }
 
