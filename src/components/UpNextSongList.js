@@ -16,18 +16,6 @@ class UpNextSongList extends React.Component{
                             </div>
                         )
 					})}
-
-
-                    {/**idk how to make the scroll margin chage so making a extra div */}
-                    
-                    {/* <SongBlock
-                        songName="Gang Up"
-                        songArtist="Young Thug, 2 Chainz, Wiz Khalifa, Pnb Rock"
-                    />
-                    <SongBlock songName="Loaded Gun" songArtist="6lack" />
-                    <SongBlock songName="3005" songArtist="Childish Gambino" />
-                    <SongBlock songName="Wesley's Theory" songArtist="Kendrick Lamar" />
-                    <SongBlock songName="POWER" songArtist="Kanye West" /> */}
                 </div>
             </div>
         );

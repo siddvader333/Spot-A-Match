@@ -41,8 +41,12 @@ module.exports = {
 			artist: 'Russ'
 		},
 		{
-			songName: 'Senorita',
-			artist: 'Shawn Mendes, Camilla Cabello'
+			songName: 'Lost in Japan',
+			artist: 'Shawn Mendes'
+		},
+		{
+			songName: 'Sanguine Paradise',
+			artist: 'Lil Uzi Vert'
 		}
 	]
 

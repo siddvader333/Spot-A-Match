@@ -55,7 +55,7 @@ class SessionPage extends React.Component {
 
 					<div className="suggested-queue col-md">
 						<h3 className="suggested-songs">Suggested Songs</h3>
-						<SongSuggestionList/>						
+						<SongSuggestionList suggestedList ={this.state.suggestedSongList}/>						
 					</div>
 
 				</div>
