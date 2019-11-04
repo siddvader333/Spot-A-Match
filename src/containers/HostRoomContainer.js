@@ -74,6 +74,7 @@ class HostRoomContainer extends React.Component {
 			const newList = prevState.currentSongList;
 			newList.push(nextProps.songToAdd);
 			prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
 			nextProps.stopSending();
 			return prevState;
 		}
@@ -88,7 +89,7 @@ class HostRoomContainer extends React.Component {
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Add Song" />
+						<AddSongsBtnSession onClick={this.props.addSong} displayText="+ Add Song" />
 					</div>
 
 					<div className="chat col-md">

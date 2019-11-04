@@ -46,6 +46,9 @@ class DashboardContainer extends React.Component {
 	addSong(song) {
 		console.log('going to add to list: ' + song.songName);
 		this.setState({ songToAdd: song });
+		if (window.location.pathname === '/dashboard') {
+			this.flashMessage("Can't add songs when not in a room or session!");
+		}
 	}
 	stopSending() {
 		this.setState({ songToAdd: { songName: '', songArtist: '' } });
@@ -96,6 +99,7 @@ class DashboardContainer extends React.Component {
 						/>
 						<DashboardFlashMessage displayText="In a session with User1234" duration="3500" />
 						<SessionPage
+							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
 							songToAdd={this.state.songToAdd}
 							stopSending={this.stopSending}
@@ -109,7 +113,12 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Close Room"
 						/>
 						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
-						<HostRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
+						<HostRoomContainer
+							createFlashMessage={this.flashMessage}
+							addSong={this.addSongButtonClick}
+							songToAdd={this.state.songToAdd}
+							stopSending={this.stopSending}
+						/>
 					</Route>
 
 					<Route exact path="/dashboard/room-listener">
@@ -119,7 +128,12 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/room-listener"
 						/>
 						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
-						<JoinRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
+						<JoinRoomContainer
+							createFlashMessage={this.flashMessage}
+							addSong={this.addSongButtonClick}
+							songToAdd={this.state.songToAdd}
+							stopSending={this.stopSending}
+						/>
 					</Route>
 
 					<Route exact path="/dashboard/profile">

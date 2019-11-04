@@ -49,6 +49,7 @@ class SessionPage extends React.Component {
 			const newList = prevState.currentSongList;
 			newList.push(nextProps.songToAdd);
 			prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
 			nextProps.stopSending();
 			return prevState;
 		}
