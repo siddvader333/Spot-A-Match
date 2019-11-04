@@ -1,6 +1,6 @@
 .leave-session-button {
-	width: 30%;
 	height: 7.5vh;
+	width: 150px;
 
 	margin-top: 1.25vh;
 	margin-bottom: 1.25vh;
@@ -27,10 +27,16 @@
 	outline: none;
 }
 
+@media only screen and (min-width: 489px) {
+	.leave-session-button {
+		width: 30%;
+	}
+}
+
 @media only screen and (min-width: 800px) {
 	.leave-session-button {
 		height: 8vh;
-		width: 15%;
+		width: 20%;
 		margin-right: 5%;
 		float: right;
 	}

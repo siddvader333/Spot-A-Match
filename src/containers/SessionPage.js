@@ -21,7 +21,6 @@ class SessionPage extends React.Component {
 		};
 		this.nextSong = this.nextSong.bind(this);
 		//this.acceptSong = this.acceptSong.bind(this);
-		this.newSong = this.newSong.bind(this);
 	}
 
 	state = {
@@ -74,7 +73,7 @@ class SessionPage extends React.Component {
 					<div className="song-queue xxx col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Add Song" addSong={this.newSong} />
+						<AddSongsBtnSession displayText="+ Add Song" />
 					</div>
 
 					<div className="suggested-queue col-md">
