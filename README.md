@@ -28,4 +28,4 @@ For a copy of our proposal, visit the following document: https://docs.google.co
 
 6. Joining a room works almost identically, with three notable differences: first, the private chat is replaced by a group chat, allowing everyone in the room to talk with each other. Second, users can now only request songs (from the host), rather than adding songs themselves. Finally, the option to pause and skip to the next song are removed. 
 
-7. Hosting a room is very similar to joining a private session, with some differences being a group chat (rather than a private chat), and the ability to approve user requests for songs. The host can also see how many users are listening, which users are listening, and can remove/ban users from the room. The host also gets a list of song suggestions as well, and can choose to add them or remove them. 
+7. Hosting a room is very similar to joining a private session, with some differences being a group chat (rather than a private chat), and the ability to approve or decline user requests for songs. Eventually, we may choose to allow hosts to see which users are in the room and kick them out as necessary.
