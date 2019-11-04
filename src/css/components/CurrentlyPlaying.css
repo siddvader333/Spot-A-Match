@@ -61,3 +61,15 @@
 	margin-right: 5%;
 	transform: translateX(-10%) ;
 }
+
+@media screen and (max-width: 768px){
+	.song-title-display {
+		font-size: 16px;
+	}
+
+	.song-artist-display {
+		font-size: 12px;
+	}
+
+
+}
