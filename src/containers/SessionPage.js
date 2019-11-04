@@ -77,8 +77,8 @@ class SessionPage extends React.Component {
 						<AddSongsBtnSession displayText="+ Add Song" addSong={this.newSong} />
 					</div>
 
-					<div className="suggested-queue col-md">
-						<Chat />
+					<div className="col-md">
+						<Chat/>
 					</div>
 				</div>
 				<div className="current-playing">
