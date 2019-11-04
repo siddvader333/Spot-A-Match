@@ -74,6 +74,7 @@ class SideMenu extends React.Component {
 							displayText="Upgrade to Pro"
 							onClick={() => {
 								cookieFunctions.setCookie('premium-status', 'true');
+								this.props.createFlashMessage('You are a premium user!');
 							}}
 						/>
 						<MenuItem
