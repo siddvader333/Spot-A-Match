@@ -1,0 +1,30 @@
+#profile-picture{
+    width: 25%; 
+    height: 0;
+    padding-bottom: 25%;  
+    margin: auto; 
+    background-color: rgba(25, 25, 25, 0.9); 
+    margin-top: 5%; 
+    border-style: solid; 
+    border-color: white;
+    border-radius: 50%; 
+}
+
+#profile-info{
+    margin-top: 6vh; 
+    border-top-style: solid; 
+    border-top-color: white; 
+    width: 30%; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.profile-stat{
+    border-bottom-style: solid; 
+    border-bottom-color: white; 
+    color: white; 
+    text-align: center; 
+    height: 8vh; 
+    padding: 15px 10px 10px 10px; 
+    margin: auto; 
+}
