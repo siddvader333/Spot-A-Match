@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 // import '../css/components/Navbar.css'
 import HostRoomContainer from './HostRoomContainer';
 import JoinRoomContainer from './JoinRoomContainer';
+import ProfileContainer from './ProfileContainer';
 import authFunctions from '../util/Auth';
 import history from '../util/History';
 
@@ -96,6 +97,10 @@ class DashboardContainer extends React.Component {
 						<JoinRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
 					</Route>
 
+					<Route exact path="/dashboard/profile">
+						<DashboardContentHeader leaveButtonText="Return to Dashboard" path="/dashboard/profile" />
+						<ProfileContainer />
+					</Route>
 					<Route exact path="/dashboard">
 						<DashboardOptions />
 					</Route>

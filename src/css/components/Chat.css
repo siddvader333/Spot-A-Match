@@ -1,9 +1,15 @@
+@media only screen and (max-width: 768px) {
+	.chat {
+		margin-top: 20px;
+	}
+}
+
 .chat {
 	background-color: #0e1111;
 	border-color: b3b3b3;
 	border-style: solid;
 	border-width: 1px;
-	margin-top: -110px;
+	margin-top: -70px;
 	border: solid 1px #353535;
 	border-radius: 5%;
 }

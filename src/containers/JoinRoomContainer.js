@@ -65,9 +65,10 @@ class HostRoomContainer extends React.Component {
 						<GroupChat />
 					</div>
 				</div>
-				<div className="row">
+				<div className="current-playing">
 					<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="false" />
 				</div>
+				<div className="add-some-space-div">a</div>
 			</div>
 		);
 	}

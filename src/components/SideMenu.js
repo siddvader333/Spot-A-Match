@@ -64,7 +64,12 @@ class SideMenu extends React.Component {
 						<div className="search-results-container">{searchResults}</div>
 					)}
 					<div className="menu-links-container">
-						<MenuItem displayText="My Profile" />
+						<MenuItem
+							displayText="My Profile"
+							onClick={() => {
+								history.push('/dashboard/profile');
+							}}
+						/>
 						<MenuItem
 							displayText="Upgrade to Pro"
 							onClick={() => {
