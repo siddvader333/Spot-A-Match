@@ -7,6 +7,13 @@
 
 }
 
+@media only screen and (max-width: 1200px){
+	.container{
+		flex-direction: column;
+		margin-left: 20vw;
+	}
+}
+
 .container .box{
 	position: relative;
 	width: 300px;
@@ -73,6 +80,8 @@
 .container .box .details .content button{
 	margin-top: 10px;
 }
+
+
 
 /* styling for the buttons */
 
