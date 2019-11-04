@@ -6,19 +6,19 @@
 }
 
 .currently-playing {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
-	height: 10vh;
+	height: 70px;
 	color: black;
 	border-top-style: solid;
 	/*border-top-color: #b3b3b3;*/
-	border: solid 1px green;
+	background-color: #222222;
 }
 
 .controlButton {
 	color: #b3b3b3;
-	background-color: black;
+	background-color: transparent;
 	border-radius: 50%;
 	border-style: solid;
 	border-color: #b3b3b3;
@@ -40,4 +40,24 @@
 
 .controlButton:focus {
 	outline: 0;
+}
+
+
+.song-title-display {
+	font-size: 22px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left: 15px;
+	margin-right: 5%;
+	transform: translateX(-10%) ;
+}
+
+.song-artist-display {
+	font-size: 15px;
+	font-weight: 300;
+	color: #b3b3b3;
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 5%;
+	transform: translateX(-10%) ;
 }

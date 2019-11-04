@@ -104,9 +104,9 @@ class HostRoomContainer extends React.Component {
 
 				</div>
 
-				{/*<div className="row">
-					<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
-		</div>*/}
+				
+				<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
+				
 			</div>
 		);
 	}
