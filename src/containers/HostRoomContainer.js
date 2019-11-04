@@ -5,9 +5,7 @@ import UpNextSongList from '../components/UpNextSongList';
 import SongSuggestionList from '../components/SongSuggestionList';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
-import { fakeSearchResults, suggestedSongs, fakePplList } from '../util/Data.js';
-import AllListenerContainer from './AllListenerContainer';
-
+import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
 
 class HostRoomContainer extends React.Component {
 	constructor(props) {
@@ -19,19 +17,15 @@ class HostRoomContainer extends React.Component {
 		const currentSong = songList.shift();
 
 		const suggestedList = Array.from(suggestedSongs);
-		const listenerList = Array.from(fakePplList)
-
 
 		this.state = {
 			currentPlaying: currentSong,
 			currentSongList: songList,
-			suggestedList: suggestedList,
-			listenerList: listenerList
+			suggestedList: suggestedList
 		};
 		this.nextSong = this.nextSong.bind(this);
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
-		this.deleteListener = this.deleteListener.bind(this); 
 	}
 
 	state = {
@@ -69,15 +63,6 @@ class HostRoomContainer extends React.Component {
 		});
 		this.setState({ suggestedList: newSuggestedList });
 	};
-
-	deleteListener = (name) => {
-		const newListernerList = this.state.listernerList.filter((item) => {
-			return item !== name;
-		});
-		this.setState({ listernerList: newListernerList });
-	};
-
-
 
 	static getDerivedStateFromProps(nextProps, prevState) {
 		if (nextProps.songToAdd == {}) {
@@ -117,7 +102,7 @@ class HostRoomContainer extends React.Component {
 				<div className="row">
 					{/*placeholder*/}
 					<div className="col-md">
-						<AllListenerContainer deleteListener={this.deleteListener}/>
+						<h3 className>USER LIST TBA</h3>
 					</div>
 
 					<div className="suggested-queue col-md">

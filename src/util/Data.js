@@ -52,21 +52,6 @@ module.exports = {
 			songName: 'Sanguine Paradise',
 			artist: 'Lil Uzi Vert'
 		}
-	],
-
-	fakePplList: [
-		'Omar Hubbard',
-		'Crystal Lia',
-		'Tina Edfir',
-		'Lola Haskaer',
-		'Aoife Navarro',
-		'Kevin Velez',
-		'Yasmine Ji',
-		'Victor Becker',
-		'Ziya Tagai',
-		'Alexander Case',
-		'Arjun Solomon',
-		'Barnaby Golden'
 	]
 
 

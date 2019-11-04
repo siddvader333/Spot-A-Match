@@ -52,8 +52,8 @@ button:active, button:focus, button{
 .song-box-suggestion .song-accept-btn button{
     color: white;
     font-weight: 400;
-    background-color: #1db954;
-    border: 2px solid #1db954;
+    background-color: green;
+    border: 2px solid green;
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -75,8 +75,8 @@ button:active, button:focus, button{
 .song-box-suggestion .song-reject-btn button{
     color: white;
     font-weight: 400;
-    background-color: #ff5733;
-    border: 2px solid #ff5733;
+    background-color: red;
+    border: 2px solid red;
     height: 30px;
     width: 30px;
     border-radius: 50%;
