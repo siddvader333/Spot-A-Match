@@ -1,58 +1,32 @@
+@media only screen and (max-width: 550px) {
+	.navbar-title {
+		display: none;
+	}
+}
+
 .nav {
 	/* text-align: center; */
-	height: 10vh;
+	height: 75px;
 	/* line-height: 100px; */
-	background-color: rgb(235, 81, 20);
+	background-color: rgba(25, 25, 25, 0.9);
+	border-bottom: 1px solid #535353;
 }
 
-.nav button {
-	margin-top: 1.1vh;
+.navbar-title {
+	font-weight: lighter;
+	color: white;
+	font-size: 40px;
 	margin-left: 10px;
-	margin-right: 10px;
-
-	width: 100px;
-	height: 30px;
-
-	border: 2px solid rgb(10, 6, 73);
-	border-radius: 500px;
-
-	font-size: 20px;
-	font-weight: 500;
-	color: rgb(235, 81, 20);
-	background-color: rgb(10, 6, 73);
-
-	transition: all .2s ease-in-out;
-	cursor: pointer;
-	text-align: center;
-
-	line-height: 0px;
+	margin-top: 3px;
 }
-
-.nav a {
-	/* text-align: center; */
-	float: left;
-	clear: right;
-	text-decoration: none;
-	color: gray;
-	line-height: 40px;
-	transition: all .3s ease-in-out;
+.logout-button {
+	position: absolute;
+	right: 0;
+	margin-right: 5%;
+	margin-top: 8px;
 }
-
 span {
-	color: rgb(10, 6, 73);
+	color: #1db954;
 	font-size: 30px;
 	font-weight: 500;
-}
-
-.nav button:hover {
-	transform: scale(1.1);
-}
-
-.nav a:hover {
-	transform: scale(1.05);
-}
-
-.nav button:focus,
-.nav button:active {
-	outline: none;
 }
