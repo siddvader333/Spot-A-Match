@@ -43,10 +43,7 @@ class HostRoomContainer extends React.Component {
 			return;
 		}
 		if (nextProps.songToAdd.songName !== '') {
-			console.log('new song that is not empty');
-			const newList = prevState.currentSongList;
-			newList.push(nextProps.songToAdd);
-			prevState.currentSongList = newList;
+			console.log('cant add songs when joined a room');
 			nextProps.stopSending();
 			return prevState;
 		}
