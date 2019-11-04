@@ -46,6 +46,11 @@
 	margin-bottom: 15px;
 }
 
+.add-some-space-div {
+	height: 100px;
+	width: 100%;
+	padding-top: 90px;
+}
 @media only screen and (max-width: 768px) {
 	.song-queue {
 		margin-bottom: 10vh;
@@ -53,5 +58,9 @@
 
 	.suggested-queue {
 		margin: 10px 10px 0 10px;
+	}
+
+	.add-some-space {
+		display: none;
 	}
 }

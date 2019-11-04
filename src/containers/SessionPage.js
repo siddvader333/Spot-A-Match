@@ -73,16 +73,17 @@ class SessionPage extends React.Component {
 					<div className="song-queue xxx col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Add Song" />
+						<AddSongsBtnSession onClick={this.props.addSong} displayText="+ Add Song" />
 					</div>
 
-					<div className="suggested-queue col-md">
+					<div className="chat col-md">
 						<Chat />
 					</div>
 				</div>
 				<div className="current-playing">
 					<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="true" />
 				</div>
+				<div className="add-some-space-div">a</div>
 			</div>
 		);
 	}
