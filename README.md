@@ -6,7 +6,7 @@ For a copy of our proposal, visit the following document: https://docs.google.co
 
 * The project description specified that we needed to have a user and an admin login, with specific credentials. However, in our application, we instead have a different hierarchy: normal and premium users. Furthermore, the login for our future application will eventually be done directly through Spotify. Through discussion with our TA, we agreed that implementing a login function that will eventually be completely removed anyway would not be conductive to our learning in this course, nor a wise use of our time. Thus, our authentication between the two types of users is done through a simple button click, and a cookie is used within the application to differentiate between the two user types. 
 
-* Please ensure you have cookies enabled, or the application may not work properly. 
+* Please ensure you have cookies enabled, or the application may not work properly. If running on localhost:3000 does not work, try running on 127.0.0.1:3000. 
 
 ## Milestone 1 Instructions
 
