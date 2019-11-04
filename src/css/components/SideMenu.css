@@ -10,6 +10,7 @@
 	transition: 0.1s;
 	color: white;
 	text-align: right;
+	margin-right: 0px;
 }
 
 .close-menu-button {
@@ -29,6 +30,7 @@
 	background-color: rgba(0, 0, 0, 0.9);
 	position: relative;
 	transition: 1s;
+	margin-right: 0px;
 }
 
 .menu-links-container {

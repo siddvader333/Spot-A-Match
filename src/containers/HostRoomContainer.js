@@ -101,9 +101,9 @@ class HostRoomContainer extends React.Component {
 
 				<div className="row">
 					{/*placeholder*/}
-					<div className="col-md">
+					{/* <div className="col-md">
 						<h3 className>USER LIST TBA</h3>
-					</div>
+					</div> */}
 
 					<div className="suggested-queue col-md">
 						<h3 className="suggested-songs">Suggested Songs</h3>
@@ -115,9 +115,7 @@ class HostRoomContainer extends React.Component {
 					</div>
 				</div>
 
-				
-				<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
-				
+				<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="true" />
 			</div>
 		);
 	}
