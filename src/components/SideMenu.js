@@ -45,7 +45,7 @@ class SideMenu extends React.Component {
 		const { isOpen, closeMenu } = this.props;
 		const style = isOpen ? { transform: 'translateX(0%)', display: 'block' } : { width: '0', display: 'none' };
 		const searchResults = this.state.searchResults.map((item) => {
-			return <MenuSearchResult song={item} />;
+			return <MenuSearchResult onClick={this.props.addSong} song={item} />;
 		});
 		return (
 			<div style={style} className="side-menu">
@@ -53,7 +53,6 @@ class SideMenu extends React.Component {
 					<p
 						onClick={() => {
 							this.setState({ searchResults: [] });
-							console.log(this.state.searchResults);
 							closeMenu();
 						}}
 						className="close-menu-button"
