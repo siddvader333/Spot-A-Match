@@ -5,6 +5,7 @@
 .song-list {
 	/* border: 1px solid green;*/
 	margin-top: 10px;
+	height: 52vh;
 	overflow: auto;
 }
 .song-list::-webkit-scrollbar {

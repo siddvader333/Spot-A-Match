@@ -6,7 +6,6 @@ import Chat from '../components/Chat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
 import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
 
-
 class SessionPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,14 +14,13 @@ class SessionPage extends React.Component {
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
 		const songList = Array.from(fakeSearchResults);
 		const currentSong = songList.shift();
-	
+
 		this.state = {
 			currentPlaying: currentSong,
 			currentSongList: songList
 		};
 		this.nextSong = this.nextSong.bind(this);
 		//this.acceptSong = this.acceptSong.bind(this);
-		this.newSong = this.newSong.bind(this);
 	}
 
 	state = {
@@ -41,32 +39,45 @@ class SessionPage extends React.Component {
 		});
 	};
 
-
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.songToAdd == {}) {
+			console.log('empty props');
+			return;
+		}
+		if (nextProps.songToAdd.songName !== '') {
+			console.log('new song that is not empty');
+			const newList = prevState.currentSongList;
+			newList.push(nextProps.songToAdd);
+			prevState.currentSongList = newList;
+			nextProps.stopSending();
+			return prevState;
+		}
+	}
 
 	newSong = (e) => {
 		e.preventDefault();
 		let currentList = this.state.currentSongList;
-		const newSong = {title: "Song Title", artist: "Song Artist"};
+		const newSong = { title: 'Song Title', artist: 'Song Artist' };
 		currentList.push(newSong);
 		this.setState({
 			currentSongList: currentList
 		});
-	}
-	
+	};
+
 	render() {
 		return (
 			<div className="session-page">
 				<br />
 				{/*<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>*/}
-				<div className="shit row">
-					<div className="song-queue col-md">
+				<div className="row">
+					<div className="song-queue xxx col-md">
 						<h3 className="up-next-session">Up Next:</h3>
-						<UpNextSongList songList = {this.state.currentSongList}/>
-						<AddSongsBtnSession displayText = "+ Add Song" addSong = {this.newSong}/>
+						<UpNextSongList songList={this.state.currentSongList} />
+						<AddSongsBtnSession displayText="+ Add Song" />
 					</div>
 
 					<div className="suggested-queue col-md">
-						<Chat/>						
+						<Chat />
 					</div>
 				</div>
 				<div className="current-playing">

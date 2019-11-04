@@ -35,7 +35,11 @@ class CurrentlyPlaying extends React.Component {
 			<div className="currently-playing">
 				{button1}
 				{button2}
-				<div className="song-info"> {/*<SongBlock songName={songName} songArtist={songArtist} />{' '}*/}</div>
+				<div className="song-info"> {/*<SongBlock songName={songName} songArtist={songArtist} />{' '}*/}
+					<h1 className="song-title-display">{songName}</h1>
+					<h1 className="song-artist-display">{songArtist}</h1>
+				
+				</div>
 			</div>
 		);
 	}

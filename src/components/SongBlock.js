@@ -10,11 +10,11 @@ class SongBlock extends React.Component {
 						<h1 className="song-title">{this.props.songName}</h1>
 						<h1 className="song-artist">{this.props.songArtist}</h1>
 					</div>
-					<div className="song-info-btn">
+					{/**<div className="song-info-btn">
 						<a href="#">
 							<button>i</button>
 						</a>
-					</div>
+					</div>*/}
 				</div>
 			</div>
 		);
