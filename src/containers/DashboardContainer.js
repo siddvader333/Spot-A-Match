@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 // import '../css/components/Navbar.css'
 import HostRoomContainer from './HostRoomContainer';
 import JoinRoomContainer from './JoinRoomContainer';
+import ProfileContainer from './ProfileContainer';
 import authFunctions from '../util/Auth';
 import history from '../util/History';
 
@@ -25,6 +26,8 @@ class DashboardContainer extends React.Component {
 
 		this.addSong = this.addSong.bind(this);
 		this.stopSending = this.stopSending.bind(this);
+
+		this.addSongButtonClick = this.addSongButtonClick.bind(this);
 	}
 
 	openMenu() {
@@ -44,6 +47,12 @@ class DashboardContainer extends React.Component {
 		this.setState({ songToAdd: { songName: '', songArtist: '' } });
 	}
 
+	addSongButtonClick() {
+		this.openMenu();
+		const searchBar = document.querySelector('.menu-search-bar');
+		searchBar.focus();
+	}
+
 	render() {
 		if (!authFunctions.isAuthed()) {
 			console.log('user not logged in');
@@ -52,7 +61,6 @@ class DashboardContainer extends React.Component {
 		return (
 			<div>
 				<SideMenu addSong={this.addSong} closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
-				{/* <button onClick={this.openMenu}>Open Menu</button> */}
 				<Navbar openMenu={this.openMenu} />
 				<Switch>
 					<Route exact path="/dashboard/session">
@@ -62,8 +70,13 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Exit session"
 						/>
 						<DashboardFlashMessage displayText="In a session with User1234" duration="3500" />
-						<SessionPage songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
+						<SessionPage
+							addSong={this.addSongButtonClick}
+							songToAdd={this.state.songToAdd}
+							stopSending={this.stopSending}
+						/>
 					</Route>
+
 					<Route exact path="/dashboard/room-host">
 						<DashboardContentHeader
 							displayText="Welcome to your room User1234!"
@@ -73,6 +86,7 @@ class DashboardContainer extends React.Component {
 						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
 						<HostRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
 					</Route>
+
 					<Route exact path="/dashboard/room-listener">
 						<DashboardContentHeader
 							displayText="In User1234's Room"
@@ -82,13 +96,12 @@ class DashboardContainer extends React.Component {
 						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
 						<JoinRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
 					</Route>
+
+					<Route exact path="/dashboard/profile">
+						<DashboardContentHeader leaveButtonText="Return to Dashboard" path="/dashboard/profile" />
+						<ProfileContainer />
+					</Route>
 					<Route exact path="/dashboard">
-						{/* <h1>This is the default dashboard view </h1>
-						<a href="/dashboard/session">Click here to join a session </a>
-						<br />
-						<a href="/dashboard/room-host">Click here to host a room</a>
-						<br />
-						<a href="/dashboard/room-listener">Click here to join a room</a> */}
 						<DashboardOptions />
 					</Route>
 				</Switch>

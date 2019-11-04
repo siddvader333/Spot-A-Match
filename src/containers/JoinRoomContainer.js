@@ -43,10 +43,7 @@ class HostRoomContainer extends React.Component {
 			return;
 		}
 		if (nextProps.songToAdd.songName !== '') {
-			console.log('new song that is not empty');
-			const newList = prevState.currentSongList;
-			newList.push(nextProps.songToAdd);
-			prevState.currentSongList = newList;
+			console.log('cant add songs when joined a room');
 			nextProps.stopSending();
 			return prevState;
 		}
@@ -68,9 +65,10 @@ class HostRoomContainer extends React.Component {
 						<GroupChat />
 					</div>
 				</div>
-				<div className="row">
+				<div className="current-playing">
 					<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="false" />
 				</div>
+				<div className="add-some-space-div">a</div>
 			</div>
 		);
 	}

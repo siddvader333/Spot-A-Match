@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/components/DashboardOptions.css';
 import authFunctions from '../util/Auth';
+import DashboardFlashMessage from './DashboardFlashMessage'
 
 class DashboardOptions extends React.Component{
     constructor(props){
@@ -8,15 +9,30 @@ class DashboardOptions extends React.Component{
         this.state = {
             path: '/dashboard/room-host' //ignore this, ended up not needing it
         };
+        this.flashMessage = this.flashMessage.bind(this);
     }
 
+    flashMessage = (e) =>{
+        e.preventDefault();
+        console.log("Flash");
+        return (<DashboardFlashMessage duration='2000' displayText = 'You must upgrade to a premium membership to use that feature!'/>);
+    }
+    
     render(){
         let roomPath;
         if (authFunctions.isPremium() === false){
-            roomPath = '/dashboard';
+            //roomPath = '/dashboard';
+            roomPath = (
+                <button className="action-button" onClick={this.flashMessage}>Host Room</button>
+            );
         }
         else{
-            roomPath = '/dashboard/room-host';
+            //roomPath = '/dashboard/room-host';
+            roomPath = (
+                <a href='/dashboard/room-host'>
+                    <button className="action-button">Host Room</button>
+                </a>
+            );
         }
         return(
             <div className="container">
@@ -54,9 +70,10 @@ class DashboardOptions extends React.Component{
                     <div className="details">
                         <div className="content">
                             <h2>Host your own room (Premium Feature).</h2>
-                            <a href={roomPath}>
+                            {/* <a href={roomPath}>
                             <button className="action-button">Host Room</button>
-                            </a>
+                            </a> */}
+                            {roomPath}
                         </div>
                     </div>
                 </div>

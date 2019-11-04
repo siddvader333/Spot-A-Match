@@ -96,6 +96,7 @@ class Chat extends React.Component {
 							onChange={this.handleNewMessage}
 						/>
 						<input
+							className="send-button"
 							type="submit"
 							value="Send"
 							onClick={(e) => {
