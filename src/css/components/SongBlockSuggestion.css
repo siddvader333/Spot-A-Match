@@ -1,90 +1,83 @@
-button:active, button:focus, button{
-    outline: none
-    
+button:active,
+button:focus,
+button {
+	outline: none;
 }
 
-.song-box-suggestion{
-    border: 1px solid #535353;
-    text-align: left;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.song-box-suggestion {
+	border: 1px solid #535353;
+	text-align: left;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-.song-box-suggestion .song-description{
-    /**border: 1px solid yellow;**/
-    width: 70%;
-
+.song-box-suggestion .song-description {
+	/**border: 1px solid yellow;**/
+	width: 70%;
 }
 
-.song-box-suggestion .row{               /**reset row margins**/
-    margin: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+.song-box-suggestion .row {
+	/**reset row margins**/
+	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.song-box-suggestion  .song-title{
-    font-size:22px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    margin-left: 15px;
-    margin-right: 5%;
+.song-box-suggestion .song-title {
+	font-size: 22px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	margin-left: 15px;
+	margin-right: 5%;
 }
 
-.song-box-suggestion .song-artist{
-    font-size: 15px;
-    font-weight: 300;
-    color: #b3b3b3;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 15px;
-    margin-right:5%;
-
+.song-box-suggestion .song-artist {
+	font-size: 15px;
+	font-weight: 300;
+	color: #b3b3b3;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-right: 5%;
 }
 
-.song-box-suggestion .song-accept-btn{
-    /*border: 1px solid green;*/
-    width:15%;    
-    text-align: right;
-    
+.song-box-suggestion .song-accept-btn {
+	/*border: 1px solid green;*/
+	width: 15%;
+	text-align: right;
 }
 
-.song-box-suggestion .song-accept-btn button{
-    color: white;
-    font-weight: 400;
-    background-color: green;
-    border: 2px solid green;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    line-height: 0px;
+.song-box-suggestion .song-accept-btn button {
+	color: white;
+	font-weight: 400;
+	background-color: #1db954;
+	border: 2px solid #1db954;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	line-height: 0px;
 
-    margin-left: 10%;
-    margin-right:5%;
-
-    
+	margin-left: 10%;
+	margin-right: 5%;
 }
 
-.song-box-suggestion .song-reject-btn{
-    /*border: 1px solid red;*/ 
-    width:15%;    
-    text-align: left;
-    
+.song-box-suggestion .song-reject-btn {
+	/*border: 1px solid red;*/
+	width: 15%;
+	text-align: left;
 }
 
-.song-box-suggestion .song-reject-btn button{
-    color: white;
-    font-weight: 400;
-    background-color: red;
-    border: 2px solid red;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    line-height: 0px;
+.song-box-suggestion .song-reject-btn button {
+	color: white;
+	font-weight: 400;
+	background-color: #ff5733;
+	border: 2px solid #ff5733;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	line-height: 0px;
 
-    margin-left: 5%;
-    margin-right: 10%;
-
-
-    
+	margin-left: 5%;
+	margin-right: 10%;
 }

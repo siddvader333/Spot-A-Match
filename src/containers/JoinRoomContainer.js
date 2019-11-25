@@ -43,7 +43,7 @@ class HostRoomContainer extends React.Component {
 			return;
 		}
 		if (nextProps.songToAdd.songName !== '') {
-			console.log('cant add songs when joined a room');
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was requested to the host!');
 			nextProps.stopSending();
 			return prevState;
 		}
@@ -58,7 +58,7 @@ class HostRoomContainer extends React.Component {
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Request" />
+						<AddSongsBtnSession onClick={this.props.addSong} displayText="+ Request" />
 					</div>
 
 					<div className="chat col-md">

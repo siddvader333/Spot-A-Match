@@ -74,6 +74,7 @@ class HostRoomContainer extends React.Component {
 			const newList = prevState.currentSongList;
 			newList.push(nextProps.songToAdd);
 			prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
 			nextProps.stopSending();
 			return prevState;
 		}
@@ -88,7 +89,7 @@ class HostRoomContainer extends React.Component {
 					<div className="song-queue col-md">
 						<h3 className="up-next-session">Up Next:</h3>
 						<UpNextSongList songList={this.state.currentSongList} />
-						<AddSongsBtnSession displayText="+ Add Song" />
+						<AddSongsBtnSession onClick={this.props.addSong} displayText="+ Add Song" />
 					</div>
 
 					<div className="chat col-md">
@@ -101,9 +102,9 @@ class HostRoomContainer extends React.Component {
 
 				<div className="row">
 					{/*placeholder*/}
-					<div className="col-md">
+					{/* <div className="col-md">
 						<h3 className>USER LIST TBA</h3>
-					</div>
+					</div> */}
 
 					<div className="suggested-queue col-md">
 						<h3 className="suggested-songs">Suggested Songs</h3>
@@ -115,9 +116,7 @@ class HostRoomContainer extends React.Component {
 					</div>
 				</div>
 
-				
-				<CurrentlyPlaying getnextsong = {this.nextSong} songList = {this.state} premium = "true"/>
-				
+				<CurrentlyPlaying getnextsong={this.nextSong} songList={this.state} premium="true" />
 			</div>
 		);
 	}

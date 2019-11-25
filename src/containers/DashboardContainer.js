@@ -18,7 +18,9 @@ class DashboardContainer extends React.Component {
 		super(props);
 		this.state = {
 			isOpen: false,
-			songToAdd: { songName: '', songArtist: '' }
+			songToAdd: { songName: '', songArtist: '' },
+			showFlashMessage: false,
+			flashMessageComponent: null
 		};
 
 		this.openMenu = this.openMenu.bind(this);
@@ -28,6 +30,8 @@ class DashboardContainer extends React.Component {
 		this.stopSending = this.stopSending.bind(this);
 
 		this.addSongButtonClick = this.addSongButtonClick.bind(this);
+
+		this.flashMessage = this.flashMessage.bind(this);
 	}
 
 	openMenu() {
@@ -42,6 +46,9 @@ class DashboardContainer extends React.Component {
 	addSong(song) {
 		console.log('going to add to list: ' + song.songName);
 		this.setState({ songToAdd: song });
+		if (window.location.pathname === '/dashboard') {
+			this.flashMessage("Can't add songs when not in a room or session!");
+		}
 	}
 	stopSending() {
 		this.setState({ songToAdd: { songName: '', songArtist: '' } });
@@ -53,6 +60,21 @@ class DashboardContainer extends React.Component {
 		searchBar.focus();
 	}
 
+	flashMessage(message) {
+		console.log('show flash message of ' + message);
+		this.setState({
+			flashMessageComponent: <DashboardFlashMessage duration="2000" displayText={message} />,
+			showFlashMessage: true
+		});
+
+		window.setTimeout(() => {
+			this.setState({
+				flashMessageComponent: null,
+				showFlashMessage: false
+			});
+		}, 5000);
+	}
+
 	render() {
 		if (!authFunctions.isAuthed()) {
 			console.log('user not logged in');
@@ -60,8 +82,14 @@ class DashboardContainer extends React.Component {
 		}
 		return (
 			<div>
-				<SideMenu addSong={this.addSong} closeMenu={this.closeMenu} isOpen={this.state.isOpen} />
+				<SideMenu
+					createFlashMessage={this.flashMessage}
+					addSong={this.addSong}
+					closeMenu={this.closeMenu}
+					isOpen={this.state.isOpen}
+				/>
 				<Navbar openMenu={this.openMenu} />
+				{this.state.showFlashMessage ? this.state.flashMessageComponent : null}
 				<Switch>
 					<Route exact path="/dashboard/session">
 						<DashboardContentHeader
@@ -71,6 +99,7 @@ class DashboardContainer extends React.Component {
 						/>
 						<DashboardFlashMessage displayText="In a session with User1234" duration="3500" />
 						<SessionPage
+							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
 							songToAdd={this.state.songToAdd}
 							stopSending={this.stopSending}
@@ -84,7 +113,12 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Close Room"
 						/>
 						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
-						<HostRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
+						<HostRoomContainer
+							createFlashMessage={this.flashMessage}
+							addSong={this.addSongButtonClick}
+							songToAdd={this.state.songToAdd}
+							stopSending={this.stopSending}
+						/>
 					</Route>
 
 					<Route exact path="/dashboard/room-listener">
@@ -94,7 +128,12 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/room-listener"
 						/>
 						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
-						<JoinRoomContainer songToAdd={this.state.songToAdd} stopSending={this.stopSending} />
+						<JoinRoomContainer
+							createFlashMessage={this.flashMessage}
+							addSong={this.addSongButtonClick}
+							songToAdd={this.state.songToAdd}
+							stopSending={this.stopSending}
+						/>
 					</Route>
 
 					<Route exact path="/dashboard/profile">
@@ -102,7 +141,7 @@ class DashboardContainer extends React.Component {
 						<ProfileContainer />
 					</Route>
 					<Route exact path="/dashboard">
-						<DashboardOptions />
+						<DashboardOptions createFlashMessage={this.flashMessage} />
 					</Route>
 				</Switch>
 			</div>
