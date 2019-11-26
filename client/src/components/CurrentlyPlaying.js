@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/components/CurrentlyPlaying.css';
-import SongBlock from '../components/SongBlock';
+import SongBlock from './SongBlock';
 
 class CurrentlyPlaying extends React.Component {
 	render() {
@@ -35,10 +35,11 @@ class CurrentlyPlaying extends React.Component {
 			<div className="currently-playing">
 				{button1}
 				{button2}
-				<div className="song-info"> {/*<SongBlock songName={songName} songArtist={songArtist} />{' '}*/}
+				<div className="song-info">
+					{' '}
+					{/*<SongBlock songName={songName} songArtist={songArtist} />{' '}*/}
 					<h1 className="song-title-display">{songName}</h1>
 					<h1 className="song-artist-display">{songArtist}</h1>
-				
 				</div>
 			</div>
 		);

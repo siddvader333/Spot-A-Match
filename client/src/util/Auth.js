@@ -1,4 +1,4 @@
-import cookieFunctions from '../util/Cookie';
+import cookieFunctions from './Cookie';
 const authFunctions = {
 	isAuthed: function() {
 		//for now check cookies for if authed or not
