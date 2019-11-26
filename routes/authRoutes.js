@@ -12,13 +12,13 @@ module.exports = (app) => {
 		}
 	);
 
-	app.get('/callback', passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
-		res.redirect('/');
+	app.get('/callback', passport.authenticate('spotify', { failureRedirect: '/' }), function(req, res) {
+		res.redirect('/dashboard');
 	});
 
-	app.get('/loginFailed', (req, res) => {
-		res.send('error occurred');
-	});
+	// app.get('/loginFailed', (req, res) => {
+	// 	res.send('error occurred');
+	// });
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -26,6 +26,7 @@ module.exports = (app) => {
 
 	app.get('/api/current_user', (req, res) => {
 		console.log(req.user);
-		res.send(req.user);
+		res.send(`${JSON.stringify(req.user)} <br>
+					<a href="/dashboard"> Go back to dashboard </a>`);
 	});
 };

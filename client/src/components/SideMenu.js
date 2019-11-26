@@ -67,8 +67,9 @@ class SideMenu extends React.Component {
 						<MenuItem
 							displayText="My Profile"
 							onClick={() => {
-								history.push('/dashboard/profile');
+								//history.push('/api/current_user');		/**change to /dashboard/profile after*/
 							}}
+							link ={'/api/current_user'}
 						/>
 						<MenuItem
 							displayText="Upgrade to Pro"
