@@ -27,7 +27,7 @@ class App extends React.Component {
 			<Router history={history}>
 				<Switch>
 					<Route path="/dashboard" component={DashboardContainer} />
-					<Route exact path="/" component={LoginPage} />
+					<Route component={LoginPage} />
 				</Switch>
 			</Router>
 		);
