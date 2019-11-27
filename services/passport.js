@@ -13,6 +13,8 @@ passport.use(
 			callbackURL: 'http://localhost:8888/callback'
 		},
 		function(accessToken, refreshToken, expires_in, profile, done) {
+			//log profile
+			//console.log(profile);
 			// asynchronous verification, for effect...
 			process.nextTick(async function() {
 				const existingUser = await User.findOne({ uniqueId: profile.id });
@@ -20,9 +22,18 @@ passport.use(
 					//account already exists
 					return done(null, existingUser);
 				}
-				//else make a new record
-				const newUser = await new User({ uniqueId: profile.id, authType: 'spotify' }).save();
-				return done(null, newUser);
+				//check for premium 
+				if(profile.product === 'premium'){
+					//else make a new record
+					const newUser = await new User({ uniqueId: profile.id, authType: 'spotify', name: profile.displayName,
+														spotifyPremium: true, profilePic: profile.photos}).save();
+					return done(null, newUser);
+				}
+				//else return null
+				else{
+					return done(null, false, {msg: "Do not have Spotify Premium"});
+				}
+
 			});
 		}
 	)
