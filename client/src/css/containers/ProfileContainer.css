@@ -1,17 +1,26 @@
-#profile-picture {
-	width: 15%;
-	height: 0;
-	padding-bottom: 15%;
+#profile-picture-div {
+	/* width: 15%;
+	height: 0; */
+	padding-bottom: -1%;
 	margin: auto;
-	background-color: rgba(25, 25, 25, 0.9);
-	margin-top: 5%;
+	margin-top: 2%;
+	/*background-color: transparent;
 	border-style: solid;
 	border-color: white;
+	border-radius: 50%; */
+}	
+
+#profie-picture{	
+	border: 2px solid white;
 	border-radius: 50%;
+	margin: auto;
 }
 
+
+
+
 #profile-info {
-	margin-top: 6vh;
+	margin-top: 5vh;
 	border-top-style: solid;
 	border-top-color: white;
 	width: 30%;
@@ -24,7 +33,7 @@
 	border-bottom-color: white;
 	color: white;
 	text-align: center;
-	height: 8vh;
-	padding: 15px 10px 10px 10px;
+	height: 7vh;
+	padding: 10px 10px 10px 10px;
 	margin: auto;
 }
