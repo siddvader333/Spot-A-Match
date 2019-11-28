@@ -9,6 +9,9 @@ const keys = require('./config/keys');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 require('./services/passport');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+server.listen(4200);
 
 //middleware, converts requests from string to js object
 mongoose
@@ -26,6 +29,13 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
+io.on('connection', (socket) => {
+	console.log('user connected');
+	socket.on('sendMessage', (message) => {
+		console.log('message sent:' + JSON.stringify(message));
+		socket.broadcast.emit('messageSent', message.content);
+	});
+});
 //Hello World Route
 app.get('/api/test', (req, res) => {
 	res.send('Hello world!');

@@ -2,15 +2,46 @@ import React from 'react';
 import '../css/components/Chat.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-
+import io from 'socket.io-client';
 class Chat extends React.Component {
-	state = {
-		message: '',
-		messages: []
-	};
+	constructor(props) {
+		super(props);
+		//const socket = io.connect();
+
+		var socket = io.connect('http://localhost:4200');
+		socket.on('connection', function(data) {
+			console.log('connected');
+			socket.emit('join', 'Hello World from client');
+		});
+
+		socket.on('messageSent', (msg) => {
+			console.log(msg);
+			this.setState({ message: msg });
+
+			const messageList = this.state.messages;
+			const message = {
+				content: msg,
+				type: 'received-message',
+				sender: 'UserXYZ'
+			};
+			messageList.push(message);
+			this.setState({
+				messages: messageList,
+				message: ''
+			});
+		});
+		this.state = {
+			message: '',
+			messages: [],
+			socket: socket
+		};
+	}
 
 	componentDidMount() {
 		this.scrollToBottom();
+		//const socket = socketIOClient('http://127.0.0.1:4200');
+		//socket.on('messageSent', (msg) => this.setState({ message: msg }));
+		//this.addMessage();
 	}
 
 	componentDidUpdate() {
@@ -32,6 +63,7 @@ class Chat extends React.Component {
 	};
 
 	addMessage = (e) => {
+		console.log('trying to push' + this.state.message);
 		e.preventDefault();
 
 		if (this.state.message === '') return;
@@ -46,16 +78,21 @@ class Chat extends React.Component {
 
 		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
 		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
-		const message2 = {
+		/*const message2 = {
 			content: 'Generic Response',
 			type: 'received-message',
 			sender: 'UserXYZ'
 		};
-		messageList.push(message2);
+		messageList.push(message2);*/
 		this.setState({
 			messages: messageList,
 			message: ''
 		});
+
+		//const socket = socketIOClient('http://localhost:8888/4200');
+		//var socket = io.connect('http://localhost:4200');
+		console.log('here');
+		this.state.socket.emit('sendMessage', message);
 	};
 
 	render() {

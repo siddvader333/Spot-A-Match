@@ -7,7 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import history from './util/History';
 import { Router } from 'react-router-dom';
-
+import io from 'socket.io-client';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,6 +16,10 @@ class App extends React.Component {
 		};
 		this.setCurrentTrack = this.setCurrentTrack.bind(this);
 		AOS.init();
+		/*var socket = io.connect('http://localhost:4200');
+		socket.on('connect', function(data) {
+			socket.emit('join', 'Hello World from client');
+		});*/
 	}
 
 	setCurrentTrack(event) {
