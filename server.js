@@ -36,6 +36,66 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('messageSent', message.content);
 	});
 });
+
+/*Queue for Session MatchMaking */
+const nsp = io.of('/session_queue');
+nsp._userlist = [];
+nsp.on('connection', (socket) => {
+	console.log('a user has joined the queue');
+	console.log(socket.id);
+	socket.on('attemptConnection', (data) => {
+		console.log(data.username + ' is trying to connect to someone');
+		console.log('userList:' + JSON.stringify(nsp._userlist));
+		if (nsp._userlist.length === 0) {
+			//list is empty
+			nsp.to(`${data.socketId}`).emit('connectionResult', { status: false });
+		} else {
+			//connect the users
+			nsp.to(`${data.socketId}`).emit('connectionResult', {
+				status: true,
+				userToConnectTo: `holy shit someone exists ${JSON.stringify(nsp._userlist[0])}`,
+				partnerDisplayName: nsp._userlist[0].displayName,
+				partnerUniqueId: nsp._userlist[0].uniqueId
+			});
+			nsp.to(`${nsp._userlist[0].socketId}`).emit('connectionResult', {
+				status: true,
+				userToConnectTo: `holy shit someone exists ${JSON.stringify(data)}`,
+				partnerDisplayName: data.displayName,
+				partnerUniqueId: data.uniqueId
+			});
+			nsp._userlist.shift();
+		}
+	});
+
+	socket.on('addToQueue', (data) => {
+		nsp._userlist.push(data);
+	});
+	socket.on('leaveQueue', (data) => {
+		const index = nsp._userlist.indexOf(data);
+		nsp._userlist.splice(index, 1);
+	});
+});
+
+const nsp2 = io.of('/private-room');
+nsp2.on('connection', (socket) => {
+	console.log('a user has found a match and is in the session page');
+	console.log(socket.id);
+
+	socket.on('requestPartnerSocket', (data) => {
+		//send this users data to get socket.id's on both sides
+		nsp2.broadcast.emit('partnerInfo', data);
+	});
+
+	socket.on('infoReceived', (data) => {
+		nsp2.broadcast.emit('infoReceived', data);
+	});
+
+	socket.on('sendMessage', (data) => {
+		console.log(data);
+		socket.broadcast.emit('messageSent', data);
+	});
+});
+
 //Hello World Route
 app.get('/api/test', (req, res) => {
 	res.send('Hello world!');
@@ -50,3 +110,10 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
 	console.log(`server running on port ${port}`);
 });
+
+function ensureAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/login');
+}

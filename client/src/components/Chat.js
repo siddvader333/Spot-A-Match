@@ -6,42 +6,37 @@ import io from 'socket.io-client';
 class Chat extends React.Component {
 	constructor(props) {
 		super(props);
-		//const socket = io.connect();
 
-		var socket = io.connect('http://localhost:4200');
-		socket.on('connection', function(data) {
+		var socket = io.connect('http://localhost:4200/private-room');
+		socket.on('connect', function(data) {
 			console.log('connected');
-			socket.emit('join', 'Hello World from client');
 		});
-
-		socket.on('messageSent', (msg) => {
-			console.log(msg);
-			this.setState({ message: msg });
-
-			const messageList = this.state.messages;
-			const message = {
-				content: msg,
-				type: 'received-message',
-				sender: 'UserXYZ'
-			};
-			messageList.push(message);
-			this.setState({
-				messages: messageList,
-				message: ''
-			});
+		socket.on('messageSent', (data) => {
+			if (data.receipient === this.props.uniqueId) {
+				const messageList = this.state.messages;
+				const message = {
+					content: data.message.content,
+					type: 'received-message',
+					sender: this.props.partnerDisplayName
+				};
+				messageList.push(message);
+				this.setState({
+					messages: messageList,
+					message: ''
+				});
+			}
 		});
 		this.state = {
 			message: '',
 			messages: [],
-			socket: socket
+			socket: socket,
+			partnerReceived: false,
+			partnerSocketId: ''
 		};
 	}
 
 	componentDidMount() {
 		this.scrollToBottom();
-		//const socket = socketIOClient('http://127.0.0.1:4200');
-		//socket.on('messageSent', (msg) => this.setState({ message: msg }));
-		//this.addMessage();
 	}
 
 	componentDidUpdate() {
@@ -75,30 +70,18 @@ class Chat extends React.Component {
 			sender: 'You'
 		};
 		messageList.push(message);
-
-		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
-		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
-		/*const message2 = {
-			content: 'Generic Response',
-			type: 'received-message',
-			sender: 'UserXYZ'
-		};
-		messageList.push(message2);*/
 		this.setState({
 			messages: messageList,
 			message: ''
 		});
 
-		//const socket = socketIOClient('http://localhost:8888/4200');
-		//var socket = io.connect('http://localhost:4200');
-		console.log('here');
-		this.state.socket.emit('sendMessage', message);
+		this.state.socket.emit('sendMessage', { receipient: this.props.partnerUniqueId, message: message });
 	};
 
 	render() {
 		return (
 			<div>
-				<h3 className="chat-header"> Chat with UserXYZ </h3>
+				<h3 className="chat-header">{`Chat With ${this.props.partnerDisplayName}`}</h3>
 				<div className="chat-box">
 					{this.state.messages.map((message) => {
 						if (message.type === 'received-message') {

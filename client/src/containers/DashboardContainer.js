@@ -12,28 +12,95 @@ import JoinRoomContainer from './JoinRoomContainer';
 import ProfileContainer from './ProfileContainer';
 import authFunctions from '../util/Auth';
 import history from '../util/History';
+import io from 'socket.io-client';
 
 class DashboardContainer extends React.Component {
 	constructor(props) {
 		super(props);
+
+		/*Socket.io Setup*/
+
+		/*Session Queue Socket */
+		var sessionSocket = io.connect('http://localhost:4200/session_queue');
+		sessionSocket.on('connect', function(data) {
+			console.log('Joined the session-queue socket, need to emit ready to add into queue');
+		});
+		sessionSocket.on('connectionResult', async (connectionResult) => {
+			if (connectionResult.status === true) {
+				this.setState({
+					userToConnectTo: connectionResult.userToConnectTo,
+					partnerDisplayName: connectionResult.partnerDisplayName,
+					partnerUniqueId: connectionResult.partnerUniqueId,
+					waitingInQueue: false
+				});
+				history.push('/dashboard/session');
+			} else {
+				sessionSocket.emit('addToQueue', {
+					username: this.state.username,
+					displayName: this.state.displayName,
+					socketId: sessionSocket.id,
+					uniqueId: this.state.uniqueId
+				});
+				this.flashMessage('Trying to Connect you to another user.');
+				//wait 30 seconds
+				await new Promise((resolve) => setTimeout(resolve, 30000));
+				if (this.state.waitingInQueue === true) {
+					this.flashMessage('Could not find anyone right now. Try again later');
+					this.setState({ waitingInQueue: false });
+					sessionSocket.emit('leave_queue', {
+						username: this.state.username,
+						displayName: this.state.displayName,
+						socketId: sessionSocket.id,
+						uniqueId: this.state.uniqueId
+					});
+				}
+			}
+		});
+
 		this.state = {
+			name: '',
 			isOpen: false,
 			songToAdd: { songName: '', songArtist: '' },
 			showFlashMessage: false,
-			flashMessageComponent: null
+			flashMessageComponent: null,
+			waitingInQueue: false,
+			userToConnectTo: '',
+			uniqueId: '',
+			partnerUniqueId: '',
+			partnerDisplayName: '',
+			sessionSocket: sessionSocket
 		};
 
 		this.openMenu = this.openMenu.bind(this);
 		this.closeMenu = this.closeMenu.bind(this);
-
 		this.addSong = this.addSong.bind(this);
 		this.stopSending = this.stopSending.bind(this);
-
 		this.addSongButtonClick = this.addSongButtonClick.bind(this);
-
 		this.flashMessage = this.flashMessage.bind(this);
+		this.getSessionRoomName = this.getSessionRoomName.bind(this);
 	}
 
+	async componentDidMount() {
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		this.setState({ name: responseJSON.name, uniqueId: responseJSON.uniqueId });
+	}
+
+	getSessionRoomName() {
+		if (this.state.waitingInQueue === false) {
+			console.log('get the session room name in here to pass to session page');
+			this.state.sessionSocket.emit('attemptConnection', {
+				username: this.state.username,
+				displayName: this.state.displayName,
+				socketId: this.state.sessionSocket.id,
+				uniqueId: this.state.uniqueId
+			});
+			this.setState({ waitingInQueue: true });
+		}
+	}
 	openMenu() {
 		console.log('here');
 		this.setState({ isOpen: true });
@@ -75,11 +142,22 @@ class DashboardContainer extends React.Component {
 		}, 5000);
 	}
 
+	async componentWillMount() {
+		//this fetch cmd will hit the /profile route, which in turn sends back the req.user data
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json(); //promise for parsing body? console.log to see data fetched from mongoDB
+
+		//set the data we got back to state for later use
+		this.setState({
+			username: responseJSON.uniqueId,
+			displayName: responseJSON.name,
+			uniqueId: this.state.uniqueId
+		});
+	}
 	render() {
-		if (!authFunctions.isAuthed()) {
-			console.log('user not logged in');
-			history.push('/');
-		}
 		return (
 			<div>
 				<SideMenu
@@ -97,12 +175,18 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/session"
 							leaveButtonText="Exit session"
 						/>
-						<DashboardFlashMessage displayText="In a session with User1234" duration="3500" />
+						<DashboardFlashMessage
+							displayText={`In a session with ${this.state.partnerDisplayName}`}
+							duration="3500"
+						/>
 						<SessionPage
 							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
 							songToAdd={this.state.songToAdd}
 							stopSending={this.stopSending}
+							partnerDisplayName={this.state.partnerDisplayName}
+							partnerUniqueId={this.state.partnerUniqueId}
+							uniqueId={this.state.uniqueId}
 						/>
 					</Route>
 
@@ -141,7 +225,10 @@ class DashboardContainer extends React.Component {
 						<ProfileContainer />
 					</Route>
 					<Route exact path="/dashboard">
-						<DashboardOptions createFlashMessage={this.flashMessage} />
+						<DashboardOptions
+							getSessionName={this.getSessionRoomName}
+							createFlashMessage={this.flashMessage}
+						/>
 					</Route>
 				</Switch>
 			</div>

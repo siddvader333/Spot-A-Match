@@ -54,9 +54,11 @@ class DashboardOptions extends React.Component {
 					<div className="details">
 						<div className="content">
 							<h2>Join a session with another listener.</h2>
-							<a href="/dashboard/session">
-								<button className="action-button">Start Session</button>
-							</a>
+							{/*<a href="/dashboard/session">*/}
+							<button onClick={this.props.getSessionName} className="action-button">
+								Start Session
+							</button>
+							{/*</a>*/}
 						</div>
 					</div>
 				</div>

@@ -9,18 +9,12 @@ import authFunctions from '../util/Auth';
 import history from '../util/History';
 import '../css/containers/ProfileContainer.css';
 
-
-
-
-
-
 class ProfileContainer extends React.Component {
-
-	constructor(props){
+	constructor(props) {
 		super(props);
-		this.state={
-			displayName:"",
-			pic:"https://img6.androidappsapk.co/300/b/1/a/com.ludicside.mrsquare.png",
+		this.state = {
+			displayName: '',
+			pic: 'https://img6.androidappsapk.co/300/b/1/a/com.ludicside.mrsquare.png',
 			roomsJoined: 0,
 			roomsHosted: 0,
 			sessionsJoined: 0
@@ -28,28 +22,27 @@ class ProfileContainer extends React.Component {
 	}
 
 	//fetch request
-	async componentWillMount(){
+	async componentWillMount() {
 		//this fetch cmd will hit the /profile route, which in turn sends back the req.user data
 		const response = await fetch('/profile', {
 			method: 'GET',
-			headers: {'Content-Type': 'applications/json'}
+			headers: { 'Content-Type': 'applications/json' }
 		});
-		const responseJSON = await response.json();				//promise for parsing body? console.log to see data fetched from mongoDB
-		
+		const responseJSON = await response.json(); //promise for parsing body? console.log to see data fetched from mongoDB
+
 		//set the data we got back to state for later use
 		this.setState({
-			displayName : responseJSON.name,
-			roomsHosted : responseJSON.roomsHosted,
-			roomsJoined : responseJSON.roomsJoined,
-			sessionsJoined : responseJSON.sessionsJoined		
-		})		
-		if(responseJSON.profilePic.length > 0){
+			displayName: responseJSON.name,
+			roomsHosted: responseJSON.roomsHosted,
+			roomsJoined: responseJSON.roomsJoined,
+			sessionsJoined: responseJSON.sessionsJoined
+		});
+		if (responseJSON.profilePic.length > 0) {
 			this.setState({
-				pic : responseJSON.profilePic[0]
+				pic: responseJSON.profilePic[0]
 			});
 		}
 	}
-
 
 	render() {
 		let userType = '';
@@ -58,11 +51,9 @@ class ProfileContainer extends React.Component {
 		return (
 			<div>
 				<div id="profile-picture-div">
-				<img id="profie-picture" className ="img-fluid mx-auto d-block" 
-						src={this.state.pic} 
-						width = "200"/>
+					<img id="profie-picture" className="img-fluid mx-auto d-block" src={this.state.pic} width="200" />
 				</div>
-				
+
 				<div id="profile-info">
 					<div className="profile-stat">Name: {this.state.displayName}</div>
 					{userType}

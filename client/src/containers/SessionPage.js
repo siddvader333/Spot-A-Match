@@ -69,7 +69,7 @@ class SessionPage extends React.Component {
 		return (
 			<div className="session-page">
 				<br />
-				{/*<h1 className="queue-user-text">You're in a queue with NameXYZ</h1>*/}
+				<h1 className="queue-user-text">{`You're in a queue with ${this.props.partnerDisplayName}`}</h1>
 				<div className="row">
 					<div className="song-queue xxx col-md">
 						<h3 className="up-next-session">Up Next:</h3>
@@ -78,7 +78,11 @@ class SessionPage extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<Chat />
+						<Chat
+							partnerUniqueId={this.props.partnerUniqueId}
+							uniqueId={this.props.uniqueId}
+							partnerDisplayName={this.props.partnerDisplayName}
+						/>
 					</div>
 				</div>
 				<div className="current-playing">
