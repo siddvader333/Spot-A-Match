@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
 		/*Socket.io Setup*/
 
 		/*Session Queue Socket */
-		var sessionSocket = io.connect('http://localhost:4200/session_queue');
+		var sessionSocket = io.connect('http://localhost:4200/session-queue');
 		sessionSocket.on('connect', function(data) {
 			console.log('Joined the session-queue socket, need to emit ready to add into queue');
 		});
@@ -102,7 +102,6 @@ class DashboardContainer extends React.Component {
 		}
 	}
 	openMenu() {
-		console.log('here');
 		this.setState({ isOpen: true });
 	}
 
@@ -118,7 +117,7 @@ class DashboardContainer extends React.Component {
 		}
 	}
 	stopSending() {
-		this.setState({ songToAdd: { songName: '', songArtist: '' } });
+		this.setState({ songToAdd: { songName: '', songArtist: '', exitSession: false } });
 	}
 
 	addSongButtonClick() {
@@ -174,6 +173,9 @@ class DashboardContainer extends React.Component {
 							displayText="In a session with: User1234"
 							path="/dashboard/session"
 							leaveButtonText="Exit session"
+							leaveSession={() => {
+								this.setState({ exitSession: true });
+							}}
 						/>
 						<DashboardFlashMessage
 							displayText={`In a session with ${this.state.partnerDisplayName}`}
@@ -187,6 +189,7 @@ class DashboardContainer extends React.Component {
 							partnerDisplayName={this.state.partnerDisplayName}
 							partnerUniqueId={this.state.partnerUniqueId}
 							uniqueId={this.state.uniqueId}
+							exitSession={this.state.exitSession}
 						/>
 					</Route>
 

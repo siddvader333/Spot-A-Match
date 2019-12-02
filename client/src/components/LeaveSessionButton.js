@@ -3,9 +3,11 @@ import '../css/components/LeaveSessionButton.css';
 
 const LeaveSessionButton = (props) => {
 	return (
-		<a href="/dashboard">
-			<button className="leave-session-button">{props.displayText}</button>
-		</a>
+		//{/*<a href="/dashboard">*/}
+		<button onClick={props.onClick} className="leave-session-button">
+			{props.displayText}
+		</button>
+		//{/*</a>*/}
 	);
 };
 

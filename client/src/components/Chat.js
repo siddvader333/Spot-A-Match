@@ -7,9 +7,12 @@ class Chat extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('http://localhost:4200/private-room');
+		var socket = io.connect('http://localhost:4200/private-session-chat');
 		socket.on('connect', function(data) {
 			console.log('connected');
+		});
+		socket.on('disconnect', (data) => {
+			console.log('disconnected');
 		});
 		socket.on('messageSent', (data) => {
 			if (data.receipient === this.props.uniqueId) {

@@ -31,70 +31,70 @@ app.use(passport.session());
 
 io.on('connection', (socket) => {
 	console.log('user connected');
-	socket.on('sendMessage', (message) => {
-		console.log('message sent:' + JSON.stringify(message));
-		socket.broadcast.emit('messageSent', message.content);
-	});
 });
 
-/*Queue for Session MatchMaking */
-const nsp = io.of('/session_queue');
-nsp._userlist = [];
-nsp.on('connection', (socket) => {
+/************** 1-1 Session Socket.io Code  **************/
+/*Namespace for handling matchmaking for 1-1 Sessions */
+const sessionQueueNsp = io.of('/session-queue');
+sessionQueueNsp._userlist = [];
+sessionQueueNsp.on('connection', (socket) => {
 	console.log('a user has joined the queue');
-	console.log(socket.id);
 	socket.on('attemptConnection', (data) => {
-		console.log(data.username + ' is trying to connect to someone');
-		console.log('userList:' + JSON.stringify(nsp._userlist));
-		if (nsp._userlist.length === 0) {
+		if (sessionQueueNsp._userlist.length === 0) {
 			//list is empty
-			nsp.to(`${data.socketId}`).emit('connectionResult', { status: false });
+			sessionQueueNsp.to(`${data.socketId}`).emit('connectionResult', { status: false });
 		} else {
 			//connect the users
-			nsp.to(`${data.socketId}`).emit('connectionResult', {
+			sessionQueueNsp.to(`${data.socketId}`).emit('connectionResult', {
 				status: true,
-				userToConnectTo: `holy shit someone exists ${JSON.stringify(nsp._userlist[0])}`,
-				partnerDisplayName: nsp._userlist[0].displayName,
-				partnerUniqueId: nsp._userlist[0].uniqueId
+				userToConnectTo: `holy shit someone exists ${JSON.stringify(sessionQueueNsp._userlist[0])}`,
+				partnerDisplayName: sessionQueueNsp._userlist[0].displayName,
+				partnerUniqueId: sessionQueueNsp._userlist[0].uniqueId
 			});
-			nsp.to(`${nsp._userlist[0].socketId}`).emit('connectionResult', {
+			sessionQueueNsp.to(`${sessionQueueNsp._userlist[0].socketId}`).emit('connectionResult', {
 				status: true,
 				userToConnectTo: `holy shit someone exists ${JSON.stringify(data)}`,
 				partnerDisplayName: data.displayName,
 				partnerUniqueId: data.uniqueId
 			});
-			nsp._userlist.shift();
+			sessionQueueNsp._userlist.shift();
 		}
 	});
 
 	socket.on('addToQueue', (data) => {
-		nsp._userlist.push(data);
+		sessionQueueNsp._userlist.push(data);
 	});
 	socket.on('leaveQueue', (data) => {
-		const index = nsp._userlist.indexOf(data);
-		nsp._userlist.splice(index, 1);
+		const index = sessionQueueNsp._userlist.indexOf(data);
+		sessionQueueNsp._userlist.splice(index, 1);
 	});
 });
 
-const nsp2 = io.of('/private-room');
-nsp2.on('connection', (socket) => {
-	console.log('a user has found a match and is in the session page');
-	console.log(socket.id);
+/*Namespace handling non-chat related events in 1-1 session*/
+const privateSessionNsp = io.of('/private-session');
+privateSessionNsp.on('connection', (socket) => {
+	console.log('connected');
 
-	socket.on('requestPartnerSocket', (data) => {
-		//send this users data to get socket.id's on both sides
-		nsp2.broadcast.emit('partnerInfo', data);
+	socket.on('leaveSession', (data) => {
+		socket.broadcast.emit('partnerLeft', data);
 	});
-
-	socket.on('infoReceived', (data) => {
-		nsp2.broadcast.emit('infoReceived', data);
+	socket.on('partnerSkipSong', (data) => {
+		socket.broadcast.emit('partnerSkipSong', data);
 	});
+	socket.on('partnerAddSong', (data) => {
+		socket.broadcast.emit('partnerAddSong', data);
+	});
+});
 
+/*Namespace handling chat related events in 1-1 session*/
+const privateSessionChatNsp = io.of('/private-session-chat');
+privateSessionChatNsp.on('connection', (socket) => {
 	socket.on('sendMessage', (data) => {
-		console.log(data);
 		socket.broadcast.emit('messageSent', data);
 	});
 });
+
+/************************* End 1-1 Session Socket.io Code **************************/
 
 //Hello World Route
 app.get('/api/test', (req, res) => {
