@@ -47,7 +47,7 @@ class DashboardContainer extends React.Component {
 				if (this.state.waitingInQueue === true) {
 					this.flashMessage('Could not find anyone right now. Try again later');
 					this.setState({ waitingInQueue: false });
-					sessionSocket.emit('leave_queue', {
+					sessionSocket.emit('leaveQueue', {
 						username: this.state.username,
 						displayName: this.state.displayName,
 						socketId: sessionSocket.id,

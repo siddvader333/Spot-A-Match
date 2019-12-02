@@ -42,7 +42,7 @@ async componentWillMount(){
 		if (event.key === 'Enter' && this.state.searchValue !== '') {
 			//console.log('enter press here! ');
 			console.log('Search for ' + this.state.searchValue);
-			console.log(this.state.searchResults);
+			//console.log(this.state.searchResults);
 			//make search query to spotify
 
 			//for now, use fake query for now
@@ -52,38 +52,17 @@ async componentWillMount(){
 			
 			
 			/////////////////////////////////////
-			//----------------------API call--------------------------//
+			/*----------------------API call--------------------------*/
 
-			const BASE_URL = "https://api.spotify.com/v1/search?";
-			const FETCH_URL = BASE_URL + "q=" + this.state.searchValue +"&type=track&market=US&limit=10&offset=0";
-
-			//var accessToken = "BQAbKVO8viMaFgRL5Kc9ToBmKR6yr_XJothUOgKnZWCajr4kL_V-k9GA_Io1iv7_uy0Ch723bNPS0jxMaCqyibsextgqFWugTkTpzhpNI3AoOMZe2UYXAOz-y1rkfm0z0jTMpgxybzgvC76dFO4YHgowTwhSMr0";
-			
-			var myOptions = {
+			const urlFetch = '/getSongResults/' + this.state.searchValue;
+			const results = await fetch(urlFetch,{
 				method: 'GET',
-				headers: {
-					'Authorization': 'Bearer ' + this.state.userAccessToken
-				},
-				mode: 'cors',
-				cache: 'default'
-			}
-			var songResults = [];
+				headers: { 'Content-Type' : 'application/json'},
+			}).then(response => response.json());	
 
-			const json = await fetch(FETCH_URL, myOptions)
-				.then(response => response.json())
+			/*-----------------End of API call--------------*/
 
-			if (json.error == null){   //if access token is still valid
-				for (let i = 0; i < json.tracks.items.length; i++){
-					songResults.push({songName: json.tracks.items[i].name, artist: json.tracks.items[i].album.artists[0].name, trackURI: json.tracks.items[i].uri});
-				}
-			}
-			console.log(songResults);
-
-			///-----------------End of API call--------------///
-			
-
-
-			this.setState({ searchResults: songResults });
+			this.setState({ searchResults: results });
 		}
 	};
 

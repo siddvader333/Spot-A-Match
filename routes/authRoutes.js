@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 module.exports = (app) => {
 	const passport = require('passport');
 	app.get(
@@ -33,6 +34,43 @@ module.exports = (app) => {
 	app.get('/profile',(req,res)=>{
 		res.send(req.user);
 	});
+
+	
+	app.get('/getSongResults/:itemSearched',async (req, res) =>{
+		
+		const BASE_URL = "https://api.spotify.com/v1/search?";
+		const FETCH_URL = BASE_URL + "q=" + /**this.state.searchValue*/ req.params.itemSearched + "&type=track&market=US&limit=10&offset=0";
+		let myOptions = {
+			method: 'GET',
+			headers: {
+				'Authorization': 'Bearer ' + req.user.currentAccessToken
+			},
+			mode: 'cors',
+			cache: 'default'
+		}
+		let songResults = [];
+		const json = await fetch(FETCH_URL, myOptions)
+			.then(response => response.json())
+
+		if (json.error == null){   //if access token is still valid
+			for (let i = 0; i < json.tracks.items.length; i++){
+				songResults.push({songName: json.tracks.items[i].name, artist: json.tracks.items[i].album.artists[0].name, 
+									trackURI: json.tracks.items[i].uri});
+			}
+		}
+		//console.log(songResults);
+		res.send(songResults);
+	});
+
+
+
+
+
+
+
+
+
+
 
 
 };
