@@ -23,13 +23,6 @@ function LoginPage() {
 					displayText="Log in with Spotify"
 				/>
 				<br />
-				<LoginProButton
-					onClick={() => {
-						cookieFunctions.setCookie('premium-status', 'true');
-						cookieFunctions.setCookie('auth-status', 'true');
-					}}
-					displayText="Log in as PRO"
-				/>
 			</div>
 		</div>
 	);

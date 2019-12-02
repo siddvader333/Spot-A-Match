@@ -1,8 +1,8 @@
 .log-in-spotify {
-	margin-top: 47vh;
+	margin-top: 48vh;
 
 	width: 250px;
-	height: 50px;
+	height: 60px;
 
 	border: 2px solid #1db954;
 	border-radius: 500px;
@@ -27,5 +27,12 @@
 @media screen and (max-width: 768px) {
 	.log-in-spotify {
 		margin-top: 10px;
+	}
+}
+
+
+@media screen and (max-width: 348px) {
+	.log-in-spotify {
+		margin-top: 40px;
 	}
 }
