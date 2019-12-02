@@ -37,6 +37,10 @@ const UserSchema = new Schema({
 	profilePic:{	//spotify provides with an array with one pic, what happens if someone deosnt have a profilePic?
 		type: Array,
 		default:[]
+	},
+	currentAccessToken: {
+		type: String,
+		default: ""
 	}
 });
 

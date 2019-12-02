@@ -13,12 +13,30 @@ class SideMenu extends React.Component {
 		super(props);
 		this.state = {
 			searchValue: '',
-			searchResults: []
+			searchResults: [],
+			userAccessToken:""
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
+
+async componentWillMount(){
+	//this fetch cmd will hit the /profile route, which in turn sends back the req.user data
+	const response = await fetch('/profile', {
+		method: 'GET',
+		headers: { 'Content-Type': 'applications/json' }
+	});
+	const responseJSON = await response.json(); //promise for parsing body? console.log to see data fetched from mongoDB
+
+	//set the data we got back to state for later use
+	this.setState({
+		userAccessToken: responseJSON.currentAccessToken
+	});
+}
+
+
+
 
 	handleKeyPress = async (event) => {
 		if (event.key === 'Enter' && this.state.searchValue !== '') {
@@ -39,12 +57,12 @@ class SideMenu extends React.Component {
 			const BASE_URL = "https://api.spotify.com/v1/search?";
 			const FETCH_URL = BASE_URL + "q=" + this.state.searchValue +"&type=track&market=US&limit=10&offset=0";
 
-			var accessToken = "BQCr92z0imtruaBop0I0e5JVTZkpazzUiVP6xJCcdGI-kqviDqqhtRaExY0nh2AdDXiAiLl2Hx1jgOCNUnTMDPR1-X3JOgIkd_4vbFBdDZzJSmnT45HD-nUxPOZkXzmyiAs7dDTqr89zCPctxg";
+			//var accessToken = "BQAbKVO8viMaFgRL5Kc9ToBmKR6yr_XJothUOgKnZWCajr4kL_V-k9GA_Io1iv7_uy0Ch723bNPS0jxMaCqyibsextgqFWugTkTpzhpNI3AoOMZe2UYXAOz-y1rkfm0z0jTMpgxybzgvC76dFO4YHgowTwhSMr0";
 			
 			var myOptions = {
 				method: 'GET',
 				headers: {
-					'Authorization': 'Bearer ' + accessToken
+					'Authorization': 'Bearer ' + this.state.userAccessToken
 				},
 				mode: 'cors',
 				cache: 'default'
