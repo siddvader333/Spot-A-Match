@@ -5,8 +5,8 @@ class ReceivedMessage extends React.Component{
     render(){
         return(
             <div>
-                <p class = "speaker"> {this.props.sender} </p>
-                <h3 class = "other-user-message">{this.props.message} </h3>
+                <p className = "speaker"> {this.props.sender} </p>
+                <h3 className = "other-user-message">{this.props.message} </h3>
             </div>
         );
     }

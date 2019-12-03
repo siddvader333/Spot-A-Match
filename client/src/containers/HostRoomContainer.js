@@ -6,6 +6,8 @@ import SongSuggestionList from '../components/SongSuggestionList';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
 import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
+import history from '../util/History';
+import io from 'socket.io-client';
 
 class HostRoomContainer extends React.Component {
 	constructor(props) {
@@ -26,6 +28,8 @@ class HostRoomContainer extends React.Component {
 		this.nextSong = this.nextSong.bind(this);
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
+
+		var roomSocket = io.connect('http://localhost:4200/room_queue');
 	}
 
 	state = {

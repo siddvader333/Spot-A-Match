@@ -62,7 +62,9 @@ class HostRoomContainer extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<GroupChat />
+						<GroupChat 
+							roomDisplayName = {this.state.roomDisplayName} 
+						/>
 					</div>
 				</div>
 				<div className="current-playing">

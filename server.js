@@ -43,6 +43,7 @@ nsp._userlist = [];
 nsp.on('connection', (socket) => {
 	console.log('a user has joined the queue');
 	console.log(socket.id);
+
 	socket.on('attemptConnection', (data) => {
 		console.log(data.username + ' is trying to connect to someone');
 		console.log('userList:' + JSON.stringify(nsp._userlist));
@@ -95,6 +96,62 @@ nsp2.on('connection', (socket) => {
 		socket.broadcast.emit('messageSent', data);
 	});
 });
+
+const nsp3 = io.of('room_queue'); 
+nsp3._roomList = []; 
+nsp3.on('connection', (socket) => {
+	
+	socket.on('attemptConnection', (data) => {
+		console.log("Num rooms: " +  nsp3._roomList.length)
+		if (nsp3._roomList.length === 0) {
+			//list is empty
+			nsp3.to(`${data.socketId}`).emit('connectionResult', { status: false });
+		} else {
+			//connect the users
+			let emptiestRoom = {}; 
+			let emptiestRoomListenerCount = -1; 
+			for(let i = 0; i < nsp3._roomList.length; i++){
+				if (nsp3._roomList[i].numListeners > emptiestRoomListenerCount){
+					emptiestRoom = nsp3._roomList[i]; 
+					emptiestRoomListenerCount = nsp3._roomList[i].numListeners; 
+				}
+			}
+			nsp3.to(`${data.socketId}`).emit('connectionResult', {
+				status: true,
+				hostDisplayName: emptiestRoom.displayName,
+				roomId: emptiestRoom.id,
+				host: false
+			});
+			emptiestRoom.numListeners++; 
+		}
+	});
+
+	socket.on('createRoom', (data) => {
+		console.log('HENLO' + data); 
+		const newRoom = {  
+			displayName: data.displayName,
+			socketId: data.socketId, 
+			numListeners: 1, 
+		}
+		nsp3._roomList.push(newRoom); 
+		nsp3.to(`${data.socketId}`).emit('connectionResult', {
+			status: true,
+			hostDisplayName: newRoom.displayName,
+			roomId: newRoom.id,
+			host: true
+		});
+		console.log('Room list: ' + JSON.stringify(nsp3._roomList))
+	})
+
+	socket.on('leaveRoom', (data) => {
+		data.room.numListeners--; 
+	});
+});
+//each item should have room name (uniqueId of host), display name (displayName of host), and listener count (starts at 1)
+//creating the room: JOIN - socket.emit('join a room'), select a room, increment the listener count, return entire room to DashboardContainer.js
+//only send back information to user who requested it: nsp.to(`${data.socketId}`); set this room in the state in DashboardContainer.js 
+//Look at nsp2 for how to send mesages on the server 
+//ignore info received/request socket 
 
 //Hello World Route
 app.get('/api/test', (req, res) => {

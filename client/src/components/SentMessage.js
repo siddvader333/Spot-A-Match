@@ -5,8 +5,8 @@ class SentMessage extends React.Component{
     render(){
         return(
             <div>
-                <p class = "speaker"> {this.props.sender} </p>
-                <h3 class = "self-message">{this.props.message} </h3>
+                <p className = "speaker"> {this.props.sender} </p>
+                <h3 className = "self-message">{this.props.message} </h3>
             </div>
         );
     }

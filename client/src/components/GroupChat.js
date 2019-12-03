@@ -2,12 +2,40 @@ import React from 'react';
 import '../css/components/Chat.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-
+import io from 'socket.io-client';
 class GroupChat extends React.Component {
-	state = {
-		message: '',
-		messages: []
-	};
+	constructor(props){
+		super(props); 
+		
+		var roomSocket = io.connect('http://localhost:4200/room_queue'); 
+		roomSocket.on('connect', function(data) {
+			console.log('connected');
+		});
+		roomSocket.on('messageSent', (data) => {
+			if (data.receipient === this.props.uniqueId) {
+				const messageList = this.state.messages;
+				const message = {
+					content: data.message.content,
+					type: 'received-message',
+					sender: this.props.partnerDisplayName
+				};
+				messageList.push(message);
+				this.setState({
+					messages: messageList,
+					message: ''
+				});
+			}
+		});
+		
+		this.state = {
+			message: '',
+			messages: [], 
+			roomSocket: roomSocket, 
+			roomId: '', 
+			displayName: this.props.displayName
+		};
+
+	}
 
 	componentDidMount() {
 		this.scrollToBottom();
@@ -44,20 +72,6 @@ class GroupChat extends React.Component {
 		};
 		messageList.push(message);
 
-		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
-		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
-		const message2 = {
-			content: 'Generic Response',
-			type: 'received-message',
-			sender: 'UserXYZ'
-		};
-		messageList.push(message2);
-		const message3 = {
-			content: 'Generic Response2 to show group chat',
-			type: 'received-message',
-			sender: 'UserABC'
-		};
-		messageList.push(message3);
 		this.setState({
 			messages: messageList,
 			message: ''
@@ -67,7 +81,7 @@ class GroupChat extends React.Component {
 	render() {
 		return (
 			<div>
-				<h3 className="chat-header"> Group Chat </h3>
+				<h3 className="chat-header"> Group Chat with {this.props.roomDisplayName} </h3>
 				<div className="chat-box">
 					{this.state.messages.map((message) => {
 						if (message.type === 'received-message') {
