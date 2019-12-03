@@ -120,7 +120,8 @@ nsp3.on('connection', (socket) => {
 				status: true,
 				hostDisplayName: emptiestRoom.displayName,
 				roomId: emptiestRoom.id,
-				host: false
+				host: false, 
+				numListeners: emptiestRoom.numListeners
 			});
 			emptiestRoom.numListeners++; 
 		}

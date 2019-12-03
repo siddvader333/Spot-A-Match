@@ -250,11 +250,11 @@ class DashboardContainer extends React.Component {
 
 					<Route exact path="/dashboard/room-host">
 						<DashboardContentHeader
-							displayText="Welcome to your room User1234" 
+							displayText="Welcome to your room" 
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
 						/>
-						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
+						<DashboardFlashMessage displayText="Welcome to your room!" duration="3500" />
 						<HostRoomContainer
 							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
@@ -271,7 +271,7 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Exit Room"
 							path="/dashboard/room-listener"
 						/>
-						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
+						<DashboardFlashMessage displayText={`Welcome to ${this.state.hostDisplayName}'s Room`} duration="3500" />
 						<JoinRoomContainer
 							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
@@ -279,6 +279,7 @@ class DashboardContainer extends React.Component {
 							stopSending={this.stopSending}
 							roomDisplayName = {this.state.name} 
 							roomUniqueId = {this.state.roomUniqueId}
+							hostName = {this.state.hostDisplayName}
 						/>
 					</Route>
 

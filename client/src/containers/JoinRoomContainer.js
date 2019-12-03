@@ -63,7 +63,7 @@ class HostRoomContainer extends React.Component {
 
 					<div className="chat col-md">
 						<GroupChat 
-							roomDisplayName = {this.state.roomDisplayName} 
+							roomDisplayName = {this.props.hostName} 
 						/>
 					</div>
 				</div>
