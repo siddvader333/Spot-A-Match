@@ -111,6 +111,7 @@ class DashboardContainer extends React.Component {
 
 	addSong(song) {
 		console.log('going to add to list: ' + song.songName);
+		//console.log(song);
 		this.setState({ songToAdd: song });
 		if (window.location.pathname === '/dashboard') {
 			this.flashMessage("Can't add songs when not in a room or session!");

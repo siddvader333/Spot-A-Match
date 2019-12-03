@@ -35,9 +35,6 @@ async componentWillMount(){
 	});
 }
 
-
-
-
 	handleKeyPress = async (event) => {
 		if (event.key === 'Enter' && this.state.searchValue !== '') {
 			//console.log('enter press here! ');
@@ -61,6 +58,33 @@ async componentWillMount(){
 			}).then(response => response.json());	
 
 			/*-----------------End of API call--------------*/
+			console.log("Got here");
+			//-----------------Play song---------------------//
+			const token = this.state.userAccessToken;
+			let ready = false;
+			// var player = new window.Spotify.Player({
+			// 	name: "Spot-A-Match Player",
+			// 	getOAuthToken: (callback) => {
+			// 		callback(token)
+			// 	},
+			// 	volume: 0.5
+			// })
+			// console.log("the player");
+			// console.log(player);
+			// console.log(token);
+
+			// player.connect().then(success => {
+			// 	if (success) {
+			// 	  console.log('The Web Playback SDK successfully connected to Spotify!');
+			// 	}
+			// })
+			// player.addListener('ready', ({ device_id }) => {
+			// 	console.log('The Web Playback SDK is ready to play music!');
+			// 	console.log('Device ID', device_id);
+			// 	this.setState({deviceID: device_id});
+			// 	ready = true;
+			// })
+			///-------------API request to play song-----------------///				
 
 			this.setState({ searchResults: results });
 		}

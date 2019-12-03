@@ -39,12 +39,81 @@ class SessionPage extends React.Component {
 		//const currentSong = songList.shift();
 
 		this.state = {
-			currentPlaying: '',
+			currentPlaying: {},
 			currentSongList: [],
-			socket: socket
+			socket: socket,
+			deviceID: ""
 		};
 		this.nextSong = this.nextSong.bind(this);
 		//this.acceptSong = this.acceptSong.bind(this);
+		this.handleLoad = this.handleLoad.bind(this);
+	}
+
+	async componentDidMount(){
+		//window.addEventListener('load', this.handleLoad);
+		//console.log("handleload")
+		//get access token
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		const token = responseJSON.currentAccessToken;
+
+		var player = new window.Spotify.Player({
+			name: "Spot-A-Match Player",
+			getOAuthToken: (callback) => {
+				callback(token)
+			},
+			volume: 0.5
+		})
+		// console.log("the player");
+		// console.log(player);
+		console.log(token);
+
+		player.connect().then(success => {
+			if (success) {
+			  console.log('The Web Playback SDK successfully connected to Spotify!');
+			}
+		})
+		player.addListener('ready', ({ device_id }) => {
+			console.log('The Web Playback SDK is ready to play music!');
+			console.log('Device ID', device_id);
+			this.setState({deviceID: device_id});
+		})
+	}
+
+	async handleLoad(){
+		console.log("handleload")
+		//get access token
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		const token = responseJSON.currentAccessToken;
+
+		var player = new window.Spotify.Player({
+			name: "Spot-A-Match Player",
+			getOAuthToken: (callback) => {
+				callback(token)
+			},
+			volume: 0.5
+		})
+		// console.log("the player");
+		// console.log(player);
+		console.log(token);
+
+		player.connect().then(success => {
+			if (success) {
+			  console.log('The Web Playback SDK successfully connected to Spotify!');
+			}
+		})
+		player.addListener('ready', ({ device_id }) => {
+			console.log('The Web Playback SDK is ready to play music!');
+			console.log('Device ID', device_id);
+			this.setState({deviceID: device_id});
+		})
 	}
 
 	/*state = {
@@ -52,7 +121,7 @@ class SessionPage extends React.Component {
 		currentSongList: []
 	};*/
 
-	nextSong = (e) => {
+	nextSong = async (e) => {
 		if (e) {
 			e.preventDefault();
 		}
@@ -63,6 +132,36 @@ class SessionPage extends React.Component {
 			currentPlaying: currentSong,
 			currentSongList: currentList
 		});
+		console.log(this.state.currentSongList);
+		console.log(currentSong);
+
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		const token = responseJSON.currentAccessToken;
+		console.log(token);
+
+		let songRequest = {
+			method: 'PUT',
+			headers: {
+				'Authorization': 'Bearer ' + token
+			},
+			body: JSON.stringify({
+				"uris": [currentSong.trackURI],
+				"offset": {
+					"position": 0
+				},
+				"position_ms": 0
+			}),
+			mode: 'cors',
+			cache: 'default'
+		};
+
+		const playURL = "https://api.spotify.com/v1/me/player/play?device_id=" + this.state.deviceID; //+ this.state.deviceID;
+		await fetch(playURL, songRequest);
+		console.log("fetch done")
 		if (e) {
 			this.state.socket.emit('partnerSkipSong', { uniqueId: this.props.uniqueId });
 		}
