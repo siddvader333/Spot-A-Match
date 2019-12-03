@@ -10,7 +10,7 @@ passport.use(
 		{
 			clientID: keys.spotifyClientID,
 			clientSecret: keys.spotifyClientSecret,
-			callbackURL: 'http://localhost:8888/callback'
+			callbackURL: 'https://mighty-refuge-58998.herokuapp.com/callback'
 		},
 		function(accessToken, refreshToken, expires_in, profile, done) {
 			//console.log(profile);
@@ -20,22 +20,25 @@ passport.use(
 				const existingUser = await User.findOne({ uniqueId: profile.id });
 				if (existingUser) {
 					//account already exists (update the access token)
-					await User.findOneAndUpdate({uniqueId: profile.id},{currentAccessToken: accessToken});
+					await User.findOneAndUpdate({ uniqueId: profile.id }, { currentAccessToken: accessToken });
 					return done(null, existingUser);
 				}
-				//check for premium 
-				if(profile.product === 'premium'){
+				//check for premium
+				if (profile.product === 'premium') {
 					//else make a new record
-					const newUser = await new User({ uniqueId: profile.id, authType: 'spotify', name: profile.displayName,
-														spotifyPremium: true, profilePic: profile.photos, 
-														currentAccessToken: accessToken}).save();
+					const newUser = await new User({
+						uniqueId: profile.id,
+						authType: 'spotify',
+						name: profile.displayName,
+						spotifyPremium: true,
+						profilePic: profile.photos,
+						currentAccessToken: accessToken
+					}).save();
 					return done(null, newUser);
+				} else {
+					//else return null
+					return done(null, false, { msg: 'Do not have Spotify Premium' });
 				}
-				//else return null
-				else{
-					return done(null, false, {msg: "Do not have Spotify Premium"});
-				}
-
 			});
 		}
 	)
