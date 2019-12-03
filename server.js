@@ -11,7 +11,7 @@ const User = require('./models/User');
 require('./services/passport');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-server.listen(4200);
+server.listen(process.env.PORT || 8888);
 
 //middleware, converts requests from string to js object
 mongoose
@@ -20,8 +20,6 @@ mongoose
 	.catch((err) => console.log(err));
 mongoose.set('useNewUrlParser', true);
 app.use(bodyParser.json());
-
-const port = process.env.PORT || 8888;
 
 app.use(express.static(__dirname + '/client/build'));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
@@ -107,9 +105,9 @@ require('./routes/authRoutes')(app);
 app.get('*', (req, res) => {
 	res.sendFile(__dirname + '/client/build/index.html');
 });
-app.listen(port, () => {
-	console.log(`server running on port ${port}`);
-});
+//app.listen(port, () => {
+//	console.log(`server running on port ${port}`);
+//});
 
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
