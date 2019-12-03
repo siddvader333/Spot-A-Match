@@ -12,7 +12,7 @@ class SessionPage extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('http://localhost:4200/private-session');
+		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/private-session');
 		socket.on('connect', function(data) {
 			console.log('private-session socket connected');
 		});

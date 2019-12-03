@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
 		/*Socket.io Setup*/
 
 		/*Session Queue Socket */
-		var sessionSocket = io.connect('http://localhost:4200/session-queue');
+		var sessionSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/session-queue');
 		sessionSocket.on('connect', function(data) {
 			console.log('Joined the session-queue socket, need to emit ready to add into queue');
 		});
