@@ -30,27 +30,28 @@ class DashboardOptions extends React.Component {
 
 	render() {
 		let roomPath;
-		if (authFunctions.isPremium() === false) {
-			//roomPath = '/dashboard';
-			roomPath = (
-				<button
-					className="action-button"
-					onClick={() => {
-						this.props.createFlashMessage('You must upgrade to a premium membership to use that feature!');
-					}}
-				>
-					Host Room
-				</button>
-			);
-		} else {
-			//roomPath = '/dashboard/room-host';
-			roomPath = (
-				<a href="/dashboard/room-host">
-					<button className="action-button">Host Room</button>
-				</a>
-			);
-		}
+		// if (authFunctions.isPremium() === false) {
+		// 	//roomPath = '/dashboard';
+		// 	roomPath = (
+		// 		<button
+		// 			className="action-button"
+		// 			onClick={() => {
+		// 				this.props.createFlashMessage('You must upgrade to a premium membership to use that feature!');
+		// 			}}
+		// 		>
+		// 			Host Room
+		// 		</button>
+		// 	);
+		// } else {
+		// 	//roomPath = '/dashboard/room-host';
+			// roomPath = (
+			// 	<a href="/dashboard/room-host">
+					
+			// 	</a>
+			// );
+		// }
 		return (
+
 			<div className="container">
 				{/* <div className="box">
 					<div className="imgBox">
@@ -77,9 +78,9 @@ class DashboardOptions extends React.Component {
 					<div className="details">
 						<div className="content">
 							<h2>Join a hosted room and enjoy the ride.</h2>
-							<a href="/dashboard/room-listener">
-								<button className="action-button">Join Room</button>
-							</a>
+							<button onClick={this.props.joinHostRoom} className="action-button">
+								Join Room
+							</button>
 						</div>
 					</div>
 				</div>
@@ -90,11 +91,12 @@ class DashboardOptions extends React.Component {
 					<div className="details">
 						<div className="content">
 							<h2>Host your own room (Premium Feature).</h2>
-							
-							{roomPath}
-						</div>
-					</div>
-				</div> */}
+							{/* <a href={roomPath}>
+                            <button className="action-button">Host Room</button>
+                            </a> */}
+							{/* <button  className="action-button">
+								Host Room
+							</button> */}
 
 				<div className='row row-options'>
 					<div className='col-lg-4'>
@@ -102,21 +104,13 @@ class DashboardOptions extends React.Component {
 					</div>
 
 					<div className='col-lg-4'>
-						<DashboardOptionsIcons2 link = "/dashboard/room-listener"/>
+						<DashboardOptionsIcons2 onClick={this.props.joinHostRoom}/>
 					</div>
 
 					<div className='col-lg-4'>
-						<DashboardOptionsIcons3 link = "/dashboard/room-host"/>
+						<DashboardOptionsIcons3 onClick={this.props.addHostRoom}/>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
 
 			</div>
 		);

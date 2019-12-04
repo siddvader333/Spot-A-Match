@@ -14,9 +14,7 @@ class DashboardOptionsIcons3 extends React.Component{
 
                 <div className = "text-dashboard-options">                    
                     <p>Host your own room (Premium Feature).</p>
-                    <a href = {this.props.link}>
-                        <button className="btn-dashboard-options">Host Room</button>
-                    </a>
+                        <button className="btn-dashboard-options" onClick = {this.props.onClick} >Host Room</button>
                 </div>
                 
             </div>

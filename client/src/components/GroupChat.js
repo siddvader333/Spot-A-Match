@@ -2,12 +2,40 @@ import React from 'react';
 import '../css/components/Chat.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-
+import io from 'socket.io-client';
 class GroupChat extends React.Component {
-	state = {
-		message: '',
-		messages: []
-	};
+	constructor(props){
+		super(props); 
+		
+		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/room-chat');
+		socket.on('connect', function(data) {
+			console.log('connected');
+		});
+		socket.on('messageSent', (data) => {
+			if (data.roomId === this.props.roomId) {
+				const messageList = this.state.messages;
+				const message = {
+					content: data.message.content,
+					type: 'received-message',
+					sender: data.sender
+				};
+				messageList.push(message);
+				this.setState({
+					messages: messageList,
+					roomId: this.props.roomId
+				});
+			}
+		});
+		
+		this.state = {
+			message: '',
+			messages: [], 
+			socket: socket, 
+			roomId: '', 
+			displayName: this.props.displayName
+		};
+
+	}
 
 	componentDidMount() {
 		this.scrollToBottom();
@@ -44,30 +72,18 @@ class GroupChat extends React.Component {
 		};
 		messageList.push(message);
 
-		//NOTE: WE HARDCODED THE RESPONSES FOR THE CHAT
-		//IN OUR REAL APPLICATION, IT WOULD TRULY BE TWO USERS TALKING, AND NOT AN AUTOMATED RESPONSE
-		const message2 = {
-			content: 'Generic Response',
-			type: 'received-message',
-			sender: 'UserXYZ'
-		};
-		messageList.push(message2);
-		const message3 = {
-			content: 'Generic Response2 to show group chat',
-			type: 'received-message',
-			sender: 'UserABC'
-		};
-		messageList.push(message3);
 		this.setState({
 			messages: messageList,
 			message: ''
 		});
+
+		this.state.socket.emit('sendMessage', { roomId: this.props.roomId, message: message, sender: this.props.displayName });
 	};
 
 	render() {
 		return (
 			<div>
-				<h3 className="chat-header"> Group Chat </h3>
+				<h3 className="chat-header"> Group Chat with {this.props.roomDisplayName} </h3>
 				<div className="chat-box">
 					{this.state.messages.map((message) => {
 						if (message.type === 'received-message') {
