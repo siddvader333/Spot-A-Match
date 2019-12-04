@@ -15,7 +15,7 @@ passport.use(
 		function(accessToken, refreshToken, expires_in, profile, done) {
 			//console.log(profile);
 			// asynchronous verification, for effect...
-			console.log(accessToken);
+			//console.log(accessToken);
 			process.nextTick(async function() {
 				const existingUser = await User.findOne({ uniqueId: profile.id });
 				if (existingUser) {
