@@ -13,13 +13,6 @@ class HostRoomContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
-		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		const songList = Array.from(fakeSearchResults);
-		const currentSong = songList.shift();
-
-		const suggestedList = Array.from(suggestedSongs);
-
 		this.state = {
 			currentPlaying: '',//currentSong,
 			currentSongList: [],//songList,
@@ -32,7 +25,7 @@ class HostRoomContainer extends React.Component {
 		this.rejectSong = this.rejectSong.bind(this);
 		this.pauseSong= this.pauseSong.bind(this);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
 		socket.on('connect', function(data) {
 			console.log('host-session socket connected');
 		});
@@ -128,8 +121,6 @@ class HostRoomContainer extends React.Component {
 			console.log('Toggled playback!');
 		});
 
-	}
-
 	acceptSong(song) {
 		//remove from suggestedList
 		const newSuggestedList = this.state.suggestedList.filter(
@@ -179,10 +170,10 @@ class HostRoomContainer extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<GroupChat 
-							roomDisplayName = "You"
-							roomId = {this.props.roomId}
-							displayName = {this.props.displayName}
+						<GroupChat
+							roomDisplayName="You"
+							roomId={this.props.roomId}
+							displayName={this.props.displayName}
 						/>
 					</div>
 				</div>

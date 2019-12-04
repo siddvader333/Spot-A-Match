@@ -1,0 +1,15 @@
+DEPLOYMENT: https://mighty-refuge-58998.herokuapp.com/
+
+For phase 2 of the project, our primary purpose was to integrate the Spotify API with our web app to achieve as much of the functionality from our proposal as possible. While we were not able to achieve full functionality in all aspects of our web application, we believe that we made decent progress (especially with the Spotify API still being in beta, and therefore, incredibly difficult to debug). 
+
+Below, we highlight the features of our application, including some changes from phase 1: 
+
+1) The login page now has just 1 button: log in via Spotify. We discussed the admin feature with our TA, and determined that our program's premium vs. regular user differences would serve as a sufficient substitute to the admin vs. regular user specified in the handout. The user is redirected to the Spotify page to log in, and is then redirected to the dashboard. 
+
+2) On the dashboard, the user will have 3 options: join a private session, join a hosted room, or host a room (available only to premium users). The user can open the menu, which allows them to view their profile (note that we were not actually able to fully complete the profile features of our application), upgrade to premium status, and log out. 
+
+3) Joining a session is the most polished part of our project. Two users will be randomly paired up together (if no other user is available for pairing, the users are added to a queue for 30 seconds, after which, if they still cannot find a match, they will be told to try again later). In this private session, they can message each other (which we got to work), add songs to the shared queue, and play songs so that both users can hear the same music at once. They can also skip and pause songs in-sync. 
+
+4) Joining a hosted room is a little bit rough around the edges. The one-to-many chat functionality works well, with each user in the group chat being able to see which of the other users sent each message. However, we were not fully able to get the "request song" functionality working. The implementation, however, would be very similar to the one-to-one session, and so we do not think that not getting this part working reflects a decrease in understanding of course concepts. When a regular user leaves a hosted room, the other users in the room are not affected. 
+
+5) Hosting a room is similarly limited to the messaging functionality. The one-to-many chat functionality works, much as above. However, when the host leaves the room, all other users in the room are kicked out as well. 
