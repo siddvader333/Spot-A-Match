@@ -1,4 +1,7 @@
 const fetch = require("node-fetch");
+const User = require('../models/User');
+const mongoose = require('mongoose');
+
 module.exports = (app) => {
 	const passport = require('passport');
 	app.get(
@@ -62,6 +65,31 @@ module.exports = (app) => {
 		res.send(songResults);
 	});
 
+	app.get('/getPremiumStatus', (req, res) =>{
+		res.send(req.user.premiumStatus);
+		// console.log('status: '+ req.user.premiumStatus)
+	});
+
+	/**body expects"
+	 * {"status": true/false} 
+	 * */
+	app.post('/setPremiumStatus',async (req, res)=>{
+		
+		console.log(req.body)
+		const test = await User.findOne({ uniqueId: req.user.uniqueId });
+		if(test){
+			test.premiumStatus = req.body.status;
+			test.save();
+			const userStatus = `${req.user.name}'s current premium status is ${test.premiumStatus}`;
+			console.log(userStatus);
+			res.send({msg: userStatus});
+		}
+		else{
+			console.log('Couldnt find one')
+			res.send({msg: 'Could not set Premium Status'});
+		}
+		
+	});
 
 
 

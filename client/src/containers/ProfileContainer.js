@@ -17,7 +17,8 @@ class ProfileContainer extends React.Component {
 			pic: 'https://img6.androidappsapk.co/300/b/1/a/com.ludicside.mrsquare.png',
 			roomsJoined: 0,
 			roomsHosted: 0,
-			sessionsJoined: 0
+			sessionsJoined: 0,
+			status: 'Non-premium User'
 		};
 	}
 
@@ -29,7 +30,7 @@ class ProfileContainer extends React.Component {
 			headers: { 'Content-Type': 'applications/json' }
 		});
 		const responseJSON = await response.json(); //promise for parsing body? console.log to see data fetched from mongoDB
-
+		//console.log(responseJSON);
 		//set the data we got back to state for later use
 		this.setState({
 			displayName: responseJSON.name,
@@ -42,12 +43,21 @@ class ProfileContainer extends React.Component {
 				pic: responseJSON.profilePic[0]
 			});
 		}
+		
+		if(responseJSON.premiumStatus === true){
+			this.setState({
+				status : "Premium User"
+			});
+		}
+
+
+
 	}
 
 	render() {
 		let userType = '';
 		if (authFunctions.isPremium()) userType = <div className="profile-stat">Premium User</div>;
-		else userType = <div className="profile-stat">Non-Premium User</div>;
+		else userType = <div className="profile-stat">{this.state.status}</div>;
 		return (
 			<div>
 				<div id="profile-picture-div">

@@ -21,69 +21,43 @@ class SideMenu extends React.Component {
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
-async componentWillMount(){
-	//this fetch cmd will hit the /profile route, which in turn sends back the req.user data
-	const response = await fetch('/profile', {
-		method: 'GET',
-		headers: { 'Content-Type': 'applications/json' }
-	});
-	const responseJSON = await response.json(); //promise for parsing body? console.log to see data fetched from mongoDB
-
-	//set the data we got back to state for later use
-	this.setState({
-		userAccessToken: responseJSON.currentAccessToken
-	});
-}
 
 	handleKeyPress = async (event) => {
 		if (event.key === 'Enter' && this.state.searchValue !== '') {
-			//console.log('enter press here! ');
+			
 			console.log('Search for ' + this.state.searchValue);
-			//console.log(this.state.searchResults);
-			//make search query to spotify
-
-			//for now, use fake query for now
-			/*fakeSearchResults.forEach((item) => {
-				this.setState({ searchResults: this.state.searchResults.push(item) });
-			});*/
 			
-			
-			/////////////////////////////////////
 			/*----------------------API call--------------------------*/
+
+			// const previousStatus = await fetch('/getPremiumStatus',{
+			// 	method: 'GET',
+			// 	headers:{ 'Content-Type' : 'application/json'}
+			// }).then(response => response.json());
+			// console.log('done prev status')
+
+			
+			
+
+			//console.log(`Previous: ${previousStatus}`);
+			
+
+
+
+
 
 			const urlFetch = '/getSongResults/' + this.state.searchValue;
 			const results = await fetch(urlFetch,{
 				method: 'GET',
-				headers: { 'Content-Type' : 'application/json'},
+				headers: { 'Content-Type' : 'application/json'}
 			}).then(response => response.json());	
 
 			/*-----------------End of API call--------------*/
 			console.log("Got here");
+
 			//-----------------Play song---------------------//
 			const token = this.state.userAccessToken;
 			let ready = false;
-			// var player = new window.Spotify.Player({
-			// 	name: "Spot-A-Match Player",
-			// 	getOAuthToken: (callback) => {
-			// 		callback(token)
-			// 	},
-			// 	volume: 0.5
-			// })
-			// console.log("the player");
-			// console.log(player);
-			// console.log(token);
-
-			// player.connect().then(success => {
-			// 	if (success) {
-			// 	  console.log('The Web Playback SDK successfully connected to Spotify!');
-			// 	}
-			// })
-			// player.addListener('ready', ({ device_id }) => {
-			// 	console.log('The Web Playback SDK is ready to play music!');
-			// 	console.log('Device ID', device_id);
-			// 	this.setState({deviceID: device_id});
-			// 	ready = true;
-			// })
+			
 			///-------------API request to play song-----------------///				
 
 			this.setState({ searchResults: results });
@@ -128,9 +102,17 @@ async componentWillMount(){
 						/>
 						<MenuItem
 							displayText="Upgrade to Pro"
-							onClick={() => {
+							onClick={async () => {
 								cookieFunctions.setCookie('premium-status', 'true');
 								this.props.createFlashMessage('You are a premium user!');
+							
+								await fetch('/setPremiumStatus',{
+									method: 'POST',
+									headers:{ 'Content-Type' : 'application/json'},
+									body: JSON.stringify({"status": true})
+								})
+							
+							
 							}}
 						/>
 						<MenuItem
