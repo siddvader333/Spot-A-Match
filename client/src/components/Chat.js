@@ -7,7 +7,7 @@ class Chat extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/private-session-chat');
+		var socket = io.connect('http://localhost:8888/private-session-chat');
 		socket.on('connect', function(data) {
 			console.log('connected');
 		});
@@ -24,8 +24,7 @@ class Chat extends React.Component {
 				};
 				messageList.push(message);
 				this.setState({
-					messages: messageList,
-					message: ''
+					messages: messageList
 				});
 			}
 		});
@@ -80,8 +79,8 @@ class Chat extends React.Component {
 		});
 
 		this.state.socket.emit('sendMessage', { receipient: this.props.partnerUniqueId, message: message });
-		
-		//for a room, change it to roomID 
+
+		//for a room, change it to roomID
 	};
 
 	render() {

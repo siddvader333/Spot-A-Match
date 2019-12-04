@@ -3,7 +3,6 @@ import '../css/components/CurrentlyPlaying.css';
 import SongBlock from './SongBlock';
 
 class CurrentlyPlaying extends React.Component {
-
 	render() {
 		const songName = this.props.songList.currentPlaying.songName;
 		const songArtist = this.props.songList.currentPlaying.artist;
@@ -12,12 +11,14 @@ class CurrentlyPlaying extends React.Component {
 		let button2 = null;
 		if (premium) {
 			button1 = (
-				<button className="controlButton" id="pause" 
-				onClick={ (e) => {
-					console.log('PAUSE');
-					this.props.pause(e);
-				}
-				}>
+				<button
+					className="controlButton"
+					id="pause"
+					onClick={(e) => {
+						console.log('PAUSE');
+						this.props.pause(e);
+					}}
+				>
 					{' '}
 					►ll{' '}
 				</button>
@@ -27,7 +28,6 @@ class CurrentlyPlaying extends React.Component {
 					className="controlButton"
 					id="next"
 					onClick={(e) => {
-
 						this.props.getnextsong(e);
 					}}
 				>
@@ -36,8 +36,6 @@ class CurrentlyPlaying extends React.Component {
 				</button>
 			);
 		}
-		console.log(songName);
-		console.log(songArtist);
 		return (
 			<div className="currently-playing">
 				{button1}

@@ -13,23 +13,24 @@ class HostRoomContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
+		//var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
+		socket.on('connect', function(data) {
+			console.log('host-session socket connected');
+		});
+
 		this.state = {
-			currentPlaying: '',//currentSong,
-			currentSongList: [],//songList,
-			suggestedList: suggestedList,
-			deviceID: "",
-	 		player_Spotify: {}
+			currentPlaying: '', //currentSong,
+			currentSongList: [], //songList,
+			suggestedList: [],
+			deviceID: '',
+			player_Spotify: {},
+			socket: socket
 		};
 		this.nextSong = this.nextSong.bind(this);
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
-		this.pauseSong= this.pauseSong.bind(this);
-
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
-		socket.on('connect', function(data) {
-			console.log('host-session socket connected');
-		});
-	
+		this.pauseSong = this.pauseSong.bind(this);
 	}
 
 	// state = {
@@ -39,7 +40,7 @@ class HostRoomContainer extends React.Component {
 	// 	player_Spotify: {}
 	// };
 
-	async componentDidMount(){
+	async componentDidMount() {
 		const response = await fetch('/profile', {
 			method: 'GET',
 			headers: { 'Content-Type': 'applications/json' }
@@ -48,31 +49,33 @@ class HostRoomContainer extends React.Component {
 		const token = responseJSON.currentAccessToken;
 
 		var player = new window.Spotify.Player({
-			name: "Spot-A-Match Player",
+			name: 'Spot-A-Match Player',
 			getOAuthToken: (callback) => {
-				callback(token)
+				callback(token);
 			},
 			volume: 0.5
-		})
+		});
 		// console.log("the player");
 		// console.log(player);
 		console.log(token);
 
-		player.connect().then(success => {
+		player.connect().then((success) => {
 			if (success) {
-			  console.log('The Web Playback SDK successfully connected to Spotify!');
+				console.log('The Web Playback SDK successfully connected to Spotify!');
 			}
-		})
+		});
 		player.addListener('ready', ({ device_id }) => {
 			console.log('The Web Playback SDK is ready to play music!');
 			console.log('Device ID', device_id);
-			this.setState({deviceID: device_id});
-		})
-		this.setState({player_Spotify: player});
+			this.setState({ deviceID: device_id });
+		});
+		this.setState({ player_Spotify: player });
 	}
 
 	nextSong = async (e) => {
-		e.preventDefault();
+		if (e) {
+			e.preventDefault();
+		}
 		let currentSong = this.state.currentPlaying;
 		const currentList = this.state.currentSongList;
 		if (currentList.length > 0) currentSong = currentList.shift();
@@ -81,6 +84,9 @@ class HostRoomContainer extends React.Component {
 			currentSongList: currentList
 		});
 
+		if (e) {
+			this.state.socket.emit('hostSkipSong', { uniqueId: this.props.uniqueId });
+		}
 		console.log(this.state.currentSongList);
 		console.log(currentSong);
 
@@ -95,31 +101,57 @@ class HostRoomContainer extends React.Component {
 		let songRequest = {
 			method: 'PUT',
 			headers: {
-				'Authorization': 'Bearer ' + token
+				Authorization: 'Bearer ' + token
 			},
 			body: JSON.stringify({
-				"uris": [currentSong.trackURI],
-				"offset": {
-					"position": 0
+				uris: [ currentSong.trackURI ],
+				offset: {
+					position: 0
 				},
-				"position_ms": 0
+				position_ms: 0
 			}),
 			mode: 'cors',
 			cache: 'default'
 		};
 
-		const playURL = "https://api.spotify.com/v1/me/player/play?device_id=" + this.state.deviceID; //+ this.state.deviceID;
+		const playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + this.state.deviceID; //+ this.state.deviceID;
 		await fetch(playURL, songRequest);
 	};
 
 	pauseSong = async (e) => {
-		if (e){
+		if (e) {
 			e.preventDefault();
 		}
-		console.log("trying to pause song");
+		console.log('trying to pause song');
 		this.state.player_Spotify.togglePlay().then(() => {
 			console.log('Toggled playback!');
 		});
+	};
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('here');
+		if (nextProps.exitSession) {
+			prevState.socket.emit('leaveSession', { uniqueId: nextProps.uniqueId });
+			nextProps.stopSending();
+			history.push('/dashboard');
+		}
+		if (nextProps.songToAdd == {}) {
+			return;
+		}
+		if (nextProps.songToAdd.songName !== '') {
+			const newList = prevState.currentSongList;
+			newList.push(nextProps.songToAdd);
+			prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
+			console.log('host added song');
+			prevState.socket.emit('hostAddSong', {
+				song: nextProps.songToAdd,
+				roomId: nextProps.roomId
+			});
+			nextProps.stopSending();
+			return prevState;
+		}
+	}
 
 	acceptSong(song) {
 		//remove from suggestedList
@@ -140,22 +172,6 @@ class HostRoomContainer extends React.Component {
 		});
 		this.setState({ suggestedList: newSuggestedList });
 	};
-
-	static getDerivedStateFromProps(nextProps, prevState) {
-		if (nextProps.songToAdd == {}) {
-			console.log('empty props');
-			return;
-		}
-		if (nextProps.songToAdd.songName !== '') {
-			console.log('new song that is not empty');
-			const newList = prevState.currentSongList;
-			newList.push(nextProps.songToAdd);
-			prevState.currentSongList = newList;
-			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
-			nextProps.stopSending();
-			return prevState;
-		}
-	}
 
 	render() {
 		return (
@@ -197,7 +213,12 @@ class HostRoomContainer extends React.Component {
 					</div>
 				</div>
 
-				<CurrentlyPlaying getnextsong={this.nextSong} pause={this.pauseSong} songList={this.state} premium="true" />
+				<CurrentlyPlaying
+					getnextsong={this.nextSong}
+					pause={this.pauseSong}
+					songList={this.state}
+					premium="true"
+				/>
 			</div>
 		);
 	}

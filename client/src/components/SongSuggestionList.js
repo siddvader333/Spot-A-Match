@@ -4,7 +4,6 @@ import SongBlockSuggestion from './SongBlockSuggestion';
 
 class UpNextSongList extends React.Component {
 	render() {
-		console.log(this.props);
 		return (
 			<div className="song-list">
 				<div className="song-list-inner">

@@ -4,10 +4,11 @@ import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
 import io from 'socket.io-client';
 class GroupChat extends React.Component {
-	constructor(props){
-		super(props); 
-		
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/room-chat');
+	constructor(props) {
+		super(props);
+
+		//var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/room-chat');
+		var socket = io.connect('http://localhost:8888/hosted-room');
 		socket.on('connect', function(data) {
 			console.log('connected');
 		});
@@ -26,15 +27,14 @@ class GroupChat extends React.Component {
 				});
 			}
 		});
-		
+
 		this.state = {
 			message: '',
-			messages: [], 
-			socket: socket, 
-			roomId: '', 
+			messages: [],
+			socket: socket,
+			roomId: '',
 			displayName: this.props.displayName
 		};
-
 	}
 
 	componentDidMount() {
@@ -77,7 +77,11 @@ class GroupChat extends React.Component {
 			message: ''
 		});
 
-		this.state.socket.emit('sendMessage', { roomId: this.props.roomId, message: message, sender: this.props.displayName });
+		this.state.socket.emit('sendMessage', {
+			roomId: this.props.roomId,
+			message: message,
+			sender: this.props.displayName
+		});
 	};
 
 	render() {

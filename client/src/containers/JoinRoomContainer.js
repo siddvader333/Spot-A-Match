@@ -12,31 +12,38 @@ class HostRoomContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
 		socket.on('connect', function(data) {
 			console.log('host-session socket connected');
 		});
 		socket.on('hostLeave', function(data) {
 			history.push('/dashboard');
-		})
-		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
-		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		const songList = Array.from(fakeSearchResults);
-		const currentSong = songList.shift();
+		});
+
+		socket.on('hostAddSong', (data) => {
+			console.log('host added a song');
+			if (data.roomId === this.props.roomId) {
+				const newList = this.state.currentSongList;
+				newList.push(data.song);
+				this.setState({ currentSongList: newList });
+			}
+		});
+		socket.on('hostSkipSong', (data) => {
+			if (data.roomId === this.props.roomId) {
+				this.nextSong();
+			}
+		});
 		this.state = {
-			currentPlaying: currentSong,
-			currentSongList: songList
+			currentPlaying: '',
+			currentSongList: []
 		};
 		this.nextSong = this.nextSong.bind(this);
 	}
 
-	state = {
-		currentPlaying: '',
-		currentSongList: []
-	};
-
 	nextSong = (e) => {
-		e.preventDefault();
+		if (e) {
+			e.preventDefault();
+		}
 		let currentSong = this.state.currentPlaying;
 		const currentList = this.state.currentSongList;
 		if (currentList.length > 0) currentSong = currentList.shift();
@@ -71,10 +78,10 @@ class HostRoomContainer extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<GroupChat 
-							roomDisplayName = {this.props.hostName} 
-							roomId = {this.props.roomId}
-							displayName = {this.props.displayName}
+						<GroupChat
+							roomDisplayName={this.props.hostName}
+							roomId={this.props.roomId}
+							displayName={this.props.displayName}
 						/>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ class SessionPage extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/private-session');
+		var socket = io.connect('http://localhost:8888/private-session');
 		socket.on('connect', function(data) {
 			console.log('private-session socket connected');
 		});
@@ -33,24 +33,20 @@ class SessionPage extends React.Component {
 				this.setState({ currentSongList: newList });
 			}
 		});
-		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
-		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		//const songList = Array.from(fakeSearchResults);
-		//const currentSong = songList.shift();
 
 		this.state = {
 			currentPlaying: {},
 			currentSongList: [],
 			socket: socket,
-			deviceID: "",
+			deviceID: '',
 			player_Spotify: {}
 		};
 		this.nextSong = this.nextSong.bind(this);
-		this.pauseSong= this.pauseSong.bind(this);
+		this.pauseSong = this.pauseSong.bind(this);
 		//this.acceptSong = this.acceptSong.bind(this);
 	}
 
-	async componentDidMount(){
+	async componentDidMount() {
 		const response = await fetch('/profile', {
 			method: 'GET',
 			headers: { 'Content-Type': 'applications/json' }
@@ -59,27 +55,27 @@ class SessionPage extends React.Component {
 		const token = responseJSON.currentAccessToken;
 
 		var player = new window.Spotify.Player({
-			name: "Spot-A-Match Player",
+			name: 'Spot-A-Match Player',
 			getOAuthToken: (callback) => {
-				callback(token)
+				callback(token);
 			},
 			volume: 0.5
-		})
+		});
 		// console.log("the player");
 		// console.log(player);
 		console.log(token);
 
-		player.connect().then(success => {
+		player.connect().then((success) => {
 			if (success) {
-			  console.log('The Web Playback SDK successfully connected to Spotify!');
+				console.log('The Web Playback SDK successfully connected to Spotify!');
 			}
-		})
+		});
 		player.addListener('ready', ({ device_id }) => {
 			console.log('The Web Playback SDK is ready to play music!');
 			console.log('Device ID', device_id);
-			this.setState({deviceID: device_id});
-		})
-		this.setState({player_Spotify: player});
+			this.setState({ deviceID: device_id });
+		});
+		this.setState({ player_Spotify: player });
 	}
 
 	/*state = {
@@ -112,43 +108,42 @@ class SessionPage extends React.Component {
 		let songRequest = {
 			method: 'PUT',
 			headers: {
-				'Authorization': 'Bearer ' + token
+				Authorization: 'Bearer ' + token
 			},
 			body: JSON.stringify({
-				"uris": [currentSong.trackURI],
-				"offset": {
-					"position": 0
+				uris: [ currentSong.trackURI ],
+				offset: {
+					position: 0
 				},
-				"position_ms": 0
+				position_ms: 0
 			}),
 			mode: 'cors',
 			cache: 'default'
 		};
 
-		const playURL = "https://api.spotify.com/v1/me/player/play?device_id=" + this.state.deviceID; //+ this.state.deviceID;
+		const playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + this.state.deviceID; //+ this.state.deviceID;
 		await fetch(playURL, songRequest);
 
 		//play the next song after an interval time equal to the current song
-		
 
-		console.log("fetch donezooh")
+		console.log('fetch donezooh');
 		if (e) {
 			this.state.socket.emit('partnerSkipSong', { uniqueId: this.props.uniqueId });
 		}
 	};
 
 	pauseSong = async (e) => {
-		if (e){
+		if (e) {
 			e.preventDefault();
 		}
-		console.log("trying to pause song");
+		console.log('trying to pause song');
 		this.state.player_Spotify.togglePlay().then(() => {
 			console.log('Toggled playback!');
 		});
-
-	}
+	};
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('here heheheh this shit works');
 		if (nextProps.exitSession) {
 			prevState.socket.emit('leaveSession', { uniqueId: nextProps.uniqueId });
 			nextProps.stopSending();
@@ -202,7 +197,12 @@ class SessionPage extends React.Component {
 					</div>
 				</div>
 				<div className="current-playing">
-					<CurrentlyPlaying getnextsong={this.nextSong} pause={this.pauseSong} songList={this.state} premium="true" />
+					<CurrentlyPlaying
+						getnextsong={this.nextSong}
+						pause={this.pauseSong}
+						songList={this.state}
+						premium="true"
+					/>
 				</div>
 				<div className="add-some-space-div">a</div>
 			</div>
