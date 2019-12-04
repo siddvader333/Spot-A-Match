@@ -34,12 +34,21 @@ class SideMenu extends React.Component {
 			// 	headers:{ 'Content-Type' : 'application/json'}
 			// }).then(response => response.json());
 			// console.log('done prev status')
-
-			
-			
-
 			//console.log(`Previous: ${previousStatus}`);
+
+			// await fetch('/roomsJoinedIncrement',{
+			// 	method: 'POST',
+			// 	headers:{ 'Content-Type' : 'application/json'}				
+			// })
 			
+			// await fetch('/roomsHostedIncrement',{
+			// 	method: 'POST',
+			// 	headers:{ 'Content-Type' : 'application/json'}				
+			// })
+			// await fetch('/sessionsJoinedIncrement',{
+			// 	method: 'POST',
+			// 	headers:{ 'Content-Type' : 'application/json'}				
+			// })
 
 
 

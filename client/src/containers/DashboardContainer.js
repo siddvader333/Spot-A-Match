@@ -33,6 +33,13 @@ class DashboardContainer extends React.Component {
 					partnerUniqueId: connectionResult.partnerUniqueId,
 					waitingInQueue: false
 				});
+
+				await fetch('/sessionsJoinedIncrement',{
+					method: 'POST',
+					headers:{ 'Content-Type' : 'application/json'}				
+				})
+
+
 				history.push('/dashboard/session');
 			} else {
 				sessionSocket.emit('addToQueue', {
@@ -71,8 +78,24 @@ class DashboardContainer extends React.Component {
 					numListeners: connectionResult.numListeners
 				});
 				console.log(connectionResult);
-				if (connectionResult.host == true) history.push('/dashboard/room-host');
-				else history.push('/dashboard/room-listener');
+				if (connectionResult.host == true){
+					history.push('/dashboard/room-host');
+
+					await fetch('/roomsHostedIncrement',{
+						method: 'POST',
+						headers:{ 'Content-Type' : 'application/json'}				
+					})
+
+				}
+				else{
+					
+					await fetch('/roomsJoinedIncrement',{
+						method: 'POST',
+						headers:{ 'Content-Type' : 'application/json'}				
+					})
+					
+					history.push('/dashboard/room-listener');
+				}
 			} else {
 				this.setState({ inARoom: false });
 				this.flashMessage('Sorry, there are no rooms currently available. Please try again later.');
@@ -141,13 +164,31 @@ class DashboardContainer extends React.Component {
 		}
 	}
 
-	addHostRoom() {
-		this.state.roomSocket.emit('createRoom', {
-			username: this.state.username,
-			displayName: this.state.displayName,
-			socketId: this.state.roomSocket.id,
-			uniqueId: this.state.uniqueId
-		});
+	async addHostRoom() {
+		const premium = await fetch('/getPremiumStatus',{
+					method: 'GET',
+					headers:{ 'Content-Type' : 'application/json'}				
+				}).then(response => response.json());
+
+		if (premium){	
+			
+			// await fetch('/roomsHostedIncrement',{
+			// 	method: 'POST',
+			// 	headers:{ 'Content-Type' : 'application/json'}				
+			// })
+			
+				this.state.roomSocket.emit('createRoom', {
+					username: this.state.username,
+					displayName: this.state.displayName,
+					socketId: this.state.roomSocket.id,
+					uniqueId: this.state.uniqueId
+				});
+
+			
+		}
+		else 
+			this.flashMessage("You need to be a Premium user for this feature")
+
 	}
 
 	joinHostRoom() {

@@ -79,6 +79,7 @@ module.exports = (app) => {
 		const test = await User.findOne({ uniqueId: req.user.uniqueId });
 		if(test){
 			test.premiumStatus = req.body.status;
+			req.user.premiumStatus = req.body.status;
 			test.save();
 			const userStatus = `${req.user.name}'s current premium status is ${test.premiumStatus}`;
 			console.log(userStatus);
@@ -91,7 +92,54 @@ module.exports = (app) => {
 		
 	});
 
+	app.post('/roomsJoinedIncrement',async (req, res)=>{
+		const test = await User.findOne({ uniqueId: req.user.uniqueId });
+		if(test){
+			test.roomsJoined = test.roomsJoined + 1;
+			req.user.roomsJoined = req.user.roomsJoined + 1;
+			test.save();
+			const userStatus = `${req.user.name} has joined  ${test.roomsJoined} rooms!`;
+			console.log(userStatus);
+			res.send({msg: userStatus});
+		}
+		else{
+			console.log('Couldnt find one')
+			res.send({msg: 'User Doesnt exist'});
+		}
+	});	
 
+
+	app.post('/roomsHostedIncrement',async (req, res)=>{
+		const test = await User.findOne({ uniqueId: req.user.uniqueId });
+		if(test){
+			test.roomsHosted = test.roomsHosted + 1;
+			req.user.roomsHosted = req.user.roomsHosted + 1;
+			test.save();
+			const userStatus = `${req.user.name} has hosted  ${test.roomsHosted} rooms!`;
+			console.log(userStatus);
+			res.send({msg: userStatus});
+		}
+		else{
+			console.log('Couldnt find one')
+			res.send({msg: 'User Doesnt exist'});
+		}
+	});	
+
+	app.post('/sessionsJoinedIncrement',async (req, res)=>{
+		const test = await User.findOne({ uniqueId: req.user.uniqueId });
+		if(test){
+			test.sessionsJoined = test.sessionsJoined + 1;
+			req.user.sessionsJoined = req.user.sessionsJoined + 1;
+			test.save();
+			const userStatus = `${req.user.name} has joined  ${test.sessionsJoined} sessions!`;
+			console.log(userStatus);
+			res.send({msg: userStatus});
+		}
+		else{
+			console.log('Couldnt find one')
+			res.send({msg: 'User Doesnt exist'});
+		}
+	});	
 
 
 
