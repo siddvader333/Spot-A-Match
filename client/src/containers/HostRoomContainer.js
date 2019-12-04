@@ -6,6 +6,8 @@ import SongSuggestionList from '../components/SongSuggestionList';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
 import { fakeSearchResults, suggestedSongs } from '../util/Data.js';
+import history from '../util/History';
+import io from 'socket.io-client';
 
 class HostRoomContainer extends React.Component {
 	constructor(props) {
@@ -26,6 +28,11 @@ class HostRoomContainer extends React.Component {
 		this.nextSong = this.nextSong.bind(this);
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
+
+		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		socket.on('connect', function(data) {
+			console.log('host-session socket connected');
+		});
 	}
 
 	state = {
@@ -93,7 +100,11 @@ class HostRoomContainer extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<GroupChat />
+						<GroupChat 
+							roomDisplayName = "You"
+							roomId = {this.props.roomId}
+							displayName = {this.props.displayName}
+						/>
 					</div>
 				</div>
 				<br />

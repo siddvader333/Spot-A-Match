@@ -57,6 +57,35 @@ class DashboardContainer extends React.Component {
 			}
 		});
 
+		/*This is for joining a room */
+		var roomSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/room_queue');
+		roomSocket.on('connect', function(data){
+			console.log('Joined the room-queue socket') 
+		}); 
+		roomSocket.on('connectionResult', async (connectionResult) => {
+			if (connectionResult.status == true){
+				this.setState({
+					roomId: connectionResult.roomId,
+					hostDisplayName: connectionResult.hostDisplayName,
+					inARoom: true,
+					numListeners: connectionResult.numListeners
+				})
+				console.log(connectionResult); 
+				if (connectionResult.host == true)
+					history.push('/dashboard/room-host')
+				else
+					history.push('/dashboard/room-listener')
+			} 
+			else{
+				this.setState({ inARoom: false })
+				this.flashMessage('Sorry, there are no rooms currently available. Please try again later.');
+			}
+		})
+		//Setup room socket
+		//Create a new socket called roomSocket (io.connect('http://localhost:4200/room_queue))
+		//IF HOSTING A ROOM: socket.emit('creating a room'), pass it the person's uniqueId
+		//socket.on, add to list of active rooms, pass the displayName as well 
+
 		this.state = {
 			name: '',
 			isOpen: false,
@@ -64,11 +93,16 @@ class DashboardContainer extends React.Component {
 			showFlashMessage: false,
 			flashMessageComponent: null,
 			waitingInQueue: false,
+			inARoom: false, 
 			userToConnectTo: '',
 			uniqueId: '',
 			partnerUniqueId: '',
+			roomId: '', 
+			hostDisplayName: '', 
 			partnerDisplayName: '',
-			sessionSocket: sessionSocket
+			sessionSocket: sessionSocket, 
+			roomSocket: roomSocket, 
+			numListeners: '', 
 		};
 
 		this.openMenu = this.openMenu.bind(this);
@@ -78,6 +112,8 @@ class DashboardContainer extends React.Component {
 		this.addSongButtonClick = this.addSongButtonClick.bind(this);
 		this.flashMessage = this.flashMessage.bind(this);
 		this.getSessionRoomName = this.getSessionRoomName.bind(this);
+		this.joinHostRoom = this.joinHostRoom.bind(this); 
+		this.addHostRoom = this.addHostRoom.bind(this); 
 	}
 
 	async componentDidMount() {
@@ -101,6 +137,32 @@ class DashboardContainer extends React.Component {
 			this.setState({ waitingInQueue: true });
 		}
 	}
+
+	addHostRoom() {
+		if (this.state.inARoom === false) {
+			this.state.roomSocket.emit('createRoom', {
+				username: this.state.username,
+				displayName: this.state.displayName,
+				socketId: this.state.roomSocket.id,
+				uniqueId: this.state.uniqueId
+			});
+			this.setState({ inARoom: true });
+
+		}
+	}
+
+	joinHostRoom(){  
+		if (this.state.inARoom === false){
+			this.state.roomSocket.emit('attemptConnection', {
+				username: this.state.username, 
+				displayName: this.state.displayName, 
+				socketId: this.state.roomSocket.id, 
+				uniqueId: this.state.uniqueId
+			}); 
+			this.setState({ inARoom: true }); 
+		}
+	}
+
 	openMenu() {
 		this.setState({ isOpen: true });
 	}
@@ -196,16 +258,21 @@ class DashboardContainer extends React.Component {
 
 					<Route exact path="/dashboard/room-host">
 						<DashboardContentHeader
-							displayText="Welcome to your room User1234!"
+							displayText="Welcome to your room" 
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
+							numListeners = {this.state.numListeners}
 						/>
-						<DashboardFlashMessage displayText="Welcome to your room User1234!" duration="3500" />
+						<DashboardFlashMessage displayText="Welcome to your room!" duration="3500" />
 						<HostRoomContainer
 							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
 							songToAdd={this.state.songToAdd}
 							stopSending={this.stopSending}
+							roomDisplayName = {this.state.roomDisplayName} 
+							roomUniqueId = {this.state.uniqueId}
+							roomId = {this.state.roomId}
+							displayName = {this.state.displayName}
 						/>
 					</Route>
 
@@ -215,12 +282,17 @@ class DashboardContainer extends React.Component {
 							leaveButtonText="Exit Room"
 							path="/dashboard/room-listener"
 						/>
-						<DashboardFlashMessage displayText="Welcome to User 1234's Room" duration="3500" />
+						<DashboardFlashMessage displayText={`Welcome to ${this.state.hostDisplayName}'s Room`} duration="3500" />
 						<JoinRoomContainer
 							createFlashMessage={this.flashMessage}
 							addSong={this.addSongButtonClick}
 							songToAdd={this.state.songToAdd}
 							stopSending={this.stopSending}
+							roomDisplayName = {this.state.name} 
+							roomUniqueId = {this.state.roomUniqueId}
+							hostName = {this.state.hostDisplayName}
+							roomId = {this.state.roomId}
+							displayName = {this.state.displayName}
 						/>
 					</Route>
 
@@ -231,6 +303,8 @@ class DashboardContainer extends React.Component {
 					<Route exact path="/dashboard">
 						<DashboardOptions
 							getSessionName={this.getSessionRoomName}
+							addHostRoom={this.addHostRoom}
+							joinHostRoom={this.joinHostRoom}
 							createFlashMessage={this.flashMessage}
 						/>
 					</Route>

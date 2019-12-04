@@ -29,6 +29,7 @@ class Chat extends React.Component {
 				});
 			}
 		});
+
 		this.state = {
 			message: '',
 			messages: [],
@@ -79,6 +80,8 @@ class Chat extends React.Component {
 		});
 
 		this.state.socket.emit('sendMessage', { receipient: this.props.partnerUniqueId, message: message });
+		
+		//for a room, change it to roomID 
 	};
 
 	render() {
