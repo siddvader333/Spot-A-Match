@@ -142,27 +142,21 @@ class DashboardContainer extends React.Component {
 	}
 
 	addHostRoom() {
-		if (this.state.inARoom === false) {
-			this.state.roomSocket.emit('createRoom', {
-				username: this.state.username,
-				displayName: this.state.displayName,
-				socketId: this.state.roomSocket.id,
-				uniqueId: this.state.uniqueId
-			});
-			this.setState({ inARoom: true });
-		}
+		this.state.roomSocket.emit('createRoom', {
+			username: this.state.username,
+			displayName: this.state.displayName,
+			socketId: this.state.roomSocket.id,
+			uniqueId: this.state.uniqueId
+		});
 	}
 
 	joinHostRoom() {
-		if (this.state.inARoom === false) {
-			this.state.roomSocket.emit('attemptConnection', {
-				username: this.state.username,
-				displayName: this.state.displayName,
-				socketId: this.state.roomSocket.id,
-				uniqueId: this.state.uniqueId
-			});
-			this.setState({ inARoom: true });
-		}
+		this.state.roomSocket.emit('attemptConnection', {
+			username: this.state.username,
+			displayName: this.state.displayName,
+			socketId: this.state.roomSocket.id,
+			uniqueId: this.state.uniqueId
+		});
 	}
 
 	openMenu() {
@@ -314,7 +308,13 @@ class DashboardContainer extends React.Component {
 					</Route>
 
 					<Route exact path="/dashboard/profile">
-						<DashboardContentHeader leaveButtonText="Return to Dashboard" path="/dashboard/profile" />
+						<DashboardContentHeader
+							leaveSession={() => {
+								history.push('/dashboard');
+							}}
+							leaveButtonText="Return to Dashboard"
+							path="/dashboard/profile"
+						/>
 						<ProfileContainer />
 					</Route>
 					<Route exact path="/dashboard">

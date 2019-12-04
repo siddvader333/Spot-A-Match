@@ -172,10 +172,11 @@ class HostRoomContainer extends React.Component {
 			}
 		);
 		this.setState({ suggestedList: newSuggestedList });
-		console.log("list",this.state.suggestedList)
-		console.log("song,",song);
+		console.log('list', this.state.suggestedList);
+		console.log('song,', song);
 		//add
 		const newSongList = this.state.currentSongList.push({ songName: song.songName, artist: song.songArtist });
+		console.log(newSongList);
 		this.state.socket.emit('hostAddSong', {
 			song: song,
 			roomId: this.props.roomId
