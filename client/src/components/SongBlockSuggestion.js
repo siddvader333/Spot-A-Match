@@ -12,7 +12,7 @@ class SongBlockSuggestion extends React.Component {
 						<h1 className="song-artist">{this.props.songArtist}</h1>
 					</div>
 					<div className="song-accept-btn">
-						<button onClick = {()=>this.props.acceptSong({songName: this.props.songName, songArtist: this.props.songArtist})}>
+						<button onClick = {()=>this.props.acceptSong({songName: this.props.songName, songArtist: this.props.songArtist, trackURI: this.props.trackURI})}>
 							+
 						</button>
 						

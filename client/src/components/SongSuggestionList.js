@@ -13,6 +13,7 @@ class UpNextSongList extends React.Component {
 								<SongBlockSuggestion
 									songName={song.songName}
 									songArtist={song.artist}
+									trackURI={song.trackURI}
 									acceptSong={this.props.acceptSong}
 									rejectSong={this.props.rejectSong}
 								/>

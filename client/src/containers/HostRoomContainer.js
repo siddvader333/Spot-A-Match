@@ -151,6 +151,7 @@ class HostRoomContainer extends React.Component {
 			const newList = prevState.currentSongList;
 			newList.push(nextProps.songToAdd);
 			prevState.currentSongList = newList;
+			console.log(newList);
 			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
 			console.log('host added song');
 			prevState.socket.emit('hostAddSong', {
@@ -171,6 +172,8 @@ class HostRoomContainer extends React.Component {
 			}
 		);
 		this.setState({ suggestedList: newSuggestedList });
+		console.log("list",this.state.suggestedList)
+		console.log("song,",song);
 		//add
 		const newSongList = this.state.currentSongList.push({ songName: song.songName, artist: song.songArtist });
 		this.state.socket.emit('hostAddSong', {
