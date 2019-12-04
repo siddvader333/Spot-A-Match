@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
 		/*Socket.io Setup*/
 
 		/*Session Queue Socket */
-		var sessionSocket = io.connect('http://localhost:8888/session-queue');
+		var sessionSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/session-queue');
 		sessionSocket.on('connect', function(data) {
 			console.log('Joined the session-queue socket, need to emit ready to add into queue');
 		});
@@ -58,7 +58,7 @@ class DashboardContainer extends React.Component {
 		});
 
 		/*This is for joining a room */
-		var roomSocket = io.connect('http://localhost:8888/room_queue');
+		var roomSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/room_queue');
 		roomSocket.on('connect', function(data) {
 			console.log('Joined the room-queue socket');
 		});
@@ -83,7 +83,7 @@ class DashboardContainer extends React.Component {
 		//IF HOSTING A ROOM: socket.emit('creating a room'), pass it the person's uniqueId
 		//socket.on, add to list of active rooms, pass the displayName as well
 
-		var hostSocket = io.connect('https://localhost:8888/host-session');
+		var hostSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
 		hostSocket.on('connect', function(data) {
 			console.log('Joined the host-session socket');
 		});

@@ -7,8 +7,8 @@ class GroupChat extends React.Component {
 	constructor(props) {
 		super(props);
 
-		//var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/room-chat');
-		var socket = io.connect('http://localhost:8888/hosted-room');
+		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/room-chat');
+		//var socket = io.connect('/hosted-room');
 		socket.on('connect', function(data) {
 			console.log('connected');
 		});

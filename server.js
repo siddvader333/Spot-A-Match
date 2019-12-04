@@ -94,7 +94,7 @@ privateSessionChatNsp.on('connection', (socket) => {
 	});
 });
 
-const nsp3 = io.of('room_queue');
+const nsp3 = io.of('/room_queue');
 nsp3._roomList = [];
 nsp3.on('connection', (socket) => {
 	socket.on('attemptConnection', (data) => {
@@ -166,7 +166,7 @@ nsp4.on('connection', (socket) => {
 	});
 });
 
-const nsp5 = io.of('host-session');
+const nsp5 = io.of('/host-session');
 nsp5._roomList = [];
 nsp5.on('connection', (socket) => {
 	console.log('we in here');
