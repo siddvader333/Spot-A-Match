@@ -28,6 +28,12 @@ class HostRoomContainer extends React.Component {
 				this.setState({ currentSongList: newList });
 			}
 		});
+
+		socket.on('hostPausedSong', (data) => {
+			if (data.roomiD === this.props.roomId) {
+				this.pauseSong();
+			}
+		});
 		socket.on('hostSkipSong', (data) => {
 			if (data.roomId === this.props.roomId) {
 				this.nextSong();
@@ -35,7 +41,8 @@ class HostRoomContainer extends React.Component {
 		});
 		this.state = {
 			currentPlaying: '',
-			currentSongList: []
+			currentSongList: [],
+			socket: socket
 		};
 		this.nextSong = this.nextSong.bind(this);
 	}
@@ -54,12 +61,25 @@ class HostRoomContainer extends React.Component {
 	};
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('here');
+		if (nextProps.exitSession) {
+			prevState.socket.emit('leaveSession', { uniqueId: nextProps.uniqueId });
+			nextProps.stopSending();
+			history.push('/dashboard');
+		}
 		if (nextProps.songToAdd == {}) {
-			console.log('empty props');
 			return;
 		}
 		if (nextProps.songToAdd.songName !== '') {
-			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was requested to the host!');
+			//const newList = prevState.currentSongList;
+			//newList.push(nextProps.songToAdd);
+			//prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
+			console.log('trying to request a song');
+			prevState.socket.emit('requestSong', {
+				song: nextProps.songToAdd,
+				roomId: nextProps.roomId
+			});
 			nextProps.stopSending();
 			return prevState;
 		}

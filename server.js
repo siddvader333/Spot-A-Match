@@ -182,6 +182,13 @@ nsp5.on('connection', (socket) => {
 	socket.on('hostSkipSong', (data) => {
 		socket.broadcast.emit('hostSkipSong', data);
 	});
+	socket.on('hostPausedSong', (data) => {
+		socket.broadcast.emit('hostPausedSong', data);
+	});
+
+	socket.on('requestSong', (data) => {
+		socket.broadcast.emit('requestSong', data);
+	});
 	socket.on('leaveRoom', (data) => {
 		data.room.numListeners--;
 	});

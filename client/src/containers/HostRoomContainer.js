@@ -19,6 +19,12 @@ class HostRoomContainer extends React.Component {
 			console.log('host-session socket connected');
 		});
 
+		socket.on('requestSong', (data) => {
+			const newList = this.state.suggestedList;
+			newList.push(data.song);
+			this.setState({ suggestedList: newList });
+		});
+
 		this.state = {
 			currentPlaying: '', //currentSong,
 			currentSongList: [], //songList,
@@ -126,6 +132,9 @@ class HostRoomContainer extends React.Component {
 		this.state.player_Spotify.togglePlay().then(() => {
 			console.log('Toggled playback!');
 		});
+		if (e) {
+			this.state.socket.emit('hostPausedSong', { roomId: this.props.roomId });
+		}
 	};
 
 	static getDerivedStateFromProps(nextProps, prevState) {
@@ -164,6 +173,10 @@ class HostRoomContainer extends React.Component {
 		this.setState({ suggestedList: newSuggestedList });
 		//add
 		const newSongList = this.state.currentSongList.push({ songName: song.songName, artist: song.songArtist });
+		this.state.socket.emit('hostAddSong', {
+			song: song,
+			roomId: this.props.roomId
+		});
 	}
 
 	rejectSong = (song) => {
