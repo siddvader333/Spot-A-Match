@@ -10,7 +10,7 @@ passport.use(
 		{
 			clientID: keys.spotifyClientID,
 			clientSecret: keys.spotifyClientSecret,
-			callbackURL: 'http://localhost:8888/callback'
+			callbackURL: 'https://mighty-refuge-58998.herokuapp.com/callback'
 		},
 		function(accessToken, refreshToken, expires_in, profile, done) {
 			//console.log(profile);
