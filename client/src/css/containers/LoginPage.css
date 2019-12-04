@@ -51,7 +51,11 @@ h1,h2,h3,h4,h5,h6{margin:0;padding:0}
   .right{
     height: 40vh;
   }
+}
 
-  
-
+/* corner case for iphone 5SE width small width and short height*/
+@media screen and (max-width: 348px) {
+	.title {
+		margin-top: 35vh;
+	}
 }

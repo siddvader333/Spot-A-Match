@@ -5,9 +5,11 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js",
 		"server": "nodemon server.js",
 		"client": "cd client && npm run start",
-		"start": "cd client && npm run build && cd .. && npm run server"
+		"dev": "cd client && npm run build && cd .. && npm run server",
+		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +30,7 @@
 		"express": "^4.17.1",
 		"express-session": "^1.17.0",
 		"mongoose": "^5.7.12",
+		"node-fetch": "^2.6.0",
 		"nodemon": "^2.0.1",
 		"passport": "^0.4.0",
 		"passport-spotify": "^1.1.0",

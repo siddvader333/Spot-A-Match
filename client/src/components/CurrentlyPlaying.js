@@ -3,6 +3,7 @@ import '../css/components/CurrentlyPlaying.css';
 import SongBlock from './SongBlock';
 
 class CurrentlyPlaying extends React.Component {
+	
 	render() {
 		const songName = this.props.songList.currentPlaying.songName;
 		const songArtist = this.props.songList.currentPlaying.artist;

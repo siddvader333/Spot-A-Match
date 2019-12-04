@@ -1,4 +1,4 @@
-.container{
+/* .container{
 	width: 1000px;
 	margin: 100px auto 0;
 	display: flex;
@@ -83,7 +83,7 @@
 
 
 
-/* styling for the buttons */
+/* styling for the buttons 
 
 .action-button{
 	margin-top: 47vh;
@@ -110,4 +110,10 @@
 .action-button:focus, 
 .action-button:active{
 	outline: none;
+} */
+
+
+.row-options{
+	margin-top: 10vw;
 }
+
