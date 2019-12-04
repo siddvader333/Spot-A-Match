@@ -68,7 +68,9 @@ class DashboardContainer extends React.Component {
 					roomId: connectionResult.roomId,
 					hostDisplayName: connectionResult.hostDisplayName,
 					inARoom: true,
+					numListeners: connectionResult.numListeners
 				})
+				console.log(connectionResult); 
 				if (connectionResult.host == true)
 					history.push('/dashboard/room-host')
 				else
@@ -100,6 +102,7 @@ class DashboardContainer extends React.Component {
 			partnerDisplayName: '',
 			sessionSocket: sessionSocket, 
 			roomSocket: roomSocket, 
+			numListeners: '', 
 		};
 
 		this.openMenu = this.openMenu.bind(this);
@@ -253,6 +256,7 @@ class DashboardContainer extends React.Component {
 							displayText="Welcome to your room" 
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
+							numListeners = {this.state.numListeners}
 						/>
 						<DashboardFlashMessage displayText="Welcome to your room!" duration="3500" />
 						<HostRoomContainer
@@ -262,6 +266,8 @@ class DashboardContainer extends React.Component {
 							stopSending={this.stopSending}
 							roomDisplayName = {this.state.roomDisplayName} 
 							roomUniqueId = {this.state.uniqueId}
+							roomId = {this.state.roomId}
+							displayName = {this.state.displayName}
 						/>
 					</Route>
 
@@ -280,6 +286,8 @@ class DashboardContainer extends React.Component {
 							roomDisplayName = {this.state.name} 
 							roomUniqueId = {this.state.roomUniqueId}
 							hostName = {this.state.hostDisplayName}
+							roomId = {this.state.roomId}
+							displayName = {this.state.displayName}
 						/>
 					</Route>
 

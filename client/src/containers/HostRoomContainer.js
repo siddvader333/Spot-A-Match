@@ -99,6 +99,8 @@ class HostRoomContainer extends React.Component {
 					<div className="chat col-md">
 						<GroupChat 
 							roomDisplayName = "You"
+							roomId = {this.props.roomId}
+							displayName = {this.props.displayName}
 						/>
 					</div>
 				</div>

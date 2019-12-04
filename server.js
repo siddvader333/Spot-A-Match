@@ -108,22 +108,23 @@ nsp3.on('connection', (socket) => {
 			nsp3.to(`${data.socketId}`).emit('connectionResult', { status: false });
 		} else {
 			//connect the users
-			let emptiestRoom = {}; 
-			let emptiestRoomListenerCount = -1; 
-			for(let i = 0; i < nsp3._roomList.length; i++){
-				if (nsp3._roomList[i].numListeners > emptiestRoomListenerCount){
-					emptiestRoom = nsp3._roomList[i]; 
+			let emptiestRoomListenerCount = nsp3._roomList[0].numListeners; 
+			let emptiestRoomIndex = 0; 
+			for(let i = 1; i < nsp3._roomList.length; i++){
+				if (nsp3._roomList[i].numListeners < emptiestRoomListenerCount){
+					emptiestRoomIndex = i; 
 					emptiestRoomListenerCount = nsp3._roomList[i].numListeners; 
 				}
 			}
+			nsp3._roomList[emptiestRoomIndex].numListeners++; 
 			nsp3.to(`${data.socketId}`).emit('connectionResult', {
 				status: true,
-				hostDisplayName: emptiestRoom.displayName,
-				roomId: emptiestRoom.id,
+				hostDisplayName: nsp3._roomList[emptiestRoomIndex].displayName,
+				roomId: nsp3._roomList[emptiestRoomIndex].id,
 				host: false, 
-				numListeners: emptiestRoom.numListeners
+				numListeners: nsp3._roomList[emptiestRoomIndex].numListeners
 			});
-			emptiestRoom.numListeners++; 
+			console.log(nsp3._roomList[emptiestRoomIndex].numListeners);
 		}
 	});
 
@@ -139,15 +140,36 @@ nsp3.on('connection', (socket) => {
 			status: true,
 			hostDisplayName: newRoom.displayName,
 			roomId: newRoom.id,
-			host: true
+			host: true, 
+			numListeners: newRoom.numListeners
 		});
-		console.log('Room list: ' + JSON.stringify(nsp3._roomList))
 	})
 
 	socket.on('leaveRoom', (data) => {
 		data.room.numListeners--; 
 	});
 });
+
+const nsp4 = io.of('/hosted-room');
+nsp4.on('connection', (socket) => {
+	console.log('a user has found a match and is in the session page');
+	console.log(socket.id);
+
+	socket.on('requestPartnerSocket', (data) => {
+		//send this users data to get socket.id's on both sides
+		nsp4.broadcast.emit('partnerInfo', data);
+	});
+
+	socket.on('infoReceived', (data) => {
+		nsp4.broadcast.emit('infoReceived', data);
+	});
+
+	socket.on('sendMessage', (data) => {
+		console.log(data);
+		socket.broadcast.emit('messageSent', data);
+	});
+});
+
 //each item should have room name (uniqueId of host), display name (displayName of host), and listener count (starts at 1)
 //creating the room: JOIN - socket.emit('join a room'), select a room, increment the listener count, return entire room to DashboardContainer.js
 //only send back information to user who requested it: nsp.to(`${data.socketId}`); set this room in the state in DashboardContainer.js 

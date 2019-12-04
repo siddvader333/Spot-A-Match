@@ -7,22 +7,22 @@ class GroupChat extends React.Component {
 	constructor(props){
 		super(props); 
 		
-		var roomSocket = io.connect('http://localhost:4200/room_queue'); 
-		roomSocket.on('connect', function(data) {
+		var socket = io.connect('http://localhost:4200/hosted-room');
+		socket.on('connect', function(data) {
 			console.log('connected');
 		});
-		roomSocket.on('messageSent', (data) => {
-			if (data.receipient === this.props.uniqueId) {
+		socket.on('messageSent', (data) => {
+			if (data.roomId === this.props.roomId) {
 				const messageList = this.state.messages;
 				const message = {
 					content: data.message.content,
 					type: 'received-message',
-					sender: this.props.partnerDisplayName
+					sender: data.sender
 				};
 				messageList.push(message);
 				this.setState({
 					messages: messageList,
-					message: ''
+					roomId: this.props.roomId
 				});
 			}
 		});
@@ -30,7 +30,7 @@ class GroupChat extends React.Component {
 		this.state = {
 			message: '',
 			messages: [], 
-			roomSocket: roomSocket, 
+			socket: socket, 
 			roomId: '', 
 			displayName: this.props.displayName
 		};
@@ -76,6 +76,8 @@ class GroupChat extends React.Component {
 			messages: messageList,
 			message: ''
 		});
+
+		this.state.socket.emit('sendMessage', { roomId: this.props.roomId, message: message, sender: this.props.displayName });
 	};
 
 	render() {
