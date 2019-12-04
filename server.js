@@ -147,7 +147,7 @@ nsp3.on('connection', (socket) => {
 	});
 });
 
-const nsp4 = io.of('/hosted-room');
+const nsp4 = io.of('/room-chat');
 nsp4.on('connection', (socket) => {
 	console.log('a user has found a match and is in the session page');
 	console.log(socket.id);
@@ -169,11 +169,14 @@ nsp4.on('connection', (socket) => {
 
 
 const nsp5 = io.of('host-session'); 
-nsp5._roomList = []; 
 nsp5.on('connection', (socket) => {
-	socket.on('leaveRoom', (data) => {
-		data.room.numListeners--; 
+	
+	socket.on('hostLeaveSession', (data) => {
+		socket.broadcast.emit('hostLeave', {
+			roomId: data.roomId
+		});
 	});
+
 });
 
 //each item should have room name (uniqueId of host), display name (displayName of host), and listener count (starts at 1)

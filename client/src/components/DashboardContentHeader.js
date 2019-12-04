@@ -15,7 +15,6 @@ export default class DashboardContentHeader extends React.Component {
 				{/*<p className="dashboard-content-title">{this.props.displayText}</p>*/}
 
 				<LeaveSessionButton onClick={this.props.leaveSession} displayText={this.props.leaveButtonText} />
-				{this.props.path === '/dashboard/room-host' ? <ListenersCountWidget numListeners = {this.props.numListeners}/> : null}
 				
 			</div>
 		);

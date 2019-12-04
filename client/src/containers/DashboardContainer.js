@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
 		/*Socket.io Setup*/
 
 		/*Session Queue Socket */
-		var sessionSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/session-queue');
+		var sessionSocket = io.connect('http://localhost:8888/session-queue');
 		sessionSocket.on('connect', function(data) {
 			console.log('Joined the session-queue socket, need to emit ready to add into queue');
 		});
@@ -58,7 +58,7 @@ class DashboardContainer extends React.Component {
 		});
 
 		/*This is for joining a room */
-		var roomSocket = io.connect('https://mighty-refuge-58998.herokuapp.com/room_queue');
+		var roomSocket = io.connect('http://localhost:8888/room_queue');
 		roomSocket.on('connect', function(data){
 			console.log('Joined the room-queue socket') 
 		}); 
@@ -86,6 +86,12 @@ class DashboardContainer extends React.Component {
 		//IF HOSTING A ROOM: socket.emit('creating a room'), pass it the person's uniqueId
 		//socket.on, add to list of active rooms, pass the displayName as well 
 
+		var hostSocket = io.connect('http://localhost:8888/host-session');
+		hostSocket.on('connect', function(data){
+			console.log('Joined the host-session socket') 
+		}); 
+
+
 		this.state = {
 			name: '',
 			isOpen: false,
@@ -102,6 +108,7 @@ class DashboardContainer extends React.Component {
 			partnerDisplayName: '',
 			sessionSocket: sessionSocket, 
 			roomSocket: roomSocket, 
+			hostSocket: hostSocket, 
 			numListeners: '', 
 		};
 
@@ -262,6 +269,12 @@ class DashboardContainer extends React.Component {
 							path="/dashboard/room-host"
 							leaveButtonText="Close Room"
 							numListeners = {this.state.numListeners}
+							leaveSession={() => {
+								this.state.hostSocket.emit('hostLeaveSession', {
+									roomId: this.roomId
+								})
+								history.push('/dashboard'); 
+							}}
 						/>
 						<DashboardFlashMessage displayText="Welcome to your room!" duration="3500" />
 						<HostRoomContainer
@@ -281,6 +294,9 @@ class DashboardContainer extends React.Component {
 							displayText="In User1234's Room"
 							leaveButtonText="Exit Room"
 							path="/dashboard/room-listener"
+							leaveSession={() => {
+								history.push('/dashboard'); 
+							}}
 						/>
 						<DashboardFlashMessage displayText={`Welcome to ${this.state.hostDisplayName}'s Room`} duration="3500" />
 						<JoinRoomContainer

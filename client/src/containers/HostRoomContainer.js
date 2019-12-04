@@ -29,7 +29,7 @@ class HostRoomContainer extends React.Component {
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
 		socket.on('connect', function(data) {
 			console.log('host-session socket connected');
 		});

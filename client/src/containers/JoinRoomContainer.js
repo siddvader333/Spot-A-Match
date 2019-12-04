@@ -5,16 +5,20 @@ import UpNextSongList from '../components/UpNextSongList';
 import GroupChat from '../components/GroupChat';
 import CurrentlyPlaying from '../components/CurrentlyPlaying';
 import { fakeSearchResults } from '../util/Data.js';
+import history from '../util/History';
 import io from 'socket.io-client';
 
 class HostRoomContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
 		socket.on('connect', function(data) {
 			console.log('host-session socket connected');
 		});
+		socket.on('hostLeave', function(data) {
+			history.push('/dashboard');
+		})
 		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
 		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
 		const songList = Array.from(fakeSearchResults);
