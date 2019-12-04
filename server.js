@@ -167,6 +167,15 @@ nsp4.on('connection', (socket) => {
 	});
 });
 
+
+const nsp5 = io.of('host-session'); 
+nsp5._roomList = []; 
+nsp5.on('connection', (socket) => {
+	socket.on('leaveRoom', (data) => {
+		data.room.numListeners--; 
+	});
+});
+
 //each item should have room name (uniqueId of host), display name (displayName of host), and listener count (starts at 1)
 //creating the room: JOIN - socket.emit('join a room'), select a room, increment the listener count, return entire room to DashboardContainer.js
 //only send back information to user who requested it: nsp.to(`${data.socketId}`); set this room in the state in DashboardContainer.js 
