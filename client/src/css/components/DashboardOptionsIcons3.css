@@ -1,0 +1,22 @@
+.container-dashboard-options3{
+      
+    background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2013/11/09/172018/a83393b8e0ba294b604cd8fb1cc76cc6-700.jpg);
+    width:300px;
+    height:300px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #1db954;
+    
+
+  }   
+
+  .container-dashboard-options3:hover{
+    background:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://www.wallpaperup.com/uploads/wallpapers/2013/11/09/172018/a83393b8e0ba294b604cd8fb1cc76cc6-700.jpg);
+    background-size: cover;
+    background-position: center;
+    
+  }
+
+  .container-dashboard-options3:hover .text-dashboard-options{
+    visibility: visible;
+  }

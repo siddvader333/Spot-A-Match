@@ -1,7 +1,12 @@
 import React from 'react';
 import '../css/components/DashboardOptions.css';
+import DashboardOptionsIcons1 from './DashboardOptionsIcons1.js'
+import DashboardOptionsIcons2 from './DashboardOptionsIcons2.js'
+import DashboardOptionsIcons3 from './DashboardOptionsIcons3.js'
+
 import authFunctions from '../util/Auth';
 import DashboardFlashMessage from './DashboardFlashMessage';
+
 
 class DashboardOptions extends React.Component {
 	constructor(props) {
@@ -47,21 +52,24 @@ class DashboardOptions extends React.Component {
 		}
 		return (
 			<div className="container">
-				<div className="box">
+				{/* <div className="box">
 					<div className="imgBox">
 						<img src="https://rxmusic.com/wp-content/uploads/2018/04/Dollarphotoclub_74179490.jpg" />
 					</div>
 					<div className="details">
 						<div className="content">
 							<h2>Join a session with another listener.</h2>
-							{/*<a href="/dashboard/session">*/}
+							
 							<button onClick={this.props.getSessionName} className="action-button">
 								Start Session
 							</button>
-							{/*</a>*/}
+						
 						</div>
 					</div>
 				</div>
+
+				
+
 				<div className="box">
 					<div className="imgBox">
 						<img src="https://media.timeout.com/images/102182623/630/472/image.jpg" />
@@ -82,13 +90,34 @@ class DashboardOptions extends React.Component {
 					<div className="details">
 						<div className="content">
 							<h2>Host your own room (Premium Feature).</h2>
-							{/* <a href={roomPath}>
-                            <button className="action-button">Host Room</button>
-                            </a> */}
+							
 							{roomPath}
 						</div>
 					</div>
+				</div> */}
+
+				<div className='row row-options'>
+					<div className='col-lg-4'>
+						<DashboardOptionsIcons1 onClick={this.props.getSessionName} />
+					</div>
+
+					<div className='col-lg-4'>
+						<DashboardOptionsIcons2 link = "/dashboard/room-listener"/>
+					</div>
+
+					<div className='col-lg-4'>
+						<DashboardOptionsIcons3 link = "/dashboard/room-host"/>
+					</div>
 				</div>
+
+
+
+
+
+
+
+
+
 			</div>
 		);
 	}
