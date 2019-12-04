@@ -13,32 +13,29 @@ class HostRoomContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		//NOTE: WE HARDCODED THESE SONGS INTO OUR APPLICATION
-		//IN OUR REAL APPLICATION, THIS WOULD BE DONE THROUGH THE SPOTIFY API
-		const songList = Array.from(fakeSearchResults);
-		const currentSong = songList.shift();
-
-		const suggestedList = Array.from(suggestedSongs);
-
 		this.state = {
-			currentPlaying: currentSong,
-			currentSongList: songList,
-			suggestedList: suggestedList
+			currentPlaying: '',
+			currentSongList: [],
+			suggestedList: []
 		};
 		this.nextSong = this.nextSong.bind(this);
 		this.acceptSong = this.acceptSong.bind(this);
 		this.rejectSong = this.rejectSong.bind(this);
 
-		var socket = io.connect('https://mighty-refuge-58998.herokuapp.com/host-session');
+		var socket = io.connect('http://localhost:8888/host-session');
 		socket.on('connect', function(data) {
 			console.log('host-session socket connected');
 		});
+		socket.on('songSuggested', (data) => {
+			//check if correct room
+			if (data.roomId === this.props.roomId) {
+				//if right room, add song
+				const newList = this.state.suggestedList;
+				newList.push(data.song);
+				this.setState({ suggestedList: newList });
+			}
+		});
 	}
-
-	state = {
-		currentPlaying: '',
-		currentSongList: []
-	};
 
 	nextSong = (e) => {
 		e.preventDefault();
@@ -50,6 +47,32 @@ class HostRoomContainer extends React.Component {
 			currentSongList: currentList
 		});
 	};
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('here PROPS HAVE SWITCHED');
+		console.log(this.props);
+		if (nextProps.songToAdd == {}) {
+			return;
+		}
+		if (nextProps.songToAdd.songName !== '') {
+			const newList = prevState.currentSongList;
+			newList.push(nextProps.songToAdd);
+			prevState.currentSongList = newList;
+			nextProps.createFlashMessage(nextProps.songToAdd.songName + ' was added to the list!');
+			console.log('tryna add a song');
+			console.log('bith im hereeeesodivhnsoivhnsdovvu');
+			/*prevState.socket.emit('hostAddedSong', {
+				song: nextProps.songToAdd,
+				roomId: nextProps.roomId
+			});*/
+			/*prevState.socket.emit('partnerAddSong', {
+				song: nextProps.songToAdd,
+				uniqueId: nextProps.uniqueId
+			});*/
+			nextProps.stopSending();
+			return prevState;
+		}
+	}
 
 	acceptSong(song) {
 		//remove from suggestedList
@@ -100,10 +123,10 @@ class HostRoomContainer extends React.Component {
 					</div>
 
 					<div className="chat col-md">
-						<GroupChat 
-							roomDisplayName = "You"
-							roomId = {this.props.roomId}
-							displayName = {this.props.displayName}
+						<GroupChat
+							roomDisplayName="You"
+							roomId={this.props.roomId}
+							displayName={this.props.displayName}
 						/>
 					</div>
 				</div>
