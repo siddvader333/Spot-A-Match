@@ -1,3 +1,5 @@
+DEPLOYMENT: https://mighty-refuge-58998.herokuapp.com/
+
 For phase 2 of the project, our primary purpose was to integrate the Spotify API with our web app to achieve as much of the functionality from our proposal as possible. While we were not able to achieve full functionality in all aspects of our web application, we believe that we made decent progress (especially with the Spotify API still being in beta, and therefore, incredibly difficult to debug). 
 
 Below, we highlight the features of our application, including some changes from phase 1: 
