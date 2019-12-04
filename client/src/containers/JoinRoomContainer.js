@@ -42,12 +42,47 @@ class HostRoomContainer extends React.Component {
 		this.state = {
 			currentPlaying: '',
 			currentSongList: [],
-			socket: socket
+			socket: socket,
+			deviceID: '',
+			player_Spotify: {}
 		};
 		this.nextSong = this.nextSong.bind(this);
+		this.pauseSong = this.pauseSong.bind(this);
 	}
 
-	nextSong = (e) => {
+	async componentDidMount() {
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		const token = responseJSON.currentAccessToken;
+
+		var player = new window.Spotify.Player({
+			name: 'Spot-A-Match Player',
+			getOAuthToken: (callback) => {
+				callback(token);
+			},
+			volume: 0.5
+		});
+		// console.log("the player");
+		// console.log(player);
+		console.log(token);
+
+		player.connect().then((success) => {
+			if (success) {
+				console.log('The Web Playback SDK successfully connected to Spotify!');
+			}
+		});
+		player.addListener('ready', ({ device_id }) => {
+			console.log('The Web Playback SDK is ready to play music!');
+			console.log('Device ID', device_id);
+			this.setState({ deviceID: device_id });
+		});
+		this.setState({ player_Spotify: player });
+	}
+
+	nextSong = async (e) => {
 		if (e) {
 			e.preventDefault();
 		}
@@ -58,6 +93,46 @@ class HostRoomContainer extends React.Component {
 			currentPlaying: currentSong,
 			currentSongList: currentList
 		});
+
+		const response = await fetch('/profile', {
+			method: 'GET',
+			headers: { 'Content-Type': 'applications/json' }
+		});
+		const responseJSON = await response.json();
+		const token = responseJSON.currentAccessToken;
+		console.log(token);
+
+		let songRequest = {
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token
+			},
+			body: JSON.stringify({
+				uris: [ currentSong.trackURI ],
+				offset: {
+					position: 0
+				},
+				position_ms: 0
+			}),
+			mode: 'cors',
+			cache: 'default'
+		};
+
+		const playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + this.state.deviceID; //+ this.state.deviceID;
+		await fetch(playURL, songRequest);
+	};
+
+	pauseSong = async (e) => {
+		if (e) {
+			e.preventDefault();
+		}
+		console.log('trying to pause song');
+		this.state.player_Spotify.togglePlay().then(() => {
+			console.log('Toggled playback!');
+		});
+		if (e) {
+			this.state.socket.emit('hostPausedSong', { roomId: this.props.roomId });
+		}
 	};
 
 	static getDerivedStateFromProps(nextProps, prevState) {
