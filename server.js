@@ -94,7 +94,7 @@ privateSessionChatNsp.on('connection', (socket) => {
 	});
 });
 
-const nsp3 = io.of('/room_queue');
+const nsp3 = io.of('room_queue');
 nsp3._roomList = [];
 nsp3.on('connection', (socket) => {
 	socket.on('attemptConnection', (data) => {
@@ -175,6 +175,9 @@ nsp5.on('connection', (socket) => {
 		socket.broadcast.emit('hostAddSong', data);
 	});
 	socket.on('hostLeaveSession', (data) => {
+		nsp3._roomList = nsp3._roomList.filter(function(entry) {
+			return entry.roomId != data.roomId;
+		});
 		socket.broadcast.emit('hostLeave', {
 			roomId: data.roomId
 		});
